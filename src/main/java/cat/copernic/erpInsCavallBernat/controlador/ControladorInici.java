@@ -1,15 +1,17 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
+import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 
 /**
  *
@@ -29,12 +31,15 @@ public class ControladorInici {
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
      *passant a ser la pàgina inicial de l'aplicació, la que es mostrarà al escriure localhost:8080
      */
+    
+    /*@AuthenticationPrincipal retorna l'usuari autenticat actualment com un objecte User de Spring security*/
     @GetMapping("/") //Arrel de l'aplicació localhost:8080
-    public String inici(Model model) {
-        log.info("Executant el controlador Spring MVC");
+    public String inici(Model model, @AuthenticationPrincipal User username) {
+        log.info("Executant el controlador Spring MVC");        
+        log.info("L'usuari autenticat és: "+username);
 
         /*Definim variable gossos on emmagatzemarem els gossos de la taula gos obtinguts mitjançant el mètode 
-         *llistarGossos definit en la interface ProducteServiceInterface i implementat en la classe GosService
+         *llistarGossos definit en la interface GosServiceInterface i implementat en la classe GosService
          */
         var productes = producteService.llistarProductes();
 
@@ -49,7 +54,7 @@ public class ControladorInici {
      *
      */
     @GetMapping("/formulariProducte") //URL a la pàgina amb el formulari de les dades del gos
-    public String crearFormulariProducte(Producte producte) {
+    public String crearFormulariGos(Producte producte) {
 
         return "formulariProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }
@@ -67,7 +72,7 @@ public class ControladorInici {
     
     /*Abans de guardar les dades del gos, és quan comprovem si són valides o no, perquè el sistema
      *realitzi aquesta validació, utilitzem l'anotació @Valid precedint a l'objecte al qual pertanyen
-     *els valors a validar, en el nostre cas, l'objecte Producte passat per paràmetre.
+     *els valors a validar, en el nostre cas, l'objecte Gos passat per paràmetre.
      *Per un altre costat, al mètode li passem el paràmetre error, objectede la classe Errors per saber
      *si el formulari té errors.
     */
@@ -89,13 +94,13 @@ public class ControladorInici {
      *existei.
      *El sistema Spring associa l'idgos passat com a paràmetre en @GetMapping al gos 
      *passat com a paràmetre en el mètode editar i crida automàticament al mètode setIdgos 
-     *de la classe Producte per fer aquesta associació, és a dir, el que fa és gos.setIdgos(idgos).
-     *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Producte.
+     *de la classe Gos per fer aquesta associació, és a dir, el que fa és gos.setIdgos(idgos).
+     *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
     @GetMapping("/editar/{idproducte}")
     public String editar(Producte producte, Model model) {
 
-        log.info(String.valueOf(producte.getIdproducte())); //Mostra idgos de Producte
+        log.info(String.valueOf(producte.getIdproducte())); //Mostra idgos de Gos
 
         /*Cerquem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode cercarGos de la capa de servei.*/
@@ -111,7 +116,7 @@ public class ControladorInici {
      *la classe GosService.
      *El sistema per associar l'id del gos a l'objecte gos passat per paràmetre, és el mateix
      *que el del mètode editar.
-     *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Producte.
+     *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
     @GetMapping("/eliminar/{idproducte}") 
     public String eliminar(Producte producte) {
@@ -124,13 +129,13 @@ public class ControladorInici {
     }
     
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
-     *crida automàticament al mètode setIdgos de la classe Producte per assignar-li l'idGos
-     *que hem rebut mitjançant el paràmetre de consulta a l'objecte Producte que passem com a
+     *crida automàticament al mètode setIdgos de la classe Gos per assignar-li l'idGos
+     *que hem rebut mitjançant el paràmetre de consulta a l'objecte Gos que passem com a
      *paràmetre del mètode eliminar.
      * 
 
     @GetMapping("/eliminar") //URL eliminar + paràmetre de consulta inclós en el mateix URL
-    public String eliminar(Producte gos) {    */
+    public String eliminar(Gos gos) {    */
 
         /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode eliminarGos de la capa de servei.

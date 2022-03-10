@@ -29,7 +29,11 @@ public class Producte implements Serializable {
 
     @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
+
     private long id;
+
+    private long idproducte;
+
 
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
