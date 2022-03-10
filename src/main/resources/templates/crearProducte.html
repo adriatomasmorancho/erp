@@ -38,19 +38,19 @@
             </p>
 
             <p>
-                <label for="edat">Preu:</label> <!--Etiqueta per l'edat del gos-->            
+                <label for="preu">Preu:</label> <!--Etiqueta per l'edat del gos-->            
                 <input type="text" name="preu" th:field="*{edat}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 <!-- Gestió errors edat-->
                 <span th:if="${#fields.hasErrors('edat')}" th:errors="*{edat}"/>
             </p>
             <p>
-                <label for="sexe">Categoria:</label> <!--Etiqueta pel sexe del gos-->            
+                <label for="categoria">Categoria:</label> <!--Etiqueta pel sexe del gos-->            
                 <input type="text" name="sexe" th:field="*{sexe}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
                 <span th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}"/>
             </p>
              <p>
-                <label for="sexe">Stock Actual:</label> <!--Etiqueta pel sexe del gos-->            
+                <label for="stock">Stock Actual:</label> <!--Etiqueta pel sexe del gos-->            
                 <input type="text" name="sexe" th:field="*{sexe}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
                 <span th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}"/>
