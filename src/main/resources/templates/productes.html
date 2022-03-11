@@ -37,13 +37,13 @@
                     <td th:text="${producte.categoria}"></td>
                     <td th:text="${producte.stock}"></td>
                     <td th:text="${producte.unitat}"></td>
-                    <td th:text="${producte.proveïdor}"></td>
+                    <td th:text="${producte.cifProveïdor}"></td>
                     <!--Enllaç mitjançant el qual accedirem a la pàgina per editar el gos actual
                         al qual li correspon l'id que concatenem a l'URL editar-->
                     <td><a th:href="@{/editarProducte/}+${producte.id}" th:text="Editar"/></td>
                     <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar el gos actual
                         al qual li correspon l'id que concatenem a l'URL d'eliminar-->
-                    <td><a th:href="@{/eliminar/}+${producte.id}" th:text="Eliminar"/></td>
+                    <td><a th:href="@{/eliminar/}+${producte.id_Producte}" th:text="Eliminar"/></td>
                     <!--<td><a th:href="@{/eliminar(idgos=${gos.idgos})}" th:text="Eliminar"/></td>-->
                 </tr>
             </table>

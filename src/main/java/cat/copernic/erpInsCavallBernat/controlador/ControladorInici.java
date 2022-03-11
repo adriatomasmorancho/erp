@@ -53,10 +53,10 @@ public class ControladorInici {
      *atributs buits (recordem que el constructor construeix un objecte buit).
      *
      */
-    @GetMapping("/formulariProducte") //URL a la pàgina amb el formulari de les dades del gos
+    @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del gos
     public String crearFormulariGos(Producte producte) {
 
-        return "formulariProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
+        return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }
 
     /*Definim el mètode per assignar els valors introduïts en el formulari, a l'objecte gos
@@ -81,7 +81,7 @@ public class ControladorInici {
         
         if(errors.hasErrors()){ //Si s'han produït errors...
             log.info("S'ha produït un error");
-             return "formulariProducte"; //Mostrem la pàgina del formulari
+             return "crearProducte"; //Mostrem la pàgina del formulari
         }
 
         producteService.afegirProducte(producte); //Afegim el gos passat per paràmetre a la base de dades
@@ -100,7 +100,7 @@ public class ControladorInici {
     @GetMapping("/editar/{idproducte}")
     public String editar(Producte producte, Model model) {
 
-        log.info(String.valueOf(producte.getIdproducte())); //Mostra idgos de Gos
+        log.info(String.valueOf(producte.getId_Producte())); //Mostra idgos de Gos
 
         /*Cerquem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode cercarGos de la capa de servei.*/
@@ -108,7 +108,7 @@ public class ControladorInici {
 
         model.addAttribute("producte", producte); //Enviem les dades del gos resultant de la cerca a la pàgina formulariGos
 
-        return "formulariProducte"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "crearProducte"; //Retorna la pàgina amb el formulari de les dades del gos
     }
     
     /*Definim el mètode per guardar el gos en la base de dades i finalment retornar

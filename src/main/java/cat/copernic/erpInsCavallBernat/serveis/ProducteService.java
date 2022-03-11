@@ -86,7 +86,7 @@ public class ProducteService implements ProducteServiceInterface{
          *Si el gos no existei retornarà null (orElse(null)).
         */ 
 
-        return this.producte.findById(producte.getIdproducte()).orElse(null);
+        return this.producte.findById(producte.getId_Producte()).orElse(null);
         
     }
     
