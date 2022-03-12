@@ -15,7 +15,7 @@
                  Per associar le dades a l'objecte gos, fem servir l'element th:objecte de 
                  Thymeleaf, al qual li assignem el paràmetre gos del mètode crearFormulariGos 
                  o editar del controlador.-->
-        <form th:action="@{/guardarGos}" method="post" th:object="${gos}">
+        <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
             
             <!-- Camp ocult on guardem l'id del gos per enviar-lo juntament amb les altres dades-->
             <input type="hidden" name="id" th:field="*{id_Producte}"/>
@@ -49,9 +49,9 @@
             </p>
              <p>
                 <label for="stock" th:text="#{producte.stockActual}"/> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="sexe" th:field="*{sexe}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                <input type="text" name="sexe" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
-                <span th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}"/>
+                <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
             </p>
             <p>
                 <label for="unitat" th:text="#{producte.unitat}"/> <!--Etiqueta pel sexe del gos-->            
@@ -67,9 +67,9 @@
             </p>
 
             <!-- Botó per enviar les dades-->
-            <input type="submit" name="enviar" value="Enviar Dades"/>   
-            <a th:href="@{/}">Inici</a>
-            <input type="submit" name="enviar" value="Enviar Dades"/>  
+            <input type="submit" name="enviar" value="Enviar Dades" th:href="@{/productes}"/>   
+            
+            <input type="submit" name="enviar" value="Enviar Dades" th:href="@{/productes}"/>  
         </form>
     </p>
     
