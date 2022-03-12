@@ -143,5 +143,10 @@ public class ControladorInici {
         
         return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
     }*/
+    
+    @GetMapping("/errors/error403")
+    public String error403() {
+        return "error/error403";
+    }
 
 }
