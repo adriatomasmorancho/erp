@@ -1,12 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Crear Producte</title>
+        <title th:text="#{producte.crearProducte}"/>
         <meta charset="UTF-8"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: capcalera" />
         
-        <h2>Nou Producte</h2>
+        <h2 th:text="#{producte.nouProducte}"/>
 
         <p>
             <!-- Creem un formulari per introduir les dades que el ControladorInici 
@@ -79,9 +79,10 @@
             </p>
 
             <!-- Botó per enviar les dades-->
-            <input type="submit" name="enviar" value="Enviar Dades" th:href="@{/productes}"/>   
-            
-            <input type="submit" name="enviar" value="Enviar Dades" th:href="@{/productes}"/>  
+            <label for="crear" th:text="#{crear}"/>
+            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>   
+            <label for="cancel" th:text="#{cancel}"/>
+            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>  
         </form>
     </p>
     

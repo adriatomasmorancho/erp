@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Productes</title>
+        <title th:text="#{producte}"/>
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Productes</h1>
+        <h1 th:text="#{producte}"/>
 
         <!-- Utilitzem la plantilla per escriure la capçalera, indicant l'adreça on
              es troba, és a dir, "layout/plantilla" i el fragment que volem inserir
              en aquest cas "capcalera" -->
         <header th:replace="layouts/plantilla :: capcalera" />
        
-
-        <h1>Llistat de gossos</h1>
 
         <div th:if="${productes!=null && !productes.empty}">
 
@@ -61,7 +59,8 @@
             Mitjançant l'element th:href de Thymeleaf definim l'URL de l'enllaç. 
             A href li assignarem la ruta de l'enllaç mitjançan @{ruta}-->
 
-        <a th:href="@{/crearProducte}"th:text="#{producte.crearProducte}"/>
+            <label for="crearProducte" th:text="#{producte.crearProducte}"/>
+            <input type="submit" name="enviar" value="" th:href="@{/crearPorducte}"/>
         
         <!-- Utilitzem la plantilla per escriure el peu, indicant l'adreça on
              es troba, és a dir, "layout/plantilla" i el fragment que volem inserir

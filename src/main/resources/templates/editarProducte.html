@@ -1,16 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Editar Producte</title>
+        <title th:text="#{producte.editarProducte}"/>
         <meta charset="UTF-8"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: capcalera" />
         
-        <h2>Editar Producte</h2>
+        <h2 th:text="#{producte.editarProducte}"/>
 
-        
-
-        <p>
+       <p>
             <!-- Creem un formulari per introduir les dades que el ControladorInici 
                  assignarà als atributs del gos passat com a paràmetre en el mètode 
                  crearFormulariGos implementat en aquest ControladorInici. 
@@ -20,10 +18,10 @@
         <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
             
             <!-- Camp ocult on guardem l'id del gos per enviar-lo juntament amb les altres dades-->
-            <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>
+            <input type="hidden" name="id" th:field="*{id_Producte}"/>
             
             <p>
-                <label for="nom">Nom:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                <label for="nom" th:text="#{producte.nom}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                 <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
                     gos assignat a th:objecte-->
                 <input type="text" name="nom" th:field="*{nom}"/>
@@ -38,22 +36,53 @@
             </p>
 
             <p>
-                <label for="edat">Edat:</label> <!--Etiqueta per l'edat del gos-->            
-                <input type="text" name="edat" th:field="*{edat}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
+                <label for="preu" th:text="#{producte.preu}"/> <!--Etiqueta per l'edat del gos-->            
+                <input type="text" name="preu" th:field="*{preu}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 <!-- Gestió errors edat-->
-                <span th:if="${#fields.hasErrors('edat')}" th:errors="*{edat}"/>
+                <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
             </p>
-
             <p>
-                <label for="sexe">Sexe:</label> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="sexe" th:field="*{sexe}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                <label for="categoria" th:text="#{producte.categoria}"/> <!--Etiqueta pel sexe del gos-->            
+               <!-- <input type="text" name="categoria" th:field="*{categoria}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
-                <span th:if="${#fields.hasErrors('sexe')}" th:errors="*{sexe}"/>
+                <select>
+                    <option value="0">Seleccione:</option>
+        
+                    </select>
+                <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
+            </p>
+             <p>
+                <label for="stock" th:text="#{producte.stockActual}"/> <!--Etiqueta pel sexe del gos-->            
+                <input type="text" name="sexe" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                <!-- Gestió errors camp sexe-->
+                <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
+            </p>
+            <p>
+                <label for="unitat" th:text="#{producte.unitat}"/> <!--Etiqueta pel sexe del gos-->            
+               <!-- <input type="text" name="unitat" th:field="*{unitat}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                <!-- Gestió errors camp sexe-->
+                <select>
+                    <option value="0">Seleccione:</option>
+        
+                    </select>
+                <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
+            </p>
+            <p>
+                <label for="proveidor" th:text="#{producte.proveidor}"/> <!--Etiqueta pel sexe del gos-->            
+                <!--<input type="text" name="proveidor" th:field="*{cifProveidor}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+                <!-- Gestió errors camp sexe-->
+                <select>
+                    <option value="0">Seleccione:</option>
+        
+                    </select>
+                <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
             </p>
 
             <!-- Botó per enviar les dades-->
-            <input type="submit" name="enviar" value="Enviar Dades"/>    
-             <input type="submit" name="enviar" value="Enviar Dades"/> 
+            <label for="actualitzar" th:text="#{actualitzar}"/>
+            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>   
+            <label for="cancel" th:text="#{cancel}"/>
+            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>  
         </form>
     </p>
     
