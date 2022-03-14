@@ -31,12 +31,11 @@ public class ControladorInici {
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
      *passant a ser la pàgina inicial de l'aplicació, la que es mostrarà al escriure localhost:8080
      */
-    
-    /*@AuthenticationPrincipal retorna l'usuari autenticat actualment com un objecte User de Spring security*/
+ /*@AuthenticationPrincipal retorna l'usuari autenticat actualment com un objecte User de Spring security*/
     @GetMapping("/") //Arrel de l'aplicació localhost:8080
     public String inici(Model model, @AuthenticationPrincipal User username) {
-        log.info("Executant el controlador Spring MVC");        
-        log.info("L'usuari autenticat és: "+username);
+        log.info("Executant el controlador Spring MVC");
+        log.info("L'usuari autenticat és: " + username);
 
         /*Definim variable gossos on emmagatzemarem els gossos de la taula gos obtinguts mitjançant el mètode 
          *llistarGossos definit en la interface GosServiceInterface i implementat en la classe GosService
@@ -53,16 +52,19 @@ public class ControladorInici {
         return "productes";
     }
     
+    
     @GetMapping("/usuaris")
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
         return "usuaris";
     }
 
+  
     /*Definim el mètode per mostrar la pàgina amb el forumlari de les dades del gos passat com a paràmetre.
      *Aquest gos, si no èxistei, es crearà de manera automàtica en el moment que executem aquest mètode amb els
      *atributs buits (recordem que el constructor construeix un objecte buit).
      *
      */
+
     @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del gos
     public String crearProducte(Producte producte) {
 

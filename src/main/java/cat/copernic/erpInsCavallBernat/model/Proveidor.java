@@ -39,3 +39,4 @@ public class Proveidor {
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String contacte;
 }
+
