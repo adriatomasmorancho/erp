@@ -5,7 +5,6 @@ import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -29,30 +27,15 @@ public class ControladorInici {
      *GosService.
      */
     private ProducteServiceInterface producteService;
-    
-    /*
-    @GetMapping("/error403")
-    public ModelAndView handleError()
-    {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("error403");
-        return modelAndView;
-    }
-    
-    public String getErrorPath() {
-        return "/error403";
-    }
-    */
 
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
      *passant a ser la pàgina inicial de l'aplicació, la que es mostrarà al escriure localhost:8080
      */
-    
-    /*@AuthenticationPrincipal retorna l'usuari autenticat actualment com un objecte User de Spring security*/
+ /*@AuthenticationPrincipal retorna l'usuari autenticat actualment com un objecte User de Spring security*/
     @GetMapping("/") //Arrel de l'aplicació localhost:8080
     public String inici(Model model, @AuthenticationPrincipal User username) {
-        log.info("Executant el controlador Spring MVC");        
-        log.info("L'usuari autenticat és: "+username);
+        log.info("Executant el controlador Spring MVC");
+        log.info("L'usuari autenticat és: " + username);
 
         /*Definim variable gossos on emmagatzemarem els gossos de la taula gos obtinguts mitjançant el mètode 
          *llistarGossos definit en la interface GosServiceInterface i implementat en la classe GosService
@@ -61,7 +44,17 @@ public class ControladorInici {
 
         model.addAttribute("productes", productes);
 
-        return "productes"; //Retorna la pàgina inici
+        return "inici"; //Retorna la pàgina inici
+    }
+
+    @GetMapping("/productes")
+    public String productes(Model model, @AuthenticationPrincipal User username) {
+        return "productes";
+    }
+    
+    @GetMapping("/usuaris")
+    public String usuaris(Model model, @AuthenticationPrincipal User username) {
+        return "usuaris";
     }
 
     /*Definim el mètode per mostrar la pàgina amb el forumlari de les dades del gos passat com a paràmetre.
@@ -85,19 +78,18 @@ public class ControladorInici {
      *afegirGos de la classe GosService, per guardar el gos en la base de dades i finalment retornar
      *a la pàgina d'inici.
      */
-    
-    /*Abans de guardar les dades del gos, és quan comprovem si són valides o no, perquè el sistema
+ /*Abans de guardar les dades del gos, és quan comprovem si són valides o no, perquè el sistema
      *realitzi aquesta validació, utilitzem l'anotació @Valid precedint a l'objecte al qual pertanyen
      *els valors a validar, en el nostre cas, l'objecte Gos passat per paràmetre.
      *Per un altre costat, al mètode li passem el paràmetre error, objectede la classe Errors per saber
      *si el formulari té errors.
-    */
+     */
     @PostMapping("/guardarProducte") //action = guardarGos
     public String guardarProducte(@Valid Producte producte, Errors errors) {
-        
-        if(errors.hasErrors()){ //Si s'han produït errors...
+
+        if (errors.hasErrors()) { //Si s'han produït errors...
             log.info("S'ha produït un error");
-             return "formulariProducte"; //Mostrem la pàgina del formulari
+            return "formulariProducte"; //Mostrem la pàgina del formulari
         }
 
         producteService.afegirProducte(producte); //Afegim el gos passat per paràmetre a la base de dades
@@ -126,7 +118,7 @@ public class ControladorInici {
 
         return "formulariProducte"; //Retorna la pàgina amb el formulari de les dades del gos
     }
-    
+
     /*Definim el mètode per guardar el gos en la base de dades i finalment retornar
      *a la pàgina d'inici. El gos l'eliminarem mitjançant el mètode eliminarGos de
      *la classe GosService.
@@ -134,16 +126,16 @@ public class ControladorInici {
      *que el del mètode editar.
      *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
-    @GetMapping("/eliminar/{idproducte}") 
+    @GetMapping("/eliminar/{idproducte}")
     public String eliminar(Producte producte) {
 
         /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode eliminarGos de la capa de servei.*/
         producteService.eliminarProducte(producte);
-        
+
         return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
     }
-    
+
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
      *crida automàticament al mètode setIdgos de la classe Gos per assignar-li l'idGos
      *que hem rebut mitjançant el paràmetre de consulta a l'objecte Gos que passem com a
@@ -153,11 +145,10 @@ public class ControladorInici {
     @GetMapping("/eliminar") //URL eliminar + paràmetre de consulta inclós en el mateix URL
     public String eliminar(Gos gos) {    */
 
-        /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
+ /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode eliminarGos de la capa de servei.
         gosService.eliminarGos(gos);
         
         return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
     }*/
-
 }
