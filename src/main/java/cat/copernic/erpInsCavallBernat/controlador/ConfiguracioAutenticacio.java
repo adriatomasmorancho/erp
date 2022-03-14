@@ -48,13 +48,18 @@ public class ConfiguracioAutenticacio extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
                 .antMatchers("/formulariProducte", "/editar/**", "/eliminar/**") //URL i subURLS (**) on pot accedir...
                 .hasRole("admin") //...l'usuari amb rol veterinari
-                .antMatchers("/") //URL inici on poden accedir...
+                .antMatchers("/", "/productes")
+                //.permitAll()//URL inici on poden accedir...
                 .hasAnyRole("admin", "professor") //...els usuaris amb rol veterinari i pacient
                 .and()
                 .formLogin() //Objecte que representa el formulari de login personalitzat que utilitzarem
                 .loginPage("/login") //Pàgina on es troba el formulari per fer login personalitzat
                 .and()
-                .exceptionHandling().accessDeniedPage("/errors/error403"); //Mostrarem la pàgina error403 si l'usuari no té accés a una àgina o acció 
+                .exceptionHandling().accessDeniedPage("/errors/error403") //Mostrarem la pàgina error403 si l'usuari no té accés a una àgina o acció 
+                .and()
+                .logout()
+                .permitAll()
+                .logoutSuccessUrl("/login?logout");
     }
     
 }

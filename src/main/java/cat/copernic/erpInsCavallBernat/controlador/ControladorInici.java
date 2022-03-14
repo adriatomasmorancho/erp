@@ -5,6 +5,7 @@ import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -27,6 +29,20 @@ public class ControladorInici {
      *GosService.
      */
     private ProducteServiceInterface producteService;
+    
+    /*
+    @GetMapping("/error403")
+    public ModelAndView handleError()
+    {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error403");
+        return modelAndView;
+    }
+    
+    public String getErrorPath() {
+        return "/error403";
+    }
+    */
 
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
      *passant a ser la pàgina inicial de l'aplicació, la que es mostrarà al escriure localhost:8080
@@ -45,7 +61,7 @@ public class ControladorInici {
 
         model.addAttribute("productes", productes);
 
-        return "inici"; //Retorna la pàgina inici
+        return "productes"; //Retorna la pàgina inici
     }
 
     /*Definim el mètode per mostrar la pàgina amb el forumlari de les dades del gos passat com a paràmetre.
@@ -54,7 +70,7 @@ public class ControladorInici {
      *
      */
     @GetMapping("/formulariProducte") //URL a la pàgina amb el formulari de les dades del gos
-    public String crearFormulariGos(Producte producte) {
+    public String crearFormulariProducte(Producte producte) {
 
         return "formulariProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }

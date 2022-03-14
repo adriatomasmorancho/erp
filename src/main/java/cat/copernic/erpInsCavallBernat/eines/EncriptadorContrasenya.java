@@ -15,7 +15,7 @@ public class EncriptadorContrasenya {
     public static void main(String[] args) {
 
         var password = "123";
-        System.out.println("Contrasenya: " + password);
+        System.out.println("Contrasenya:" + password);
         System.out.println("Contrasenya encriptada:" + encriptarContrasenya(password));
     }
 
