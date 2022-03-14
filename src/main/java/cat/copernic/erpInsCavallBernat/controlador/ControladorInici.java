@@ -47,6 +47,16 @@ public class ControladorInici {
 
         return "inici"; //Retorna la pàgina inici
     }
+    
+    @GetMapping("/productes")
+    public String productes(Model model, @AuthenticationPrincipal User username) {
+        return "productes";
+    }
+    
+    @GetMapping("/usuaris")
+    public String usuaris(Model model, @AuthenticationPrincipal User username) {
+        return "usuaris";
+    }
 
     /*Definim el mètode per mostrar la pàgina amb el forumlari de les dades del gos passat com a paràmetre.
      *Aquest gos, si no èxistei, es crearà de manera automàtica en el moment que executem aquest mètode amb els
