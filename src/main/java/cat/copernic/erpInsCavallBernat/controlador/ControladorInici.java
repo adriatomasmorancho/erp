@@ -54,7 +54,7 @@ public class ControladorInici {
      *
      */
     @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del gos
-    public String crearFormulariGos(Producte producte) {
+    public String crearProducte(Producte producte) {
 
         return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }
