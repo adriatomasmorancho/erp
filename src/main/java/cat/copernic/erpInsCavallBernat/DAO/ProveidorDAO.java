@@ -4,10 +4,14 @@
  */
 package cat.copernic.erpInsCavallBernat.DAO;
 
+import cat.copernic.erpInsCavallBernat.model.Proveidor;
+import org.springframework.data.repository.CrudRepository;
+
 /**
  *
  * @author ivan
  */
-public class ProveidorDAO {
-    
+public interface ProveidorDAO extends CrudRepository<Proveidor,Long> {
+   
+  
 }

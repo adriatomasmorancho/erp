@@ -1,11 +1,11 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
-import cat.copernic.erpInsCavallBernat.model.Producte;
+import cat.copernic.erpInsCavallBernat.DAO.ProveidorDAO;
+import cat.copernic.erpInsCavallBernat.model.Proveidor;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
 
 /**
  *
@@ -16,7 +16,7 @@ import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
  *i que permet injectar aquesta classe en el controlador
 */
 @Service 
-public class ProducteService implements ProducteServiceInterface{
+public class ProveidorService implements ProveidorServiceInterface{
     
     /*Quan treballem en la capa de servei amb classes de tipus DAO, com és el cas, estem
      *treballant amb transaccions SQL, és a dir, quan fem una consulta a la BBDD, si aquesta
@@ -29,7 +29,7 @@ public class ProducteService implements ProducteServiceInterface{
      *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
     */
     @Autowired
-    private ProducteDAO producte; 
+    private ProveidorDAO proveidor; 
 
     /*LListar productes de la taula producte de la BBDD erp*/
     @Override
@@ -39,41 +39,41 @@ public class ProducteService implements ProducteServiceInterface{
      *perquè només hem de llegir de la BBDD.
     */    
     @Transactional(readOnly=true) 
-    public List<Producte> llistarProductes() {
+    public List<Proveidor> llistarProveidors() {
         
         /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de productes de la BBDD.
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
         */
-        return (List<Producte>) producte.findAll(); 
+        return (List<Proveidor>) proveidor.findAll(); 
     }
 
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
-    public void afegirProducte(Producte producte) {
+    public void afegirProveidor(Proveidor proveidor) {
         
         /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
          *a la taula producte de la BBDD erp.
         */
-        this.producte.save(producte); 
+        this.proveidor.save(proveidor); 
     }
 
     /*Eliminar el producte passat per paràmetre de la taula producte de la BBDD erp*/
     @Override
     @Transactional //Igual que en el mètode afegirProducte, modifiquem la informació de la BBDD
-    public void eliminarProducte(Producte producte) {
+    public void eliminarProveidor(Proveidor proveidor) {
         
         /*Cridem al mètode delete() de CrudRepository perquè elimini el producte passat com a paràmetre,
          *de la taula producte de la BBDD erp.
         */
-        this.producte.delete(producte);
+        this.proveidor.delete(proveidor);
         
     }
 
     /*Cercar el producte passat per paràmetre en la taula producte de la BBDD erp*/
     @Override
     @Transactional(readOnly=true) //Igual que en el mètode llistarProductes, no modifiquem la informació de la BBDD
-    public Producte cercarProducte(Producte producte) {
+    public Proveidor cercarProveidor(Proveidor proveidor) {
         
         /*Cridem al mètode findById() de CrudRepository perquè ens retorni el producte passat com a paràmetre.
          *El paràmetre que li passem a aquest mètode, ha de ser la clau primària de l'entitat, en el nostre 
@@ -82,7 +82,7 @@ public class ProducteService implements ProducteServiceInterface{
          *Si el producte no existei retornarà null (orElse(null)).
         */ 
 
-        return this.producte.findById(producte.getId_Producte()).orElse(null);
+        return this.proveidor.findById(proveidor.getId_Proveidor()).orElse(null);
         
     }
     

@@ -37,9 +37,7 @@ public class ControladorInici {
         log.info("Executant el controlador Spring MVC");
         log.info("L'usuari autenticat és: " + username);
         
-        var productes = producteService.llistarProductes();
-
-        model.addAttribute("productes", productes);
+        
 
         /*Definim variable gossos on emmagatzemarem els gossos de la taula gos obtinguts mitjançant el mètode 
          *llistarGossos definit en la interface GosServiceInterface i implementat en la classe GosService
@@ -48,7 +46,11 @@ public class ControladorInici {
     }
     
     @GetMapping("/productes")
-    public String productes(Model model, @AuthenticationPrincipal User username) {
+    public String productes(Model model, Producte producte) {
+        
+        var productes = producteService.llistarProductes();
+
+        model.addAttribute("productes", productes);
             
         return "productes";
     }

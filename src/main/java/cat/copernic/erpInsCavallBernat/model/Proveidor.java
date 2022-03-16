@@ -4,6 +4,7 @@
  */
 package cat.copernic.erpInsCavallBernat.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,12 +20,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="proveidor")
-public class Proveidor {
+public class Proveidor implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id //L'atribut idRol és la clau primària de la BBDD
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Generació autonumèrica de l'id
-    private int id_Rol;
+    private long id_Proveidor;
     
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String cif;
@@ -33,7 +34,7 @@ public class Proveidor {
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String email;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
-    private String telefon;
+    private int telefon;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String adreca;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom

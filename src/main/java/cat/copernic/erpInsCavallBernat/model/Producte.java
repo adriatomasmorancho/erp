@@ -28,14 +28,11 @@ public class Producte implements Serializable {
     @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
     private long id_Producte;
-
-
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
     @NotEmpty //Validem un nombre mínim de caràcters
     private String nom;
-
     /*Validació per comprovar que el sexe no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
@@ -50,5 +47,5 @@ public class Producte implements Serializable {
     
     @NotEmpty
     private String cifProveidor;
-   
+  
 }
