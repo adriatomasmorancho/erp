@@ -8,7 +8,7 @@
         <h2 th:text="#{producte.nouProducte}"/>
         <p>          
         <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
-            <input type="hidden" name="id" th:field="*{id_Producte}"/>           
+            <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
             <p>
                 <label for="nom" th:text="#{producte.nom}"/>
                 <input type="text" name="nom" th:field="*{nom}"/>

@@ -23,10 +23,10 @@
                     <td th:text="${producte.nom}"></td>
                     <td th:text="${producte.preu}"></td>
                     <td th:text="${producte.categoria}"></td>
-                    <td th:text="${producte.stock}"></td>
+                  <!--  <td th:text="${producte.stock}"></td>-->
                     <td th:text="${producte.unitat}"></td>
-                <!--    <td th:text="${producte.cifProveidor}"></td>-->
-                    <td><a th:href="@{/editarProducte}+${producte.id}" th:text="Editar"/></td>
+                    <td th:text="${producte.cifProveidor}"></td>
+                    <td><a th:href="@{/editarProducte}+${producte.id_Producte}" th:text="Editar"/></td>
                 </tr>
             </table>
         </div>

@@ -45,6 +45,8 @@ public class Producte implements Serializable {
     @NotEmpty
     private int categoria;
     
+    
+    
     @NotEmpty
     private String cifProveidor;
   

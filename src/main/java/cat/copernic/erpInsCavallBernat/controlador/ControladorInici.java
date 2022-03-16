@@ -133,7 +133,7 @@ public class ControladorInici {
      *que el del mètode editar.
      *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
-    @GetMapping("/eliminar/{idproducte}") 
+    @GetMapping("/eliminar/{id_Producte}") 
     public String eliminar(Producte producte) {
 
         /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
