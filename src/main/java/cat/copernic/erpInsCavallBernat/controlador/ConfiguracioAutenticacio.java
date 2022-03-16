@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +41,9 @@ public class ConfiguracioAutenticacio extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //.antMatchers("/formulariProducte", "/editar/**", "/eliminar/**") //URL i subURLS (**) on pot accedir...
-                //.hasRole("admin") //...l'usuari amb rol veterinari
+                //.hasRole("admin") //...l'usuari amb rol admin
                 //.antMatchers("/", "/productes")
-                //.hasAnyRole("admin", "professor") //...els usuaris amb rol veterinari i pacient
+                //.hasAnyRole("admin", "professor") //...els usuaris amb rol admin i professor
                 .antMatchers("/login")
                 .permitAll()
                 .anyRequest()

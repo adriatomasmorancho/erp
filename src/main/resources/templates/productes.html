@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Productes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>ESTAMOS DENTRO</h1>
+        <h1>PRODUCTES</h1>
         <div>
+            <p>
+                <a th:href="@{/usuaris}"th:text="Usuaris"/>
+            </p>
             <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">

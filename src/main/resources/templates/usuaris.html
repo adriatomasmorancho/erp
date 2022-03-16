@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>TODO supply a title</title>
+        <title>Usuaris</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <h1>USUARIS</h1>
-        <div>
+    <body>        
+        <!--Enllaç que ens portarà a la pàgina per poder afegir un usuari.
+            Mitjançant l'element th:href de Thymeleaf definim l'URL de l'enllaç. 
+            A href li assignarem la ruta de l'enllaç mitjançan @{ruta}-->
+        <a th:href="@{/crearUsuari}"th:text="#{usuari.crearUsuari}"/>
+        <h1>Llistat de usuaris</h1>
+        <div th:if="${usuaris!=null && !usuaris.empty}">
+            <!-- Mostrem en una taula les dades del usuaris guardats en la taula usuaris de la BBDD -->
+            <table border="1">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Password</th>
+                    <th>Rol</th>
+                    <!--Columnes per afegir l'enllaç d'editar i eliminar l'usuari-->
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <!-- Recorregut dels usuaris. Cada usuari de l'ArrayList usuaris es guarda en la variable usuari-->
+                <tr th:each="usuari : ${usuaris}"> 
+                    <td th:text="${usuari.id_usuari}"></td>
+                    <td th:text="${usuari.username}"></td>
+                    <td th:text="${usuari.password}"></td>
+                    <td th:text="${usuari.rols}"></td>
+                    <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
+                        al qual li correspon l'id que concatenem a l'URL editar-->
+                    <td><a th:href="@{/editar/}+${usuari.id_usuari}" th:text="Editar"/></td>
+                    <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar l'usuari actual
+                        al qual li correspon l'id que concatenem a l'URL d'eliminar-->
+                    <td><a th:href="@{/eliminar/}+${usuari.id_usuari}" th:text="Eliminar"/></td>
+                    <!--<td><a th:href="@{/eliminar(id_usuari=${usuari.id_usuari})}" th:text="Eliminar"/></td>-->
+                </tr>
+            </table>
+        </div>
+        <div th:if="${usuaris==null || usuaris.empty}"><!--Si l'ArrayList de usuaris no està inicialitzat o no té contingut-->
+            <!-- Mostrem missatge-->
+            No hi ha usuaris a la llista.
+        </div>
+        <p/>
+        <div><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
             <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
