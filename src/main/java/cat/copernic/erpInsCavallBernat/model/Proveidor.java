@@ -4,6 +4,7 @@
  */
 package cat.copernic.erpInsCavallBernat.model;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,8 +19,8 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="proveidor")
-public class Proveidor {
+@Table(name="Proveidor")
+public class Proveidor implements Serializable {
     private static final long serialVersionUID=1L;
 
     @Id //L'atribut idRol és la clau primària de la BBDD

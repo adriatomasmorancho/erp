@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Crear Usuari</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h2>Crear Usuari</h2>
+        <a th:href="@{/usuaris}">Usuaris</a>
+        <p>
+            <!-- Creem un formulari per introduir les dades que el ControladorInici 
+                 assignarà als atributs del usuari passat com a paràmetre en el mètode 
+                 crearUsuari implementat en aquest ControladorInici. 
+                 Per associar le dades a l'objecte usuari, fem servir l'element th:objecte de 
+                 Thymeleaf, al qual li assignem el paràmetre gos del mètode crearUsuari 
+                 o editar del controlador.-->
+        <form th:action="@{/guardarUsuari}" method="post" th:object="${usuari}">
+            <!-- Camp ocult on guardem l'id del usuari per enviar-lo juntament amb les altres dades-->
+            <input type="hidden" name="id_usuari" th:field="*{id_usuari}"/>
+            <p>
+                <label for="nom">Nom:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del usuari-->
+                <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
+                    usuari assignat a th:objecte-->
+                <input type="text" name="username" th:field="*{username}"/>
+                <!--Comprovem si el camp "nom" conté errors mitjançant th:if="${#fields.hasErrors('username')}", on passem com a
+                    paràmetre el nom del camp on volem comprovar si hi ha errors, en el nostre cas "username", i ens retornarà
+                    verdader si conté errors i fals en cas contrari.
+                    Si conté errors, li demanarem a l'atribut nom del usuari que ens mostri els errors mitjançant th:errors="*{username}".
+                    Tot això és possible perquè en la classe Usuari hem afegit les anotacions per les validacions.-->
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"/>
+            </p>
+            <p>
+                <label for="contrasenya">Contrasenya:</label> <!--Etiqueta per la contrasenya del usuari-->            
+                <input type="text" name="password" th:field="*{password}"/> <!--Associem les dades introduïdes amb l'atribut password-->
+                <!-- Gestió errors edat-->
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+            </p>
+            <!-- Botó per enviar les dades i afegir un nou usuari-->
+            <input type="submit" name="enviar" value="Crear"/>        
+        </form>
+        </p>
+    </body>
+</html>

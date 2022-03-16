@@ -8,6 +8,7 @@ import cat.copernic.erpInsCavallBernat.DAO.UsuariDAO;
 import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service ("userDetailsService")
 @Slf4j
-public class UsuariService implements UserDetailsService{
+public class UsuariService implements UserDetailsService, UsuariServiceInterface{
     
    
     /*Atribut que defineix un UsuariDAO, injectant els seu mètodes a aquesta classe (@Autowired),
@@ -80,6 +81,27 @@ public class UsuariService implements UserDetailsService{
          *li correspon el nom d'usuari passat com a paràmetre.
         */
         return new User(usuari.getUsername(), usuari.getPassword(), rols);
+    }
+
+    @Override
+    @Transactional(readOnly=true)
+    public List<Usuari> llistarUsuaris() {
+        return (List<Usuari>) usuariDAO.findAll();
+    }
+
+    @Override
+    public void afegirUsuari(Usuari usuari) {
+        this.usuariDAO.save(usuari);
+    }
+
+    @Override
+    public void eliminarUsuari(Usuari usuari) {
+        this.usuariDAO.delete(usuari);
+    }
+
+    @Override
+    public Usuari cercarUsuari(Usuari usuari) {
+        return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
     }
     
 }
