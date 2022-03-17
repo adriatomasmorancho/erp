@@ -5,6 +5,7 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.UsuariDAO;
+import cat.copernic.erpInsCavallBernat.eines.EncriptadorContrasenya;
 import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.util.ArrayList;
@@ -91,6 +92,7 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
 
     @Override
     public void afegirUsuari(Usuari usuari) {
+        usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(usuari.getPassword()));
         this.usuariDAO.save(usuari);
     }
 
