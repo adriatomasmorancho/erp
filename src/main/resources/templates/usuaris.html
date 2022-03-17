@@ -11,6 +11,7 @@
             Mitjançant l'element th:href de Thymeleaf definim l'URL de l'enllaç. 
             A href li assignarem la ruta de l'enllaç mitjançan @{ruta}-->
         <a th:href="@{/crearUsuari}"th:text="#{usuari.crearUsuari}"/>
+        <a th:href="@{/}"th:text="#{back}"/>
         <h1>Llistat de usuaris</h1>
         <div th:if="${usuaris!=null && !usuaris.empty}">
             <!-- Mostrem en una taula les dades del usuaris guardats en la taula usuaris de la BBDD -->

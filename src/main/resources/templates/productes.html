@@ -8,10 +8,45 @@
     <body>
         <h1>PRODUCTES</h1>
         <div>
-            <p>
-                <a th:href="@{/usuaris}"th:text="Usuaris"/>
-            </p>
-            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+            <a th:href="@{/formulariProducte}"th:text="#{producte.afegirProducte}"/>
+
+        <h1>Llistat de productes</h1>
+
+        <div th:if="${productes!=null && !productes.empty}">
+
+            <!-- Mostrem en una taula les dades del gossos guardats en la taula gossos de la BBDD veterinari -->
+            <table border="1">
+                <tr>
+                    <th>Nom</th>
+                    <th>Edat</th>
+                    <th>Sexe</th>
+                    <!--Columnes per afegir l'enllaç d'editar i eliminar el gos-->
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <!-- Recorregut dels gossos. Cada gos de l'ArrayList gossos es guarda en la variable gos-->
+                <tr th:each="producte : ${productes}"> 
+                    <td th:text="${producte.nom}"></td>
+                    <td th:text="${producte.edat}"></td>
+                    <td th:text="${producte.sexe}"></td>
+                    <!--Enllaç mitjançant el qual accedirem a la pàgina per editar el gos actual
+                        al qual li correspon l'id que concatenem a l'URL editar-->
+                    <td><a th:href="@{/editar/}+${producte.idproducte}" th:text="Editar"/></td>
+                    <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar el gos actual
+                        al qual li correspon l'id que concatenem a l'URL d'eliminar-->
+                    <td><a th:href="@{/eliminar/}+${producte.idproducte}" th:text="Eliminar"/></td>
+                    <!--<td><a th:href="@{/eliminar(idgos=${gos.idgos})}" th:text="Eliminar"/></td>-->
+                </tr>
+            </table>
+
+        </div>
+
+        <div th:if="${productes==null || productes.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
+            <!-- Mostrem missatge-->
+            No hi ha productes a la llista.
+        </div>
+        
+        <p/>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                 <input hidden type="submit" value="Sign Out"/>

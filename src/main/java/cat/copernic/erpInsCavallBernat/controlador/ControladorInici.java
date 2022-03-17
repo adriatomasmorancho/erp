@@ -43,15 +43,17 @@ public class ControladorInici {
         /*Definim variable gossos on emmagatzemarem els gossos de la taula gos obtinguts mitjançant el mètode 
          *llistarGossos definit en la interface GosServiceInterface i implementat en la classe GosService
          */
-        var productes = producteService.llistarProductes();
-
-        model.addAttribute("productes", productes);
 
         return "inici"; //Retorna la pàgina inici
     }
 
     @GetMapping("/productes")
     public String productes(Model model, @AuthenticationPrincipal User username) {
+        
+        //var productes = producteService.llistarProductes();
+
+        //model.addAttribute("productes", productes);
+        
         return "productes";
     }
     
