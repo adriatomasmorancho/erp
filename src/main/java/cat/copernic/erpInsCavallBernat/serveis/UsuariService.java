@@ -72,9 +72,11 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
          *classe SimpleGrantedAuthority la qual implementa GrantedAuthority, passant-li com a paràmetre 
          *el nom del rol.
         */
+        
         for(Rol rol: usuari.getRols()){
             rols.add(new SimpleGrantedAuthority(rol.getNom()));
         }
+        
         
         /*Retornme el nou usuari de tipus UserDetails mitjançant la classe User d'Spring Security,
          *la qual implementa la interface UserDetails.
@@ -91,7 +93,7 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     }
 
     @Override
-    public void afegirUsuari(Usuari usuari) {
+    public void crearUsuari(Usuari usuari) {
         usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(usuari.getPassword()));
         this.usuariDAO.save(usuari);
     }

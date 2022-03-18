@@ -18,8 +18,11 @@
             <table border="1">
                 <tr>
                     <th>Id</th>
-                    <th>Nom</th>
+                    <th>Email</th>
                     <th>Password</th>
+                    <th>Nom</th>
+                    <th>Cognoms</th>
+                    <th>Telefon</th>
                     <th>Rol</th>
                     <!--Columnes per afegir l'enllaç d'editar i eliminar l'usuari-->
                     <th>Editar</th>
@@ -30,7 +33,10 @@
                     <td th:text="${usuari.id_usuari}"></td>
                     <td th:text="${usuari.username}"></td>
                     <td th:text="${usuari.password}"></td>
-                    <td th:text="${usuari.rols}"></td>
+                    <td th:text="${usuari.nom}"></td>
+                    <td th:text="${usuari.cognoms}"></td>
+                    <td th:text="${usuari.telefon}"></td>
+                    <td th:text="${usuari.rol}"></td>
                     <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
                         al qual li correspon l'id que concatenem a l'URL editar-->
                     <td><a th:href="@{/editar/}+${usuari.id_usuari}" th:text="Editar"/></td>

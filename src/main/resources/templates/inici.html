@@ -12,9 +12,10 @@
         <a th:href="@{/usuaris}"th:text="#{usuari}"/>
         <br />
         <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-        
-        
-         <!--<footer th:replace="layouts/plantilla :: peu" />-->
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form> 
+        <!--<footer th:replace="layouts/plantilla :: peu" />-->
 
     </body>
 </html>

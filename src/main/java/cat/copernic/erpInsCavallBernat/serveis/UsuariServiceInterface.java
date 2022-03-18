@@ -13,7 +13,7 @@ public interface UsuariServiceInterface {
     
     public List<Usuari> llistarUsuaris(); //Mètode que implementarem per llistar usuaris
     
-    public void afegirUsuari(Usuari usuari); //Mètode que implementarem per afegir un usuari
+    public void crearUsuari(Usuari usuari); //Mètode que implementarem per afegir un usuari
     
     public void eliminarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
     
