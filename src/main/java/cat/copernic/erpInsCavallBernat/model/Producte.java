@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
+
 /**
  *
  * @author ivan
@@ -45,7 +46,9 @@ public class Producte implements Serializable {
     @NotEmpty
     private int categoria;
     
-    
+    //FALTA STOCK
+    //@NotEmpty
+    //private String stock;
     
     @NotEmpty
     private String cifProveidor;

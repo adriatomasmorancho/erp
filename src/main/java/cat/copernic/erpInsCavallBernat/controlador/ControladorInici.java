@@ -112,7 +112,7 @@ public class ControladorInici {
      *de la classe Gos per fer aquesta associació, és a dir, el que fa és gos.setIdgos(idgos).
      *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
-    @GetMapping("/editarProducte/{id_Producte}")
+    @GetMapping("/editar/{id_Producte}")
     public String editar(Producte producte, Model model) {
 
         log.info(String.valueOf(producte.getId_Producte())); //Mostra idgos de Gos
@@ -123,9 +123,10 @@ public class ControladorInici {
 
         model.addAttribute("producte", producte); //Enviem les dades del gos resultant de la cerca a la pàgina formulariGos
 
-        return "productes"; //Retorna la pàgina amb el formulari de les dades del gos
+        return "editarProducte"; //Retorna la pàgina amb el formulari de les dades del gos
     }
-    
+       
+   
     /*Definim el mètode per guardar el gos en la base de dades i finalment retornar
      *a la pàgina d'inici. El gos l'eliminarem mitjançant el mètode eliminarGos de
      *la classe GosService.

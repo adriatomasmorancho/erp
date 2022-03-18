@@ -4,7 +4,7 @@
         <meta charset="UTF-8"/>
     </head>
     <body>
-        <header th:replace="layout/plantilla :: capcalera" />
+        <header></header>
         
         <h2 th:text="#{producte.editarProducte}"/>
 
@@ -21,7 +21,7 @@
             <input type="hidden" name="id" th:field="*{id_Producte}"/>
             
             <p>
-                <label for="nom" th:text="#{producte.nom}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                <label for="nom" th:text="#{producte.nom1}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
                 <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
                     gos assignat a th:objecte-->
                 <input type="text" name="nom" th:field="*{nom}"/>
@@ -36,13 +36,13 @@
             </p>
 
             <p>
-                <label for="preu" th:text="#{producte.preu}"/> <!--Etiqueta per l'edat del gos-->            
+                <label for="preu" th:text="#{producte.preu1}"/> <!--Etiqueta per l'edat del gos-->            
                 <input type="text" name="preu" th:field="*{preu}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
                 <!-- Gestió errors edat-->
                 <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
             </p>
             <p>
-                <label for="categoria" th:text="#{producte.categoria}"/> <!--Etiqueta pel sexe del gos-->            
+                <label for="categoria" th:text="#{producte.categoria1}"/> <!--Etiqueta pel sexe del gos-->            
                <!-- <input type="text" name="categoria" th:field="*{categoria}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
                 <select>
@@ -51,12 +51,12 @@
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
-             <p>
+           <!--  <p>
                 <label for="stock" th:text="#{producte.stockActual}"/> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="sexe" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+             <!--     <input type="text" name="sexe" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
-                <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
-            </p>
+             <!--     <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
+            </p>-->
             <p>
                 <label for="unitat" th:text="#{producte.unitat}"/> <!--Etiqueta pel sexe del gos-->            
                <!-- <input type="text" name="unitat" th:field="*{unitat}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
@@ -75,7 +75,7 @@
                     <option value="0">Seleccione:</option>
         
                     </select>
-                <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
+                <span th:if="${#fields.hasErrors('cifProveidor')}" th:errors="*{cifProveidor}"/>
             </p>
 
             <!-- Botó per enviar les dades-->

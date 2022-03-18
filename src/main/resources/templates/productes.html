@@ -13,7 +13,7 @@
                     <th th:text="#{producte.nom}"/>
                     <th th:text="#{producte.preu}"/>
                     <th th:text="#{producte.categoria}"/>
-                    <th th:text="#{producte.stock}"/>
+                    <!--<th th:text="#{producte.stock}"/>-->
                     <th th:text="#{producte.unitat}"/>
                     <th th:text="#{producte.proveidor}"/>
                     <th th:text="#{editar}"/>
@@ -23,10 +23,11 @@
                     <td th:text="${producte.nom}"></td>
                     <td th:text="${producte.preu}"></td>
                     <td th:text="${producte.categoria}"></td>
-                  <!--  <td th:text="${producte.stock}"></td>-->
+                    <!--<td th:text="${producte.stock}"></td>-->
                     <td th:text="${producte.unitat}"></td>
                     <td th:text="${producte.cifProveidor}"></td>
-                    <td><a th:href="@{/editarProducte}+${producte.id_Producte}" th:text="Editar"/></td>
+                    <td><a th:href="@{/editar/}+${producte.id_Producte}" th:text="Editar"/></td>
+                    <td><a th:href="@{/editar/}+${producte.id_Producte}" th:text="Editar"/></td>
                 </tr>
             </table>
         </div>
@@ -35,8 +36,8 @@
         </div>  
         
             <label for="crearProducte" th:text="#{producte.crearProducte}"/>
-            <a th:href="@{/crearPorducte}">
-                <input type="submit" name="enviar" value=""  th:href="@{/crearPorducte}"/></a>
+            <a th:href="@{/crearProducte}">
+                <input type="submit" name="enviar" value=""  th:href="@{/crearProducte}"/></a>
         
         <footer th:replace="layout/plantilla :: peu" />
     </body>

@@ -10,45 +10,49 @@
         <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
             <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
             <p>
-                <label for="nom" th:text="#{producte.nom}"/>
+                <label for="nom" th:text="#{producte.nom1}"/>
                 <input type="text" name="nom" th:field="*{nom}"/>
                 <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
             </p>
             <p>
-                <label for="preu" th:text="#{producte.preu}"/>            
+                <label for="preu" th:text="#{producte.preu1}"/>            
                 <input type="text" name="preu" th:field="*{preu}"/> 
                 <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
             </p>
             <p>
-                <label for="categoria" th:text="#{producte.categoria}"/>
+                <label for="categoria" th:text="#{producte.categoria1}"/>
                 <select>
-                    <option value="0">Seleccione:</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Kg">Litre</option>
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
-             <p>
+            <!-- <p>
                 <label for="stock" th:text="#{producte.stockActual}"/>           
-                <input type="text" name="sexe" th:field="*{stock}"/>
+                <input type="text" name="stock" th:field="*{stock}"/>
                 <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
-            </p>
+            </p>-->
             <p>
-                <label for="unitat" th:text="#{producte.unitat}"/>
+                <label for="unitat" th:text="#{producte.unitat1}"/>
                 <select>
-                    <option value="0">Seleccione:</option>
+                    <option value="1">Seleccione:</option>
                     </select>
                 <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
             </p>
             <p>
-                <label for="proveidor" th:text="#{producte.proveidor}"/>            
+                <label for="proveidor" th:text="#{producte.proveidor1}"/>            
                 <select>
-                    <option value="0">Seleccione:</option>
+                    <option value="1">Seleccione:</option>
                     </select>
-                <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
+                <span th:if="${#fields.hasErrors('cifProveidor')}" th:errors="*{cifProveidor}"/>
             </p>
-            <label for="crear" th:text="#{crear}"/>
-            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>   
-            <label for="cancel" th:text="#{cancel}"/>
-            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>  
+            
+            <label for="crearProducte" th:text="#{crear}"/>
+            
+                <input type="submit" name="enviar" value=""/>
+           <!--  <label for="crearProducte" th:text="#{cancel}"/>
+            <a th:href="@{/productes}">
+                <input type="submit" name="enviar" value=""  th:href="@{/productes}"/></a>-->
         </form>
     </p>
     <footer th:replace="layout/plantilla :: peu" />  
