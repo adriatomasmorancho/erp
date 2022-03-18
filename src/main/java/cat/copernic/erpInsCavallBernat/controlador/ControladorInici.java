@@ -73,7 +73,7 @@ public class ControladorInici {
      *
      */
     @GetMapping("/crearUsuari") //URL a la pàgina amb el formulari de les dades del gos
-    public String crearFormulariUsuari(Usuari usuari) {
+    public String crearUsuari(Usuari usuari) {
 
         return "crearUsuari"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
     }
@@ -102,7 +102,7 @@ public class ControladorInici {
             return "crearUsuari"; //Mostrem la pàgina del formulari
         }
 
-        usuariService.afegirUsuari(usuari); //Afegim el gos passat per paràmetre a la base de dades
+        usuariService.crearUsuari(usuari); //Afegim el gos passat per paràmetre a la base de dades
 
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }

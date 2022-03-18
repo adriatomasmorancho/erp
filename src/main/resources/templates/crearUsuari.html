@@ -17,7 +17,7 @@
             <!-- Camp ocult on guardem l'id del usuari per enviar-lo juntament amb les altres dades-->
             <input type="hidden" name="id_usuari" th:field="*{id_usuari}"/>
             <p>
-                <label for="nom">Nom:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del usuari-->
+                <label for="nom">Email:</label> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del usuari-->
                 <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
                     usuari assignat a th:objecte-->
                 <input type="text" name="username" th:field="*{username}"/>
@@ -33,6 +33,30 @@
                 <input type="text" name="password" th:field="*{password}"/> <!--Associem les dades introduïdes amb l'atribut password-->
                 <!-- Gestió errors edat-->
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"/>
+            </p>
+            <p>
+                <label for="nom">Nom:</label> <!--Etiqueta per la contrasenya del usuari-->            
+                <input type="text" name="nom" th:field="*{nom}"/> <!--Associem les dades introduïdes amb l'atribut password-->
+                <!-- Gestió errors edat-->
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+            </p>
+            <p>
+                <label for="cognoms">Cognoms:</label> <!--Etiqueta per la contrasenya del usuari-->            
+                <input type="text" name="cognoms" th:field="*{cognoms}"/> <!--Associem les dades introduïdes amb l'atribut password-->
+                <!-- Gestió errors edat-->
+                <span th:if="${#fields.hasErrors('cognoms')}" th:errors="*{cognoms}"/>
+            </p>
+            <p>
+                <label for="telefon">Telefon:</label> <!--Etiqueta per la contrasenya del usuari-->            
+                <input type="text" name="telefon" th:field="*{telefon}"/> <!--Associem les dades introduïdes amb l'atribut password-->
+                <!-- Gestió errors edat-->
+                <span th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}"/>
+            </p>
+            <p>
+                <label for="rol">Rol:</label> <!--Etiqueta per la contrasenya del usuari-->            
+                <input type="text" name="rol" th:field="*{rol}"/> <!--Associem les dades introduïdes amb l'atribut password-->
+                <!-- Gestió errors edat-->
+                <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"/>
             </p>
             <!-- Botó per enviar les dades i afegir un nou usuari-->
             <input type="submit" name="enviar" value="Crear"/>        
