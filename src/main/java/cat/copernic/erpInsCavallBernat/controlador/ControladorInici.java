@@ -1,8 +1,10 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
+import cat.copernic.erpInsCavallBernat.model.Proveidor;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ProveidorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class ControladorInici {
 
-    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de GosService al controlador
-    /*Mitjançant aquest atribut de tipus interface, es cridaran els mètodes implementats en la classe GosService,
-     *ja que l'objecte de tipus interface va a cercar una classe que implementi la interface, en el nostre cas, 
-     *GosService.
-     */
+    @Autowired
     private UsuariServiceInterface usuariService;
+    @Autowired
+    private ProveidorServiceInterface proveidorService;
     private ProducteServiceInterface producteService;
 
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
@@ -154,6 +154,16 @@ public class ControladorInici {
         usuariService.eliminarUsuari(usuari);
 
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
+    }
+    
+    @GetMapping("/proveidors")
+    public String proveidors(Model model, @AuthenticationPrincipal Proveidor cif) {
+        
+        var proveidors = proveidorService.llistarProveidors();
+
+        model.addAttribute("proveidors", proveidors);
+        
+        return "proveidors";
     }
 
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
