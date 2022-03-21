@@ -18,5 +18,7 @@ public interface UsuariDAO extends JpaRepository<Usuari,Long>{
     *com a mètode de seguretat per recuperar l'usuari.
     */
     Usuari findByUsername(String username);
+    Usuari findByNom(String nom);
+    Usuari findByRol(String rol);
     
 }

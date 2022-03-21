@@ -4,8 +4,8 @@
         <meta charset="UTF-8"/>
     </head>
     <body>
+        <a th:href="@{/usuaris}"th:text="#{back}"/>
         <h2>Editar Usuari</h2>
-        <a th:href="@{/usuaris}">Usuaris</a>
         <p>
             <!-- Creem un formulari per introduir les dades que el ControladorInici 
                  assignarà als atributs del usuari passat com a paràmetre en el mètode 
@@ -53,9 +53,12 @@
                 <span th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}"/>
             </p>
             <p>
-                <label for="rol">Rol:</label> <!--Etiqueta per la contrasenya del usuari-->            
-                <input type="text" name="rol" th:field="*{rol}"/> <!--Associem les dades introduïdes amb l'atribut password-->
-                <!-- Gestió errors edat-->
+                <label for="rol">Rol:</label> <!--Etiqueta per la contrasenya del usuari-->
+                <select name="cars" id="cars" th:field="*{rol}">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Professor">Professor</option>
+                </select>
+                <!-- Gestió errors rol-->
                 <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"/>
             </p>
             <!-- Botó per enviar les dades i afegir un nou usuari-->

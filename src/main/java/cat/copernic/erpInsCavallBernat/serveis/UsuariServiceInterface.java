@@ -18,4 +18,6 @@ public interface UsuariServiceInterface {
     public void eliminarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
     
     public Usuari cercarUsuari(Usuari usuari); //Mètode que implementarem per cercar un usuari
+    
+    public List<Usuari> cercarUsuariPerNom(String nom); //Mètode que implementarem per cercar un usuari
 }

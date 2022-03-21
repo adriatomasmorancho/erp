@@ -13,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -63,6 +65,14 @@ public class ControladorInici {
         var usuaris = usuariService.llistarUsuaris();
 
         model.addAttribute("usuaris", usuaris);
+        
+        return "usuaris";
+    }
+    
+    @GetMapping("/usuarisNom")
+    public String cercarUsuarisPerNom(@RequestParam String nom, Model model, @ModelAttribute("usuaris") Usuari usuari) {
+
+        model.addAttribute("usuarisPerNom", usuariService.cercarUsuariPerNom(nom));
         
         return "usuaris";
     }

@@ -5,19 +5,36 @@
         <title>Usuaris</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de bootstrap pels elements dinamics que utilitzarem-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>        
         <!--Enllaç que ens portarà a la pàgina per poder afegir un usuari.
             Mitjançant l'element th:href de Thymeleaf definim l'URL de l'enllaç. 
             A href li assignarem la ruta de l'enllaç mitjançan @{ruta}-->
-        <a th:href="@{/crearUsuari}"th:text="#{usuari.crearUsuari}"/>
         <a th:href="@{/}"th:text="#{back}"/>
-        <h1>Llistat de usuaris</h1>
-        <div th:if="${usuaris!=null && !usuaris.empty}">
+        <h1 align="center">Llistat de usuaris</h1>
+        <p/>
+
+        <div align="center">
+            <form th:object="${usuaris}" method="get">
+                <input type="text" class="form-control col-md-4"/>
+                <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+            </form>
+        </div>
+
+        <p/>
+        <div th:if="${usuaris!=null && !usuaris.empty}" align="center">
             <!-- Mostrem en una taula les dades del usuaris guardats en la taula usuaris de la BBDD -->
             <table border="1">
                 <tr>
-                    <th>Id</th>
                     <th>Email</th>
                     <th>Password</th>
                     <th>Nom</th>
@@ -29,22 +46,40 @@
                     <th>Eliminar</th>
                 </tr>
                 <!-- Recorregut dels usuaris. Cada usuari de l'ArrayList usuaris es guarda en la variable usuari-->
-                <tr th:each="usuari : ${usuaris}"> 
-                    <td th:text="${usuari.id_usuari}"></td>
+                
+                <tr th:each="usuari : ${usuaris}" align="center"> 
                     <td th:text="${usuari.username}"></td>
                     <td th:text="${usuari.password}"></td>
                     <td th:text="${usuari.nom}"></td>
                     <td th:text="${usuari.cognoms}"></td>
                     <td th:text="${usuari.telefon}"></td>
                     <td th:text="${usuari.rol}"></td>
-                    <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
-                        al qual li correspon l'id que concatenem a l'URL editar-->
-                    <td><a th:href="@{/editar/}+${usuari.id_usuari}" th:text="Editar"/></td>
-                    <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar l'usuari actual
-                        al qual li correspon l'id que concatenem a l'URL d'eliminar-->
-                    <td><a th:href="@{/eliminar/}+${usuari.id_usuari}" th:text="Eliminar"/></td>
-                    <!--<td><a th:href="@{/eliminar(id_usuari=${usuari.id_usuari})}" th:text="Eliminar"/></td>-->
-                </tr>
+                
+                <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
+                    al qual li correspon l'id que concatenem a l'URL editar-->
+                
+                <td><a th:href="@{/editar/}+${usuari.id_usuari}"><i class="bi bi-pencil-fill"></i></a></td>
+                
+                <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar l'usuari actual
+                    al qual li correspon l'id que concatenem a l'URL d'eliminar-->
+                
+                <td><a th:href="@{/eliminar/}+${usuari.id_usuari}"><i class="bi bi-trash-fill"></i></a></td>
+                <td><a th:href="@{/eliminar(id_usuari=${usuari.id_usuari})}" th:text="Eliminar"/></td>
+                
+            </tr>
+                <!--
+                <tbody>
+                    <tr th:each="usuari : ${usuarisPerNom}">
+                        <td th:text="${usuari.username}"></td>
+                        <td th:text="${usuari.password}"></td>
+                        <td th:text="${usuari.nom}"></td>
+                        <td th:text="${usuari.cognoms}"></td>
+                        <td th:text="${usuari.telefon}"></td>
+                        <td th:text="${usuari.rol}"></td>
+                    </tr>
+                </tbody>
+                -->
+
             </table>
         </div>
         <div th:if="${usuaris==null || usuaris.empty}"><!--Si l'ArrayList de usuaris no està inicialitzat o no té contingut-->
@@ -52,8 +87,14 @@
             No hi ha usuaris a la llista.
         </div>
         <p/>
-        <div><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
+        <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+            <a th:href="@{/crearUsuari}"th:text="#{usuari.crearUsuari}"></a>
+            <a th:href="@{/crearUsuari}"><i class="bi bi-plus-circle"></i></a>
+        </div>
+        <p/>
+        <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
             <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                 <input hidden type="submit" value="Sign Out"/>
