@@ -11,6 +11,8 @@
         <br />
         <a th:href="@{/usuaris}"th:text="#{usuari}"/>
         <br />
+        <a th:href="@{/proveidors}"th:text="#{proveidors}"/>
+        <br />
         <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
         <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
             <input hidden type="submit" value="Sign Out"/>
