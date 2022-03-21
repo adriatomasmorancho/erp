@@ -51,12 +51,12 @@
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
-           <!--  <p>
+            <p>
                 <label for="stock" th:text="#{producte.stockActual}"/> <!--Etiqueta pel sexe del gos-->            
-             <!--     <input type="text" name="sexe" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
+             <input type="text" name="stock" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
                 <!-- Gestió errors camp sexe-->
-             <!--     <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
-            </p>-->
+             <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
+            </p>
             <p>
                 <label for="unitat" th:text="#{producte.unitat}"/> <!--Etiqueta pel sexe del gos-->            
                <!-- <input type="text" name="unitat" th:field="*{unitat}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
