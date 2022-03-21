@@ -6,7 +6,7 @@
     </head>
     <body>
         <h1>Inici</h1>
-        <!-- <header th:replace="layouts/plantilla :: capcalera" /> -->
+        <header th:replace="layouts/navBar :: navBar" />
         <a th:href="@{/productes}"th:text="#{producte}"/>
         <br />
         <a th:href="@{/usuaris}"th:text="#{usuari}"/>
