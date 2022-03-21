@@ -22,8 +22,7 @@
             <p>
                 <label for="categoria" th:text="#{producte.categoria1}"/>
                 <select>
-                    <option value="Kg">Kg</option>
-                    <option value="Kg">Litre</option>
+                   <option value="1">Seleccione:</option>
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
@@ -35,7 +34,8 @@
             <p>
                 <label for="unitat" th:text="#{producte.unitat1}"/>
                 <select>
-                    <option value="1">Seleccione:</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Litre">Litre</option>
                     </select>
                 <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
             </p>
