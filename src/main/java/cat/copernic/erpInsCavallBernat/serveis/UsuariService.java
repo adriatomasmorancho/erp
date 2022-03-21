@@ -5,9 +5,11 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.UsuariDAO;
+import cat.copernic.erpInsCavallBernat.eines.EncriptadorContrasenya;
 import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service ("userDetailsService")
 @Slf4j
-public class UsuariService implements UserDetailsService{
+public class UsuariService implements UserDetailsService, UsuariServiceInterface{
     
    
     /*Atribut que defineix un UsuariDAO, injectant els seu mètodes a aquesta classe (@Autowired),
@@ -70,9 +72,11 @@ public class UsuariService implements UserDetailsService{
          *classe SimpleGrantedAuthority la qual implementa GrantedAuthority, passant-li com a paràmetre 
          *el nom del rol.
         */
+        
         for(Rol rol: usuari.getRols()){
             rols.add(new SimpleGrantedAuthority(rol.getNom()));
         }
+        
         
         /*Retornme el nou usuari de tipus UserDetails mitjançant la classe User d'Spring Security,
          *la qual implementa la interface UserDetails.
@@ -81,5 +85,34 @@ public class UsuariService implements UserDetailsService{
         */
         return new User(usuari.getUsername(), usuari.getPassword(), rols);
     }
+
+    @Override
+    @Transactional(readOnly=true)
+    public List<Usuari> llistarUsuaris() {
+        return (List<Usuari>) usuariDAO.findAll();
+    }
+
+    @Override
+    public void crearUsuari(Usuari usuari) {
+        usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(usuari.getPassword()));
+        this.usuariDAO.save(usuari);
+    }
+
+    @Override
+    public void eliminarUsuari(Usuari usuari) {
+        this.usuariDAO.delete(usuari);
+    }
+
+    @Override
+    public Usuari cercarUsuari(Usuari usuari) {
+        return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
+    }
     
+
+    @Override
+    public List<Usuari> cercarUsuariPerNom(String nom) {
+        return (List<Usuari>) usuariDAO.findByNom(nom);
+    }
+    
+
 }

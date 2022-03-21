@@ -7,6 +7,7 @@
     <body>
         <h1>Inici</h1>
 
+
         <!-- Utilitzem la plantilla per escriure la capçalera, indicant l'adreça on
              es troba, és a dir, "layout/plantilla" i el fragment que volem inserir
              en aquest cas "capcalera" -->
@@ -21,7 +22,19 @@
         <!-- Utilitzem la plantilla per escriure el peu, indicant l'adreça on
              es troba, és a dir, "layout/plantilla" i el fragment que volem inserir
              en aquest cas "peu" -->
-        <footer th:replace="layout/plantilla :: peu" />
+       
+
+        <!-- <header th:replace="layouts/plantilla :: capcalera" /> -->
+        <a th:href="@{/productes}"th:text="#{producte}"/>
+        <br />
+        <a th:href="@{/usuaris}"th:text="#{usuari}"/>
+        <br />
+        <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+            <input hidden type="submit" value="Sign Out"/>
+        </form> 
+        <!--<footer th:replace="layouts/plantilla :: peu" />-->
+
 
     </body>
 </html>
