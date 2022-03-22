@@ -23,18 +23,24 @@
             <h1>Inicia Sessió</h1>
             <form method="POST" th:action="@{/login}">
                 <p>
-                    <!--El name i id de el nom d'usuari ha de ser username perquè Spring Security el reconegui com a tal-->
-                    <label for="username">Usuari:</label>
-                    <input type="text" name="username" id="username"/>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Usuari</span>
+                    </div>
+                    <input type="text" class="form-control" name="username" id="username"/>
+                </div>
                 <p/>
 
                 <p>
-                    <!--El name i id de la contrasenya ha de ser password perquè Spring Security el reconegui com a tal-->
-                    <label for="password">Contrasenya:</label>
-                    <input type="password" name="password" id="password"/>
+                    <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Contrasenya</span>
+                    </div>
+                    <input type="password" class="form-control" name="password" id="password"/>
+                </div>
                 <p/>
 
-                <input type="submit" value="Login"/>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"/>
             </form>
         </div>
 
