@@ -165,6 +165,22 @@ public class ControladorInici {
         
         return "proveidors";
     }
+    
+    @GetMapping("/crearProveidor") //URL a la pàgina amb el formulari de les dades del gos
+    public String crearProveidor(Proveidor proveidor) {
+
+        return "crearProveidor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
+    }
+    
+    @PostMapping("/guardarProveidor") //action = guardarProveidor
+    public String guardarProveidor(@Valid Proveidor proveidor, Errors errors) {
+        if (errors.hasErrors()) {
+            log.info("S'ha produït un error");
+            return "crearProveidor";
+        }
+        proveidorService.crearProveidor(proveidor);
+        return "redirect:/proveidors";
+    }
 
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
      *crida automàticament al mètode setId_usuari de la classe Usuari per assignar-li l'id_usuari

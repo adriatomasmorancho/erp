@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Crear Proveidor</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <a th:href="@{/proveidors}"th:text="#{back}"/>
+        <h2>Crear Proveidor</h2>
+        <p>
+        <form th:action="@{/guardarProveidor}" method="post" th:object="${proveidor}">
+            <p>
+                <label for="cif">Cif:</label>
+                <input type="text" name="cif" th:field="*{cif}"/>
+                <span th:if="${#fields.hasErrors('cif')}" th:errors="*{cif}"/>
+            </p>
+            <p>
+                <label for="nom">Nom:</label>
+                <input type="text" name="nom" th:field="*{nom}"/>
+                <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+            </p>
+            <p>
+                <label for="email">Email:</label>
+                <input type="text" name="email" th:field="*{email}"/>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"/>
+            </p>
+            <p>
+                <label for="telefon">Telefon:</label>
+                <input type="text" name="telefon" th:field="*{telefon}"/>
+                <span th:if="${#fields.hasErrors('telefon')}" th:errors="*{telefon}"/>
+            </p>
+            <p>
+                <label for="adreca">Adreca:</label>
+                <input type="text" name="adreca" th:field="*{adreca}"/>
+                <span th:if="${#fields.hasErrors('adreca')}" th:errors="*{adreca}"/>
+            </p>
+            <p>
+                <label for="contacte">Contacte:</label>
+                <input type="text" name="contacte" th:field="*{contacte}"/>
+                <span th:if="${#fields.hasErrors('contacte')}" th:errors="*{contacte}"/>
+            </p>
+            <input type="submit" name="enviar" value="Crear"/>        
+        </form>
+    </p>
+</body>
+</html>
