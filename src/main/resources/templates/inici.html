@@ -5,8 +5,8 @@
         <meta charset="UTF-8">
     </head>
     <body>
-        <h1>Inici</h1>
         <header th:replace="layout/navBar :: navBar" />
+        <h1>Inici</h1>
         <a th:href="@{/productes}"th:text="#{producte}"/>
         <br />
         <a th:href="@{/usuaris}"th:text="#{usuari}"/>
