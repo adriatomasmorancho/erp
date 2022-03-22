@@ -19,29 +19,31 @@
     </style>
     <body style="background-color:powderblue;">
 
-        <div class="center">
-            <h1>Inicia Sessió</h1>
-            <form method="POST" th:action="@{/login}">
-                <p>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Usuari</span>
-                    </div>
-                    <input type="text" class="form-control" name="username" id="username"/>
-                </div>
-                <p/>
-
-                <p>
+        <div class="card text-white bg-secondary mb-3 center" style="width: 25rem;">
+            <div class="card-body">
+                <h2 class="card-title">Inicia Sessió</h2>
+                <form method="POST" th:action="@{/login}">
+                    <p>
                     <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Contrasenya</span>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Usuari</span>
+                        </div>
+                        <input type="text" class="form-control" name="username" id="username"/>
                     </div>
-                    <input type="password" class="form-control" name="password" id="password"/>
-                </div>
-                <p/>
+                    <p/>
 
-                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"/>
-            </form>
+                    <p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Contrasenya</span>
+                        </div>
+                        <input type="password" class="form-control" name="password" id="password"/>
+                    </div>
+                    <p/>
+
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"/>
+                </form>
+            </div>
         </div>
 
     </body>
