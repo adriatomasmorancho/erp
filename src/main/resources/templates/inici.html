@@ -4,20 +4,21 @@
         <title>Inici dinàmic</title>
         <meta charset="UTF-8">
     </head>
+    
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    
     <body>
         <header th:replace="layout/navBar :: navBar" />
-        <h1>Inici</h1>
-        <a th:href="@{/productes}"th:text="#{producte}"/>
-        <br />
-        <a th:href="@{/usuaris}"th:text="#{usuari}"/>
-        <br />
-        <a th:href="@{/proveidors}"th:text="#{proveidor}"/>
-        <br />
-        <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-            <input hidden type="submit" value="Sign Out"/>
-        </form> 
-        <!--<footer th:replace="layouts/plantilla :: peu" />-->
+        
+        <h1 class="center">ERP INS CAVALL BERNAT</h1>
 
     </body>
 </html>
