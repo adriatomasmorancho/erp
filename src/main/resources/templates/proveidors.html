@@ -16,6 +16,7 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
+        <header th:replace="layout/navBar :: navBar" />
         <a th:href="@{/}"th:text="#{back}"/>
         <h1 align="center">Llistat de proveidors</h1>
         <p/>
