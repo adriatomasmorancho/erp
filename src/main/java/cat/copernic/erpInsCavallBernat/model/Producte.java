@@ -26,7 +26,7 @@ public class Producte implements Serializable {
     //Identificació de la classe per poder deserialitzar de manera correcta
     private static final long serialVersionUID = 1L;
 
-    @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
+    @Id //Indica al sistema que l'atribut id_Producte és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
     private long id_Producte;
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
