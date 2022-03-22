@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.erpInsCavallBernat.model;
 
 import java.io.Serializable;
@@ -11,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 
@@ -34,19 +31,19 @@ public class Producte implements Serializable {
      */
     @NotEmpty //Validem un nombre mínim de caràcters
     private String nom;
-    /*Validació per comprovar que el sexe no està buit. Com a paràmetre no li passem res, per tant
+    /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
     @NotEmpty
     private String unitat;
     
-    @NotEmpty
+    @NotNull
     private double preu;
     
-    @NotEmpty
+    @NotNull
     private int categoria;
     
-    @NotEmpty
+    @NotNull
     private int stock;
     
     @NotEmpty

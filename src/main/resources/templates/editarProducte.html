@@ -19,69 +19,55 @@
         <h2 th:text="#{producte.editarProducte}"/>
 
        <p>
-            <!-- Creem un formulari per introduir les dades que el ControladorInici 
-                 assignarà als atributs del gos passat com a paràmetre en el mètode 
-                 crearFormulariGos implementat en aquest ControladorInici. 
-                 Per associar le dades a l'objecte gos, fem servir l'element th:objecte de 
-                 Thymeleaf, al qual li assignem el paràmetre gos del mètode crearFormulariGos 
-                 o editar del controlador.-->
+            
         <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
             
-            <!-- Camp ocult on guardem l'id del gos per enviar-lo juntament amb les altres dades-->
+            <!-- Camp ocult on guardem l'id del producte per enviar-lo juntament amb les altres dades-->
             <input type="hidden" name="id" th:field="*{id_Producte}"/>
             
             <p>
-                <label for="nom" th:text="#{producte.nom1}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del gos-->
+                <label for="nom" th:text="#{producte.nom1}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del producte-->
                 <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
-                    gos assignat a th:objecte-->
+                    producte assignat a th:objecte-->
                 <input type="text" name="nom" th:field="*{nom}"/>
                 
                 <!--Afegim un contenidor de tipus span per gestionar la validació-->
                 <!--Comprovem si el camp "nom" conté errors mitjançant th:if="${#fields.hasErrors('nom')}", on passem com a
                     paràmetre el nom del camp on volem comprovar si hi ha errors, en el nostre cas "nom", i ens retornarà
                     verdader si conté errors i fals en cas contrari.
-                    Si conté errors, li demanarem a l'atribut nom del gos que ens mostri els errors mitjançant th:errors="*{nom}".
-                    Tot això és possible perquè en la classe Gos hem afegit les anotacions per les validacions.-->
+                    Si conté errors, li demanarem a l'atribut nom del producte que ens mostri els errors mitjançant th:errors="*{nom}".
+                    Tot això és possible perquè en la classe Producte hem afegit les anotacions per les validacions.-->
                 <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
             </p>
 
             <p>
-                <label for="preu" th:text="#{producte.preu1}"/> <!--Etiqueta per l'edat del gos-->            
-                <input type="text" name="preu" th:field="*{preu}"/> <!--Associem les dades introduïdes amb l'atribut edat-->
-                <!-- Gestió errors edat-->
+                <label for="preu" th:text="#{producte.preu1}"/> <!--Etiqueta per el preu del producte-->            
+                <input type="text" name="preu" th:field="*{preu}"/> <!--Associem les dades introduïdes amb l'atribut preu-->
+                <!-- Gestió errors preu-->
                 <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
             </p>
             <p>
-                <label for="categoria" th:text="#{producte.categoria1}"/> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="categoria" th:field="*{categoria}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                <!-- Gestió errors camp sexe-->
+                <label for="categoria" th:text="#{producte.categoria1}"/> 
                 <select select th:field="*{categoria}">
-                    <option value="1">pa i altres</option>
-        
+                    <option value="1">pa i altres</option>       
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
             <p>
-                <label for="stock" th:text="#{producte.stockActual}"/> <!--Etiqueta pel sexe del gos-->            
-             <input type="text" name="stock" th:field="*{stock}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                <!-- Gestió errors camp sexe-->
+                <label for="stock" th:text="#{producte.stockActual}"/>           
+             <input type="text" name="stock" th:field="*{stock}"/> 
              <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
             </p>
             <p>
-                <label for="unitat" th:text="#{producte.unitat}"/> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="unitat" th:field="*{unitat}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                <!-- Gestió errors camp sexe-->
+                <label for="unitat" th:text="#{producte.unitat}"/> 
                 <select select th:field="*{unitat}">
                    <option value="Kg">Kg</option>
                    <option value="Litre">Litre</option>
-        
                     </select>
                 <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
             </p>
             <p>
-                <label for="proveidor" th:text="#{producte.proveidor}"/> <!--Etiqueta pel sexe del gos-->            
-                <input type="text" name="proveidor" th:field="*{cifProveidor}"/> <!--Associem les dades introduïdes amb l'atribut sexe-->
-                <!-- Gestió errors camp sexe-->
+                <label for="proveidor" th:text="#{producte.proveidor}"/>
                 <select select th:field="*{cifProveidor}">
                      <option value="08226">Mercadona</option>
         

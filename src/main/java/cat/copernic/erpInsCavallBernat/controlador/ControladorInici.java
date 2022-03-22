@@ -201,7 +201,7 @@ public class ControladorInici {
 
         producteService.afegirProducte(producte); //Afegim el gos passat per paràmetre a la base de dades
 
-        return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
+        return "redirect:/productes"; //Retornem a la pàgina inici mitjançant redirect
     }
 
     /*Definim el mètode que ens retornarà la pàgina formulariGos on se'ns mostraran les dades del gos
@@ -241,7 +241,7 @@ public class ControladorInici {
          *el mètode eliminarGos de la capa de servei.*/
         producteService.eliminarProducte(producte);
         
-        return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
+        return "redirect:/productes"; //Retornem a la pàgina inici mitjançant redirect
     }
     
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping

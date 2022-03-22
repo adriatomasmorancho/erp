@@ -31,7 +31,7 @@
             </p>
             <p>
                 <label for="categoria" th:text="#{producte.categoria1}"/>
-                <select th:field="*{categoria}">
+                <select name="categoria" id="categoria" th:field="*{categoria}">
                    <option value="1">pa i altres</option>
                     </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
@@ -43,7 +43,7 @@
             </p>
             <p>
                 <label for="unitat" th:text="#{producte.unitat1}"/>
-                <select th:field="*{unitat}">
+                <select name="unitat" id="unitat" th:field="*{unitat}">
                     <option value="Kg">Kg</option>
                     <option value="Litre">Litre</option>
                     </select>
@@ -51,7 +51,7 @@
             </p>
             <p>
                 <label for="proveidor" th:text="#{producte.proveidor1}"/>            
-                <select th:field="*{cifProveidor}">
+                <select name="proveidor" id="cifProveidor" th:field="*{cifProveidor}">
                     <option value="08226">Mercadona</option>
                     </select>
                 <span th:if="${#fields.hasErrors('cifProveidor')}" th:errors="*{cifProveidor}"/>
