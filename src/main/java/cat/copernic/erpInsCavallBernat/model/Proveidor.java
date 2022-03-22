@@ -22,11 +22,6 @@ import lombok.Data;
 @Table(name="proveidor")
 public class Proveidor implements Serializable {
     private static final long serialVersionUID=1L;
-
-
-   
-    
-
     @Id //L'atribut idRol és la clau primària de la BBDD    
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String cif;
