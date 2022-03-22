@@ -1,8 +1,10 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
+import cat.copernic.erpInsCavallBernat.model.Proveidor;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ProveidorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -25,12 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class ControladorInici {
 
-    @Autowired //Anotació que injecta tots els mètodes i possibles dependències de GosService al controlador
-    /*Mitjançant aquest atribut de tipus interface, es cridaran els mètodes implementats en la classe GosService,
-     *ja que l'objecte de tipus interface va a cercar una classe que implementi la interface, en el nostre cas, 
-     *GosService.
-     */
+    @Autowired
     private UsuariServiceInterface usuariService;
+    @Autowired
+    private ProveidorServiceInterface proveidorService;
     private ProducteServiceInterface producteService;
 
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
@@ -259,12 +259,47 @@ public class ControladorInici {
         return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
     }*/
     
-    @GetMapping("/errors/error403")
-    public String error403() {
-        return "error/error403";
-    }
+     @GetMapping("/proveidors")
+    public String proveidors(Model model, @AuthenticationPrincipal Proveidor cif) {
+        
+        var proveidors = proveidorService.llistarProveidors();
 
-}
+        model.addAttribute("proveidors", proveidors);
+        
+        return "proveidors";
+    }
+    
+    @GetMapping("/crearProveidor") //URL a la pàgina amb el formulari de les dades del gos
+    public String crearProveidor(Proveidor proveidor) {
+
+        return "crearProveidor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels gos
+    }
+    
+    @PostMapping("/guardarProveidor") //action = guardarProveidor
+    public String guardarProveidor(@Valid Proveidor proveidor, Errors errors) {
+        if (errors.hasErrors()) {
+            log.info("S'ha produït un error");
+            return "crearProveidor";
+        }
+        proveidorService.crearProveidor(proveidor);
+        return "redirect:/proveidors";
+    }
+    
+    @GetMapping("/eliminarProveidor/{cif}")
+    public String eliminarProveidor(Proveidor proveidor) {
+        proveidorService.eliminarProveidor(proveidor);
+        return "redirect:/proveidors";
+    }
+    
+    @GetMapping("/editarProveidor/{cif}")
+    public String editar(Proveidor proveidor, Model model) {
+
+        log.info(String.valueOf(proveidor.getCif()));
+        proveidor = proveidorService.cercarProveidor(proveidor);
+        model.addAttribute("proveidor", proveidor);
+
+        return "editarProveidor";
+    }
 
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
      *crida automàticament al mètode setId_usuari de la classe Usuari per assignar-li l'id_usuari
@@ -282,3 +317,11 @@ public class ControladorInici {
         return "redirect:/"; //Retornem a la pàgina inici mitjançant redirect
     }*/
 
+    @GetMapping("/errors/error403")
+    public String error403() {
+        return "error/error403";
+    }
+
+}
+   
+       

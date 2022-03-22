@@ -4,7 +4,19 @@
         <title>Inici dinàmic</title>
         <meta charset="UTF-8">
     </head>
+    
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    
     <body>
+
         <h1>Inici</h1>
 
 
@@ -34,6 +46,11 @@
             <input hidden type="submit" value="Sign Out"/>
         </form> 
         <!--<footer th:replace="layouts/plantilla :: peu" />-->
+
+        <header th:replace="layout/navBar :: navBar" />
+        
+        <h1 class="center">ERP INS CAVALL BERNAT</h1>
+
 
 
     </body>

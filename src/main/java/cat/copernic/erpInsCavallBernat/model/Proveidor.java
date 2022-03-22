@@ -23,10 +23,14 @@ import lombok.Data;
 public class Proveidor implements Serializable {
     private static final long serialVersionUID=1L;
 
+
     @Id //L'atribut idRol és la clau primària de la BBDD
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Generació autonumèrica de l'id
     private long id_Proveidor;
     
+
+    @Id //L'atribut idRol és la clau primària de la BBDD    
+
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String cif;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
