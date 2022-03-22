@@ -54,7 +54,7 @@
                         <input class="form-control" type="text" name="contacte" th:field="*{contacte}"/>
                         <span th:if="${#fields.hasErrors('contacte')}" th:errors="*{contacte}"/>
                     </p>
-                    <input type="submit" name="enviar" value="Editar"/>        
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar"/>
                 </form>
             </div>
         </div>

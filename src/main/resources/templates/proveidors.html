@@ -5,73 +5,73 @@
         <title>Proveidors</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--Enllaç als estils de Bootstrap-->
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <!--Enllaç als estils de Font Awesome-->
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-        <!--Llibreries jquery, popper i Java Script de bootstrap pels elements dinamics que utilitzarem-->
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
+    
     <body>
         <header th:replace="layout/navBar :: navBar" />
         <a th:href="@{/}"th:text="#{back}"/>
-        <h1 align="center">Llistat de proveidors</h1>
-        <p/>
+        <div style="width: 50%; margin: 0 auto;">
+            <h1 align="center">Llistat de proveidors</h1>
+            <p/>
 
-        <div align="center">
-            <form th:object="${proveidors}" method="get">
-                <input type="text" class="form-control col-md-4"/>
-                <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
-            </form>
-        </div>
+            <div align="center">
+                <form th:object="${proveidors}" method="get">
+                    <input type="text" class="form-control col-md-4"/>
+                    <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+                </form>
+            </div>
 
-        <p/>
-        <div th:if="${proveidors!=null && !proveidors.empty}" align="center">
-            <table class="table">
-                <tr>
-                    <th>cif</th>
-                    <th>nom</th>
-                    <th>email</th>
-                    <th>telefon</th>
-                    <th>adreca</th>
-                    <th>contacte</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
-                </tr>
-                
-                <tr th:each="proveidor : ${proveidors}" align="center"> 
-                    <td th:text="${proveidor.cif}"></td>
-                    <td th:text="${proveidor.nom}"></td>
-                    <td th:text="${proveidor.email}"></td>
-                    <td th:text="${proveidor.telefon}"></td>
-                    <td th:text="${proveidor.adreca}"></td>
-                    <td th:text="${proveidor.contacte}"></td>
-                
-                <td><a th:href="@{/editarProveidor/}+${proveidor.cif}"><i class="bi bi-pencil-fill"></i></a></td>
-                <td><a th:href="@{/eliminarProveidor/}+${proveidor.cif}"><i class="bi bi-trash-fill"></i></a></td>
-                
-            </tr>
-            </table>
-        </div>
-        <div th:if="${proveidors==null || proveidors.empty}">
-            No hi ha proveidors a la llista.
-        </div>
-        <p/>
-        <div align="center">
-            <a th:href="@{/crearProveidor}"th:text="#{proveidor.crearProveidor}"></a>
-            <a th:href="@{/crearProveidor}"><i class="bi bi-plus-circle"></i></a>
-        </div>
-        <p/>
-        <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-            <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
+            <p/>
+            <div th:if="${proveidors!=null && !proveidors.empty}" align="center">
+                <table class="table">
+                    <tr>
+                        <th>cif</th>
+                        <th>nom</th>
+                        <th>email</th>
+                        <th>telefon</th>
+                        <th>adreca</th>
+                        <th>contacte</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
 
-            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-                <input hidden type="submit" value="Sign Out"/>
-            </form> 
+                    <tr th:each="proveidor : ${proveidors}" align="center"> 
+                        <td th:text="${proveidor.cif}"></td>
+                        <td th:text="${proveidor.nom}"></td>
+                        <td th:text="${proveidor.email}"></td>
+                        <td th:text="${proveidor.telefon}"></td>
+                        <td th:text="${proveidor.adreca}"></td>
+                        <td th:text="${proveidor.contacte}"></td>
+
+                        <td><a th:href="@{/editarProveidor/}+${proveidor.cif}"><i class="bi bi-pencil-fill"></i></a></td>
+                        <td><a th:href="@{/eliminarProveidor/}+${proveidor.cif}"><i class="bi bi-trash-fill"></i></a></td>
+
+                    </tr>
+                </table>
+            </div>
+            <div th:if="${proveidors==null || proveidors.empty}">
+                No hi ha proveidors a la llista.
+            </div>
+            <p/>
+            <div align="center">
+                <a th:href="@{/crearProveidor}"th:text="#{proveidor.crearProveidor}"></a>
+                <a th:href="@{/crearProveidor}"><i class="bi bi-plus-circle"></i></a>
+            </div>
+            <p/>
+            <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
+                <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
+
+                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                    <input hidden type="submit" value="Sign Out"/>
+                </form> 
+            </div>
         </div>
     </body>
 </html>
