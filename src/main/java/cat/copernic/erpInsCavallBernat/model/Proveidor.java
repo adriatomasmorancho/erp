@@ -19,9 +19,13 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="Proveidor")
+@Table(name="proveidor")
 public class Proveidor implements Serializable {
     private static final long serialVersionUID=1L;
+
+
+   
+    
 
     @Id //L'atribut idRol és la clau primària de la BBDD    
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
@@ -31,9 +35,14 @@ public class Proveidor implements Serializable {
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String email;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
-    private String telefon;
+    private int telefon;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String adreca;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String contacte;
+
 }
+
+
+
+

@@ -6,16 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
- * @author fta
+ * @author adria
  */
 
 /*Anotació que permet al sistema que reconegui aquesta classe com una classe de servei
  *i que permet injectar aquesta classe en el controlador
 */
-@Service 
+@Service ("productesDetailsService")
+@Slf4j
 public class ProducteService implements ProducteServiceInterface{
     
     /*Quan treballem en la capa de servei amb classes de tipus DAO, com és el cas, estem
@@ -25,13 +27,13 @@ public class ProducteService implements ProducteServiceInterface{
      *dels mètodes per accedir a la BBDD que implementem en aquesta classe.    
     */
     
-    /*Atribut que defineix un gosDAO. Mitjançant aquest atribut el control ja no 
+    /*Atribut que defineix un producteDAO. Mitjançant aquest atribut el control ja no 
      *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
     */
     @Autowired
     private ProducteDAO producte; 
 
-    /*LListar gossos de la taula gos de la BBDD veterinari*/
+    /*LListar productes de la taula producte de la BBDD erp*/
     @Override
     /*La notació @Transactional fa referència a la classe Transactional de Spring Framework.
      *En aquest cas no hi haurà ni COMMITS, ni ROLLBACKS, ja que no modifiquem la informació
@@ -41,52 +43,48 @@ public class ProducteService implements ProducteServiceInterface{
     @Transactional(readOnly=true) 
     public List<Producte> llistarProductes() {
         
-        /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de gosos de la BBDD.
-         *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de gossos
+        /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de productes de la BBDD.
+         *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
         */
         return (List<Producte>) producte.findAll(); 
     }
 
-    /*Afegir el gos passat per paràmetre a la taula gos de la BBDD veterinari*/
+    /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
-    /*En aquest cas hi haurà COMMITS i ROLLBACKS, ja que modifiquem la informació de la BBDD, per tant,
-     *utilitzarem aquesta notació sense passar-li cap paràmetre perquè es puguin fer els COMMITS 
-     *i ROLLBACKS.
-    */ 
     @Transactional
     public void afegirProducte(Producte producte) {
         
-        /*Cridem al mètode save() de CrudRepository perquè afegeixi el gos passat com a paràmetre,
-         *a la taula gos de la BBDD veterinari.
+        /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
+         *a la taula producte de la BBDD erp.
         */
         this.producte.save(producte); 
     }
 
-    /*Eliminar el gos passat per paràmetre de la taula gos de la BBDD veterinari*/
+    /*Eliminar el producte passat per paràmetre de la taula producte de la BBDD erp*/
     @Override
-    @Transactional //Igual que en el mètode afegirGos, modifiquem la informació de la BBDD
+    @Transactional //Igual que en el mètode afegirProducte, modifiquem la informació de la BBDD
     public void eliminarProducte(Producte producte) {
         
-        /*Cridem al mètode delete() de CrudRepository perquè elimini el gos passat com a paràmetre,
-         *de la taula gos de la BBDD veterinari.
+        /*Cridem al mètode delete() de CrudRepository perquè elimini el producte passat com a paràmetre,
+         *de la taula producte de la BBDD erp.
         */
         this.producte.delete(producte);
         
     }
 
-    /*Cercar el gos passat per paràmetre en la taula gos de la BBDD veterinari*/
+    /*Cercar el producte passat per paràmetre en la taula producte de la BBDD erp*/
     @Override
-    @Transactional(readOnly=true) //Igual que en el mètode llistarGossos, no modifiquem la informació de la BBDD
+    @Transactional(readOnly=true) //Igual que en el mètode llistarProductes, no modifiquem la informació de la BBDD
     public Producte cercarProducte(Producte producte) {
         
-        /*Cridem al mètode findById() de CrudRepository perquè ens retorni el gos passat com a paràmetre.
+        /*Cridem al mètode findById() de CrudRepository perquè ens retorni el producte passat com a paràmetre.
          *El paràmetre que li passem a aquest mètode, ha de ser la clau primària de l'entitat, en el nostre 
-         *cas el gos.
+         *cas el producte.
          *
-         *Si el gos no existei retornarà null (orElse(null)).
+         *Si el producte no existei retornarà null (orElse(null)).
         */ 
 
-        return this.producte.findById(producte.getIdproducte()).orElse(null);
+        return this.producte.findById(producte.getId_Producte()).orElse(null);
         
     }
     
