@@ -1,52 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Productes</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de bootstrap pels elements dinamics que utilitzarem-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h1>PRODUCTES</h1>
-        <div>
-            <a th:href="@{/formulariProducte}"th:text="#{producte.afegirProducte}"/>
+        <header th:replace="layout/navBar :: navBar" />
 
-        <h1>Llistat de productes</h1>
+        <h1 align="center">Llistat de productes</h1>
+        <p/>
 
-        <div th:if="${productes!=null && !productes.empty}">
+        <div align="center">
+            <form th:object="${productes}" method="get">
+                <input type="text" class="form-control col-md-4"/>
+                <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+            </form>
+        </div>
 
-            <!-- Mostrem en una taula les dades del gossos guardats en la taula gossos de la BBDD veterinari -->
-            <table border="1">
+        <p/>
+        <div th:if="${productes!=null && !productes.empty}" align="center">
+            <table class="table">
                 <tr>
                     <th>Nom</th>
-                    <th>Edat</th>
-                    <th>Sexe</th>
-                    <!--Columnes per afegir l'enllaç d'editar i eliminar el gos-->
+                    <th>Unitat</th>
+                    <th>Preu</th>
+                    <th>Categoria</th>
+                    <th>cifProveïdor</th>
                     <th>Editar</th>
                     <th>Eliminar</th>
                 </tr>
-                <!-- Recorregut dels gossos. Cada gos de l'ArrayList gossos es guarda en la variable gos-->
-                <tr th:each="producte : ${productes}"> 
+                
+                <tr th:each="producte : ${productes}" align="center"> 
                     <td th:text="${producte.nom}"></td>
-                    <td th:text="${producte.edat}"></td>
-                    <td th:text="${producte.sexe}"></td>
-                    <!--Enllaç mitjançant el qual accedirem a la pàgina per editar el gos actual
-                        al qual li correspon l'id que concatenem a l'URL editar-->
-                    <td><a th:href="@{/editar/}+${producte.idproducte}" th:text="Editar"/></td>
-                    <!--Enllaç mitjançant el qual accedirem a la pàgina per eliminar el gos actual
-                        al qual li correspon l'id que concatenem a l'URL d'eliminar-->
-                    <td><a th:href="@{/eliminar/}+${producte.idproducte}" th:text="Eliminar"/></td>
-                    <!--<td><a th:href="@{/eliminar(idgos=${gos.idgos})}" th:text="Eliminar"/></td>-->
-                </tr>
+                    <td th:text="${producte.unitat}"></td>
+                    <td th:text="${producte.preu}"></td>
+                    <td th:text="${producte.categoria}"></td>
+                    <td th:text="${producte.cifProveidor}"></td>
+                
+                <td><a th:href="@{/editarProducte/}+${producte.id_Producte}"><i class="bi bi-pencil-fill"></i></a></td>
+                <td><a th:href="@{/eliminarProducte/}+${producte.id_Producte}"><i class="bi bi-trash-fill"></i></a></td>
+                
+            </tr>
             </table>
-
         </div>
-
-        <div th:if="${productes==null || productes.empty}"><!--Si l'ArrayList de gossos no està inicialitzat o no té contingut-->
-            <!-- Mostrem missatge-->
+        <div th:if="${productes==null || productes.empty}">
             No hi ha productes a la llista.
         </div>
-        
         <p/>
+        <div align="center">
+            <a th:href="@{/crearProducte}"th:text="#{producte.crearProducte}"></a>
+            <a th:href="@{/crearProducte}"><i class="bi bi-plus-circle"></i></a>
+        </div>
+        <p/>
+        <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
+            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                 <input hidden type="submit" value="Sign Out"/>

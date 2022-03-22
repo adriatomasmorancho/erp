@@ -11,7 +11,7 @@
                  assignarà als atributs del usuari passat com a paràmetre en el mètode 
                  crearUsuari implementat en aquest ControladorInici. 
                  Per associar le dades a l'objecte usuari, fem servir l'element th:objecte de 
-                 Thymeleaf, al qual li assignem el paràmetre gos del mètode crearUsuari 
+                 Thymeleaf, al qual li assignem el paràmetre usuari del mètode crearUsuari 
                  o editar del controlador.-->
         <form th:action="@{/guardarUsuari}" method="post" th:object="${usuari}">
             <!-- Camp ocult on guardem l'id del usuari per enviar-lo juntament amb les altres dades-->
@@ -54,7 +54,7 @@
             </p>
             <p>
                 <label for="rol">Rol:</label> <!--Etiqueta per la contrasenya del usuari-->
-                <select name="cars" id="cars" th:field="*{rol}">
+                <select name="rols" id="rols" th:field="*{rol}">
                     <option value="administrador">Administrador</option>
                     <option value="professor">Professor</option>
                 </select>

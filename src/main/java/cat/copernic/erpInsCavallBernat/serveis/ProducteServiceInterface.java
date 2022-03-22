@@ -13,7 +13,7 @@ public interface ProducteServiceInterface {
     
     public List<Producte> llistarProductes(); //Mètode que implementarem per llistar gossos
     
-    public void afegirProducte(Producte producte); //Mètode que implementarem per afegir un gos
+    public void crearProducte(Producte producte); //Mètode que implementarem per afegir un gos
     
     public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un gos
     

@@ -10,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -29,22 +28,24 @@ public class Producte implements Serializable {
 
     @Id //Indica al sistema que l'atribut idgos és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
-    private long idproducte;
+    private long id_Producte;
 
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
     @NotEmpty
-    @Size(min = 5) //Validem un nombre mínim de caràcters
     private String nom;
 
-    /*Validació per comprovar que el sexe no està buit. Com a paràmetre no li passem res, per tant
-     *ens mostrarà el missatge per defecte del sitema.
-     */
-    @NotEmpty
-    private String sexe;
+    @NotNull
+    private int unitat;
 
-    @Min(value = 0) //Validació que el valor de l'edat no sigui negatiu
-    private int edat;
+    @NotNull
+    private double preu;
+    
+    @NotEmpty
+    private String categoria;
+    
+    @NotEmpty
+    private String cifProveidor;
 
 }
