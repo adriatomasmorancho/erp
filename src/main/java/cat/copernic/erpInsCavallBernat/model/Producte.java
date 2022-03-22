@@ -44,8 +44,7 @@ public class Producte implements Serializable {
     private double preu;
     
     @NotEmpty
-    private String categoria;
-    
+    private int categoria;
     
     @NotEmpty
     private int stock;
