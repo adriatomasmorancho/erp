@@ -181,6 +181,22 @@ public class ControladorInici {
         proveidorService.crearProveidor(proveidor);
         return "redirect:/proveidors";
     }
+    
+    @GetMapping("/eliminarProveidor/{cif}")
+    public String eliminarProveidor(Proveidor proveidor) {
+        proveidorService.eliminarProveidor(proveidor);
+        return "redirect:/proveidors";
+    }
+    
+    @GetMapping("/editarProveidor/{cif}")
+    public String editar(Proveidor proveidor, Model model) {
+
+        log.info(String.valueOf(proveidor.getCif()));
+        proveidor = proveidorService.cercarProveidor(proveidor);
+        model.addAttribute("proveidor", proveidor);
+
+        return "editarProveidor";
+    }
 
     /*Mètode eliminar utilitzant query paràmetres. Com en el mètode editar, @GetMaping
      *crida automàticament al mètode setId_usuari de la classe Usuari per assignar-li l'id_usuari

@@ -11,6 +11,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author ivan
  */
-public interface ProveidorDAO extends JpaRepository<Proveidor,Long>{
+public interface ProveidorDAO extends JpaRepository<Proveidor,String>{
     Proveidor findByCif(String username);
 }

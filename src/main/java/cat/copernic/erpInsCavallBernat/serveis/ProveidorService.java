@@ -6,6 +6,7 @@ package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.ProveidorDAO;
 import cat.copernic.erpInsCavallBernat.model.Proveidor;
+import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class ProveidorService implements ProveidorServiceInterface {
     @Override
     public void eliminarProveidor(Proveidor proveidor) {
         this.proveidorDAO.delete(proveidor);
+    }
+    
+    @Override
+    public Proveidor cercarProveidor(Proveidor proveidor) {
+        return this.proveidorDAO.findById(proveidor.getCif()).orElse(null);
     }
 
     @Override

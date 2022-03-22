@@ -17,5 +17,7 @@ public interface ProveidorServiceInterface {
     
     public void eliminarProveidor(Proveidor proveidor); //Mètode que implementarem per eliminar un usuari
     
+    public Proveidor cercarProveidor(Proveidor proveidor); //Mètode que implementarem per cercar un usuari
+    
     public List<Proveidor> cercarProveidorByCif(String nom); //Mètode que implementarem per cercar un usuari
 }
