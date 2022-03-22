@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Inici dinàmic</title>
+        <title>Dashboard</title>
         <meta charset="UTF-8">
     </head>
     
@@ -16,42 +16,9 @@
     </style>
     
     <body>
-
-        <h1>Inici</h1>
-
-
-        <!-- Utilitzem la plantilla per escriure la capçalera, indicant l'adreça on
-             es troba, és a dir, "layout/plantilla" i el fragment que volem inserir
-             en aquest cas "capcalera" -->
-        <header th:replace="layout/plantilla :: capcalera" />
-        
-        <!--Enllaç que ens portarà a la pàgina per poder afegir un gos.
-            Mitjançant l'element th:href de Thymeleaf definim l'URL de l'enllaç. 
-            A href li assignarem la ruta de l'enllaç mitjançan @{ruta}-->
-
-        
-        
-        <!-- Utilitzem la plantilla per escriure el peu, indicant l'adreça on
-             es troba, és a dir, "layout/plantilla" i el fragment que volem inserir
-             en aquest cas "peu" -->
-       
-
-        <!-- <header th:replace="layouts/plantilla :: capcalera" /> -->
-        <a th:href="@{/productes}"th:text="#{producte}"/>
-        <br />
-        <a th:href="@{/usuaris}"th:text="#{usuari}"/>
-        <br />
-        <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-        <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-            <input hidden type="submit" value="Sign Out"/>
-        </form> 
-        <!--<footer th:replace="layouts/plantilla :: peu" />-->
-
         <header th:replace="layout/navBar :: navBar" />
         
         <h1 class="center">ERP INS CAVALL BERNAT</h1>
-
-
 
     </body>
 </html>

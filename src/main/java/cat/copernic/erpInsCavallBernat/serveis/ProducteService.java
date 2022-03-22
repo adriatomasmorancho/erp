@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  *
@@ -15,7 +16,8 @@ import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
 /*Anotació que permet al sistema que reconegui aquesta classe com una classe de servei
  *i que permet injectar aquesta classe en el controlador
 */
-@Service 
+@Service ("productesDetailsService")
+@Slf4j
 public class ProducteService implements ProducteServiceInterface{
     
     /*Quan treballem en la capa de servei amb classes de tipus DAO, com és el cas, estem

@@ -31,6 +31,7 @@ public class ControladorInici {
     private UsuariServiceInterface usuariService;
     @Autowired
     private ProveidorServiceInterface proveidorService;
+    @Autowired
     private ProducteServiceInterface producteService;
 
     /*Farem que aquest mètode retorni la pàgina inici penjant de de l'arrel de l'aplicacó,
@@ -211,8 +212,8 @@ public class ControladorInici {
      *de la classe Gos per fer aquesta associació, és a dir, el que fa és gos.setIdgos(idgos).
      *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
-    @GetMapping("/editar/{id_Producte}")
-    public String editar(Producte producte, Model model) {
+    @GetMapping("/editarProducte/{id_Producte}")
+    public String editarProducte(Producte producte, Model model) {
 
         log.info(String.valueOf(producte.getId_Producte())); //Mostra idgos de Gos
 
@@ -233,8 +234,8 @@ public class ControladorInici {
      *que el del mètode editar.
      *IMPORTANT: idgos ha de tenir el mateix nom que l'atribut id de la classe Gos.
      */
-    @GetMapping("/eliminar/{id_Producte}") 
-    public String eliminar(Producte producte) {
+    @GetMapping("/eliminarProducte/{id_Producte}") 
+    public String eliminarProducte(Producte producte) {
 
         /*Eliminem el gos passat per paràmetre amb l'idgos de @GetMapping mitjançant 
          *el mètode eliminarGos de la capa de servei.*/

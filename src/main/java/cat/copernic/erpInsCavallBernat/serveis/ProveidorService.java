@@ -6,7 +6,6 @@ package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.ProveidorDAO;
 import cat.copernic.erpInsCavallBernat.model.Proveidor;
-import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
