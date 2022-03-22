@@ -189,7 +189,7 @@ public class ControladorInici {
     }
     
     @GetMapping("/editarProveidor/{cif}")
-    public String editar(Proveidor proveidor, Model model) {
+    public String editarProveidor(Proveidor proveidor, Model model) {
 
         log.info(String.valueOf(proveidor.getCif()));
         proveidor = proveidorService.cercarProveidor(proveidor);
