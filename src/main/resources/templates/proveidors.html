@@ -10,7 +10,6 @@
         <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
         <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
         <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
-        <script th:src="@{/dataTableScript.js}" type="text/javascript"></script>
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar" />
@@ -54,6 +53,7 @@
 
                     </tr>
                 </table>
+                <script type="text/javascript" charset="utf8" th:src="@{/dataTableScript.js}"></script>
             </div>
             <div th:if="${proveidors==null || proveidors.empty}">
                 No hi ha proveidors a la llista.
