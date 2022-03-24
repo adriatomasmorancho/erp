@@ -13,7 +13,7 @@ public interface CategoriaServiceInterface {
     
     public List<Categoria> llistarCategories(); //Mètode que implementarem per llistar productes
     
-    public void afegirCategoria(Categoria categoria); //Mètode que implementarem per afegir un gos
+    public void crearCategoria(Categoria categoria); //Mètode que implementarem per afegir un gos
     
     public void eliminarCategoria(Categoria categoria); //Mètode que implementarem per eliminar un producte
     

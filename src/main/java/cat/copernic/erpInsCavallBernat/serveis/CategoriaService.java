@@ -52,7 +52,7 @@ public class CategoriaService implements CategoriaServiceInterface{
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
-    public void afegirCategoria(Categoria categoria) {
+    public void crearCategoria(Categoria categoria) {
         
         /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
          *a la taula producte de la BBDD erp.
