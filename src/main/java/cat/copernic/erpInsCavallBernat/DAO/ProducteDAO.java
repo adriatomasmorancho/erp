@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author ivan
  */
 public interface ProducteDAO extends CrudRepository<Producte,Long> {
-   
+   Producte findByNom(String nom);
   
 }

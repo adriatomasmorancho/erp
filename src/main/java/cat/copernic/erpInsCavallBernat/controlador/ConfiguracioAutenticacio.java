@@ -37,23 +37,16 @@ public class ConfiguracioAutenticacio extends WebSecurityConfigurerAdapter {
     public void autenticacio(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
-
-    /*Sobreescrivim el mètode configure per restringir les URL a les que poden accedir
-     *els usuaris segons el seu rol.
-     *Passem com a paràmetre un objecte de la classe HttpSecurity de Spring Security que
-     *és el que ens permetrà cridar als mètodes per configurar les restriccions de les URL.
-     */
+    
+     /*Passem com a paràmetre un objecte de la classe HttpSecurity de Spring Security que
+     *és el que ens permetrà cridar als mètodes per configurar les restriccions de les URL.*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                //.antMatchers("/formulariProducte", "/editar/**", "/eliminar/**") //URL i subURLS (**) on pot accedir...
-                //.hasRole("admin") //...l'usuari amb rol admin
-                //.antMatchers("/", "/productes")
-                //.hasAnyRole("admin", "professor") //...els usuaris amb rol admin i professor
                 .antMatchers("/login")
                 .permitAll()
-                .anyRequest()
-                .authenticated()
+                .anyRequest() //Qualsevol direcció que no sigui /login
+                .authenticated() //Obliga a estar autenticat per a direccionar a la resta de direccions
                 .and()
                 .formLogin() //Objecte que representa el formulari de login personalitzat que utilitzarem
                 .loginPage("/login") //Pàgina on es troba el formulari per fer login personalitzat
@@ -65,6 +58,5 @@ public class ConfiguracioAutenticacio extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/login?logout");
     }
-
 }
 
