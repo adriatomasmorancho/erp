@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
- * @author ivan
+ * @author rpuig
  */
 public interface ProveidorDAO extends JpaRepository<Proveidor,String>{
     Proveidor findByCif(String username);
