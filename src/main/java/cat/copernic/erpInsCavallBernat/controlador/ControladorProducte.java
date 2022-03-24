@@ -50,7 +50,7 @@ public class ControladorProducte {
             log.info("S'ha produït un error");
             return "crearProducte";
         }
-        producteService.crearProducte(producte);
+        producteService.afegirProducte(producte);
         return "redirect:/productes";
     }
     

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Usuaris</title>
+        <title th:text="#{usuaris}"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Enllaç als estils de Bootstrap-->
@@ -20,46 +20,46 @@
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar" />
-        
-        <h1 align="center">Llistat de usuaris</h1>
+        <p/>
+        <h1 align="center" th:text="#{usuari.llistatUsuaris}"/>
         <p/>
 
         <div align="center">
             <select name="dades" id="dades">
-                <option value="email">Email</option>
-                <option value="nom">Nom</option>
-                <option value="telefon">Telefon</option>
-                <option value="rol">Rol</option>
+                <option value="email" th:text="#{usuari.email}"/>
+                <option value="nom" th:text="#{usuari.nom}"/>
+                <option value="telefon" th:text="#{usuari.telefon}"/>
+                <option value="rol" th:text="#{usuari.rol}"/>
             </select>
             <p/>
             <form th:object="${usuaris}" method="get">
                 <input type="text" class="form-control col-md-4"/>
-                <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+                <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
             </form>
         </div>
         <p/>
         <div th:if="${usuaris!=null && !usuaris.empty}" align="center">
             <!-- Mostrem en una taula les dades del usuaris guardats en la taula usuaris de la BBDD -->
             <table border="2" class="display">
-                <tr>
-                    <th>Email</th>
-                    <th>Password</th>
-                    <th>Nom</th>
-                    <th>Cognoms</th>
-                    <th>Telefon</th>
-                    <th>Rol</th>
+                <tr align="center">
+                    <th th:text="#{usuari.email}"/>
+                    <th th:text="#{usuari.password}"/>
+                    <th th:text="#{usuari.nom}"/>
+                    <th th:text="#{usuari.cognoms}"/>
+                    <th th:text="#{usuari.telefon}"/>
+                    <th th:text="#{usuari.rol}"/>
                     <!--Columnes per afegir l'enllaç d'editar i eliminar l'usuari-->
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th th:text="#{editar}"/>
+                    <th th:text="#{eliminar}"/>
                 </tr>
                 <!-- Recorregut dels usuaris. Cada usuari de l'ArrayList usuaris es guarda en la variable usuari-->
                 <tr th:each="usuari : ${usuaris}" align="center"> 
-                    <td th:text="${usuari.username}"></td>
-                    <td th:text="${usuari.password}"></td>
-                    <td th:text="${usuari.nom}"></td>
-                    <td th:text="${usuari.cognoms}"></td>
-                    <td th:text="${usuari.telefon}"></td>
-                    <td th:text="${usuari.rol}"></td>
+                    <td th:text="${usuari.username}"/>
+                    <td th:text="${usuari.password}"/>
+                    <td th:text="${usuari.nom}"/>
+                    <td th:text="${usuari.cognoms}"/>
+                    <td th:text="${usuari.telefon}"/>
+                    <td th:text="${usuari.rol}"/>
 
                     <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
                         al qual li correspon l'id que concatenem a l'URL editar-->
@@ -100,12 +100,12 @@
                 </thead>
                 <tbody>
                     <tr th:each="usuari : ${usuaris}" align="center"> 
-                    <td th:text="${usuari.username}"></td>
-                    <td th:text="${usuari.password}"></td>
-                    <td th:text="${usuari.nom}"></td>
-                    <td th:text="${usuari.cognoms}"></td>
-                    <td th:text="${usuari.telefon}"></td>
-                    <td th:text="${usuari.rol}"></td>
+                    <td th:text="${usuari.username}"/>
+                    <td th:text="${usuari.password}"/>
+                    <td th:text="${usuari.nom}"/>
+                    <td th:text="${usuari.cognoms}"/>
+                    <td th:text="${usuari.telefon}"/>
+                    <td th:text="${usuari.rol}"/>
 
                     <!--Enllaç mitjançant el qual accedirem a la pàgina per editar l'usuari actual
                         al qual li correspon l'id que concatenem a l'URL editar-->

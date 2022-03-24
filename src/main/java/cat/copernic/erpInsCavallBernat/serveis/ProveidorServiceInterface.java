@@ -10,14 +10,9 @@ import java.util.List;
 
 //Interface on definirem els mètodes CRUD personalitzats per la nostra aplicació
 public interface ProveidorServiceInterface {
-    
-    public List<Proveidor> llistarProveidors(); //Mètode que implementarem per llistar usuaris
-    
-    public void crearProveidor(Proveidor proveidor); //Mètode que implementarem per afegir un usuari
-    
-    public void eliminarProveidor(Proveidor proveidor); //Mètode que implementarem per eliminar un usuari
-    
-    public Proveidor cercarProveidor(Proveidor proveidor); //Mètode que implementarem per cercar un usuari
-    
-    public List<Proveidor> cercarProveidorByCif(String nom); //Mètode que implementarem per cercar un usuari
+    public List<Proveidor> llistarProveidors();
+    public void crearProveidor(Proveidor proveidor);
+    public void eliminarProveidor(Proveidor proveidor);
+    public Proveidor cercarProveidor(Proveidor proveidor);
+    public List<Proveidor> cercarProveidorByCif(String nom);
 }

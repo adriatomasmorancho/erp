@@ -4,13 +4,14 @@
  */
 package cat.copernic.erpInsCavallBernat.DAO;
 
-import cat.copernic.erpInsCavallBernat.model.Proveidor;
-import org.springframework.data.jpa.repository.JpaRepository;
+import cat.copernic.erpInsCavallBernat.model.Categoria;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  *
- * @author rpuig
+ * @author ivan
  */
-public interface ProveidorDAO extends JpaRepository<Proveidor,String>{
-    Proveidor findByCif(String username);
+public interface CategoriaDAO extends CrudRepository<Categoria,Long> {
+   
+  
 }

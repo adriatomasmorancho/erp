@@ -108,9 +108,11 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
         return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
     }
     
+
     @Override
     public List<Usuari> cercarUsuariPerNom(String nom) {
         return (List<Usuari>) usuariDAO.findByNom(nom);
     }
     
+
 }

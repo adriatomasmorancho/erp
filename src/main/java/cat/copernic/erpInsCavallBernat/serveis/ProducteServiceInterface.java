@@ -5,17 +5,17 @@ import java.util.List;
 
 /**
  *
- * @author fta
+ * @author adria
  */
 
-//Interface on definirem els mètodes CRUD personalitzats per la nostra aplicació
+//Interface on definirem els mètodes  personalitzats per la nostra aplicació
 public interface ProducteServiceInterface {
     
-    public List<Producte> llistarProductes(); //Mètode que implementarem per llistar gossos
+    public List<Producte> llistarProductes(); //Mètode que implementarem per llistar productes
     
-    public void crearProducte(Producte producte); //Mètode que implementarem per afegir un gos
+    public void afegirProducte(Producte producte); //Mètode que implementarem per afegir un gos
     
-    public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un gos
+    public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un producte
     
-    public Producte cercarProducte(Producte producte); //Mètode que implementarem per cercar un gos
+    public Producte cercarProducte(Producte producte); //Mètode que implementarem per cercar un producte
 }
