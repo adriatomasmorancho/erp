@@ -13,9 +13,21 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 
     </head>
-    <body>
-        <header></header>       
-        <h2 th:text="#{producte.nouProducte}"/>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <body> 
+        <header th:replace="layout/navBar :: navBar" />
+        <a th:href="@{/productes}"th:text="#{back}"/>
+        <div class="card center" style="width: 25rem;">
+        <div class="card-body">
+        <h2 class="card-title" th:text="#{producte.nouProducte}"/>
         <p>          
         <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
             <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
@@ -58,13 +70,15 @@
             </p>
             
             <label for="crearProducte" th:text="#{crear}"/>
+            <input type="submit" name="enviar" value=""/>
             
-                <input type="submit" name="enviar" value=""/>
-           <!--  <label for="crearProducte" th:text="#{cancel}"/>
-            <a th:href="@{/productes}">
-                <input type="submit" name="enviar" value=""  th:href="@{/productes}"/></a>-->
+           <label for="crearProducte" th:text="#{cancel}"/>
+           <a th:href="@{/productes}"></a>
+                
         </form>
     </p>
-    <footer th:replace="layout/plantilla :: peu" />  
+    </div>
+        </div>
+    <footer/>  
 </body>
 </html>
