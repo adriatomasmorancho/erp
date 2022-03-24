@@ -19,6 +19,18 @@
         <header th:replace="layout/navBar :: navBar" />
         
         <h1 class="center">ERP INS CAVALL BERNAT</h1>
+        
+        <table border="2" class="display">
+                <tr align="center">
+                    <th th:text="#{usuari.email}"/>
+                    <th th:text="#{usuari.rol}"/>
+                </tr>
+                <!-- Recorregut dels usuaris. Cada usuari de l'ArrayList usuaris es guarda en la variable usuari-->
+                <tr th:each="usuari : ${usuaris}" align="center"> 
+                    <td th:text="${usuari.username}"/>
+                    <td th:text="${usuari.rol}"/>
+                </tr>
+        </table>
 
     </body>
 </html>
