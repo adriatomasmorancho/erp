@@ -14,9 +14,16 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <h1 th:text="#{producte}"/>
-        <header></header>
-        <div th:if="${productes!=null && !productes.empty}">
+        <header th:replace="layout/navBar :: navBar" />
+        <a th:href="@{/}"th:text="#{back}"/>
+        <h1 align="center" th:text="#{producte}"/>
+          <div align="center">
+                <form th:object="${productes}" method="get">
+                    <input type="text" class="form-control col-md-4"/>
+                    <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+                </form>
+            </div>
+        <div th:if="${productes!=null && !productes.empty}" align="center">
             <table border="1">
                 <tr>
                     <th th:text="#{producte.nom}"/>
@@ -42,11 +49,19 @@
         </div>
         <div th:if="${productes==null || productes.empty}">
             No hi ha productes a la llista.
-        </div>  
-        
+        </div>    
+        <div align="center"><!-- Posem un enllaç per a crear un usuari -->
             <label for="crearProducte" th:text="#{producte.crearProducte}"/>
             <a th:href="@{/crearProducte}"><i class="bi bi-plus-circle"></i></a>
-        
-        <footer th:replace="layout/plantilla :: peu" />
+        </div>
+        <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
+            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
+
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input hidden type="submit" value="Sign Out"/>
+            </form> 
+        </div>
+        <footer/>
     </body>
 </html>
