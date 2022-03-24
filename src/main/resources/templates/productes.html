@@ -20,7 +20,7 @@
           <div align="center">
                 <form th:object="${productes}" method="get">
                     <input type="text" class="form-control col-md-4"/>
-                    <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+                    <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
                 </form>
             </div>
         <div th:if="${productes!=null && !productes.empty}" align="center">
