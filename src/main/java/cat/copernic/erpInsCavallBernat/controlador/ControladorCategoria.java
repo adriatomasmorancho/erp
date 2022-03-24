@@ -51,7 +51,7 @@ public class ControladorCategoria {
             log.info("S'ha produït un error");
             return "crearCategoria";
         }
-        categoriaService.afegirCategoria(categoria);
+        categoriaService.crearCategoria(categoria);
         return "redirect:/categories";
     }
     

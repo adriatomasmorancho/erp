@@ -52,7 +52,7 @@ public class ProducteService implements ProducteServiceInterface{
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
-    public void afegirProducte(Producte producte) {
+    public void crearProducte(Producte producte) {
         
         /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
          *a la taula producte de la BBDD erp.
