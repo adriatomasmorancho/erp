@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.CategoriaDAO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -48,11 +49,16 @@ public class CategoriaService implements CategoriaServiceInterface{
         */
         return (List<Categoria>) categoria.findAll(); 
     }
+    
+    @Override
+    public String getRolUserCurrent(User username) {
+        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
+    }
 
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
-    public void afegirCategoria(Categoria categoria) {
+    public void crearCategoria(Categoria categoria) {
         
         /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
          *a la taula producte de la BBDD erp.

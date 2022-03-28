@@ -2,6 +2,7 @@ package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.model.Categoria;
 import java.util.List;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -13,7 +14,9 @@ public interface CategoriaServiceInterface {
     
     public List<Categoria> llistarCategories(); //Mètode que implementarem per llistar productes
     
-    public void afegirCategoria(Categoria categoria); //Mètode que implementarem per afegir un gos
+    public String getRolUserCurrent(User username);
+    
+    public void crearCategoria(Categoria categoria); //Mètode que implementarem per afegir un gos
     
     public void eliminarCategoria(Categoria categoria); //Mètode que implementarem per eliminar un producte
     

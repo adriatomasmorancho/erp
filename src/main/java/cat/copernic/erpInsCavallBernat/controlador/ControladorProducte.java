@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
@@ -10,6 +6,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -29,11 +26,13 @@ public class ControladorProducte {
     private ProducteServiceInterface producteService;
     
     @GetMapping("/productes") //Pàgina productes de l'aplicació localhost:5050
-    public String productes(Model model, @AuthenticationPrincipal Producte id_Producte) {
+    public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
         
         var productes = producteService.llistarProductes();
+        var rol = producteService.getRolUserCurrent(username);
 
         model.addAttribute("productes", productes);
+        model.addAttribute("rol", rol);
         
         return "productes";
     }
@@ -50,7 +49,7 @@ public class ControladorProducte {
             log.info("S'ha produït un error");
             return "crearProducte";
         }
-        producteService.afegirProducte(producte);
+        producteService.crearProducte(producte);
         return "redirect:/productes";
     }
     

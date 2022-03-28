@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Dashboard</title>
         <meta charset="UTF-8">
@@ -18,19 +19,6 @@
     <body>
         <header th:replace="layout/navBar :: navBar" />
         
-        <h1 class="center">ERP INS CAVALL BERNAT</h1>
-        
-        <table border="2" class="display">
-                <tr align="center">
-                    <th th:text="#{usuari.email}"/>
-                    <th th:text="#{usuari.rol}"/>
-                </tr>
-                <!-- Recorregut dels usuaris. Cada usuari de l'ArrayList usuaris es guarda en la variable usuari-->
-                <tr th:each="usuari : ${usuaris}" align="center"> 
-                    <td th:text="${usuari.username}"/>
-                    <td th:text="${usuari.rol}"/>
-                </tr>
-        </table>
-
+        <h1 class="center" th:text="#{titol}"/>
     </body>
 </html>

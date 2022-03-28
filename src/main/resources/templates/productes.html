@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title th:text="#{producte}"/>
         <meta charset="UTF-8">
@@ -55,7 +56,7 @@
             <a th:href="@{/crearProducte}"><i class="bi bi-plus-circle"></i></a>
         </div>
         <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+            <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
             <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
             <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">

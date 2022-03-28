@@ -23,7 +23,7 @@
             <div align="center">
                 <form th:object="${proveidors}" method="get">
                     <input type="text" class="form-control col-md-4"/>
-                    <button type="submit" class="btn btn-success mt-4 mb-4">Cercar</button>
+                    <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
                 </form>
             </div>
 
@@ -65,7 +65,7 @@
             </div>
             <p/>
             <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-                <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
