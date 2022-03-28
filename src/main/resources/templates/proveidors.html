@@ -5,55 +5,56 @@
         <title>Proveidors</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
-        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
-    
     <body>
         <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/}"th:text="#{back}"/>
+
         <div style="width: 50%; margin: 0 auto;">
             <h1 align="center">Llistat de proveidors</h1>
             <p/>
 
-            <div align="center">
-                <form th:object="${proveidors}" method="get">
-                    <input type="text" class="form-control col-md-4"/>
-                    <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
-                </form>
-            </div>
-
             <p/>
             <div th:if="${proveidors!=null && !proveidors.empty}" align="center">
-                <table class="table">
-                    <tr>
-                        <th>cif</th>
-                        <th>nom</th>
-                        <th>email</th>
-                        <th>telefon</th>
-                        <th>adreca</th>
-                        <th>contacte</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
-                    </tr>
+                <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
+                <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
+                <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
+                <div>
+                    <br />
+                    <table id="table_id">
+                        <thead>
+                            <tr>
+                                <th>cif</th>
+                                <th>nom</th>
+                                <th>email</th>
+                                <th>telefon</th>
+                                <th>adreca</th>
+                                <th>contacte</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="proveidor : ${proveidors}">
+                                <td th:text="${proveidor.cif}"></td>
+                                <td th:text="${proveidor.nom}"></td>
+                                <td th:text="${proveidor.email}"></td>
+                                <td th:text="${proveidor.telefon}"></td>
+                                <td th:text="${proveidor.adreca}"></td>
+                                <td th:text="${proveidor.contacte}"></td>
+                                <td><a th:href="@{/editarProveidor/}+${proveidor.cif}"><i class="bi bi-pencil-fill"></i></a></td>
+                                <td><a th:href="@{/eliminarProveidor/}+${proveidor.cif}"><i class="bi bi-trash-fill"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                    <tr th:each="proveidor : ${proveidors}" align="center"> 
-                        <td th:text="${proveidor.cif}"></td>
-                        <td th:text="${proveidor.nom}"></td>
-                        <td th:text="${proveidor.email}"></td>
-                        <td th:text="${proveidor.telefon}"></td>
-                        <td th:text="${proveidor.adreca}"></td>
-                        <td th:text="${proveidor.contacte}"></td>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#table_id').DataTable();
+                    });
+                </script>
 
-                        <td><a th:href="@{/editarProveidor/}+${proveidor.cif}"><i class="bi bi-pencil-fill"></i></a></td>
-                        <td><a th:href="@{/eliminarProveidor/}+${proveidor.cif}"><i class="bi bi-trash-fill"></i></a></td>
-
-                    </tr>
-                </table>
             </div>
             <div th:if="${proveidors==null || proveidors.empty}">
                 No hi ha proveidors a la llista.
@@ -65,7 +66,7 @@
             </div>
             <p/>
             <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-                <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
