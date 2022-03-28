@@ -9,6 +9,7 @@ import cat.copernic.erpInsCavallBernat.model.Proveidor;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +28,11 @@ public class ProveidorService implements ProveidorServiceInterface {
     @Transactional(readOnly = true)
     public List<Proveidor> llistarProveidors() {
         return (List<Proveidor>) proveidorDAO.findAll();
+    }
+    
+    @Override
+    public String getRolUserCurrent(User username) {
+        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
     }
 
     @Override

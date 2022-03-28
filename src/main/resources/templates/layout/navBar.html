@@ -18,20 +18,30 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div th:if="${rol}==Administrador" class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/usuaris">Usuari </a>
+                            <a class="nav-link" href="/usuaris" th:text="#{usuari}"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/productes">Producte <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/productes" th:text="#{producte}"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/proveidors">Proveidor </a>
+                            <a class="nav-link" href="/proveidors" th:text="#{proveidor}"/>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link" href="/categories">Categoria </a>
+                            <a class="nav-link" href="/categories" th:text="#{categories}"/>
+                        </li>
+                    </ul>
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
+                    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                        <input hidden type="submit" value="Sign Out"/>
+                    </form> 
+                </div>
+                <div th:unless="${rol}==Administrador" class="collapse navbar-collapse" id="navbarSupportedContent2" >
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/usuaris" th:text="#{usuari}"/>
                         </li>
                     </ul>
                     <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
