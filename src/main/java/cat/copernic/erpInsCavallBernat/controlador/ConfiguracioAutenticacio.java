@@ -45,6 +45,8 @@ public class ConfiguracioAutenticacio extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login")
                 .permitAll()
+                .antMatchers("/productes", "/crear/**", "/editar/**") //URL i subURLS (**) on pot accedir...
+                .hasAuthority("Administrador") //...l'usuari amb rol administrador
                 .anyRequest() //Qualsevol direcció que no sigui /login
                 .authenticated() //Obliga a estar autenticat per a direccionar a la resta de direccions
                 .and()

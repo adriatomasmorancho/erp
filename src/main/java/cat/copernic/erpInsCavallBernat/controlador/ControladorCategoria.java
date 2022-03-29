@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -29,11 +30,14 @@ public class ControladorCategoria {
     private CategoriaServiceInterface categoriaService;
     
     @GetMapping("/categories") //Pàgina productes de l'aplicació localhost:5050
-    public String categories(Model model, @AuthenticationPrincipal Categoria id_Categoria) {
-        
+    public String categories(Model model, Categoria id_Categoria, @AuthenticationPrincipal User username) {
+        log.info("L'usuari autenticat és: " + username);
         var categories = categoriaService.llistarCategories();
+        var rol = categoriaService.getRolUserCurrent(username);
+        log.info("ROL és: " + rol);
 
         model.addAttribute("categories", categories);
+        model.addAttribute("rol", rol);
         
         return "categories";
     }

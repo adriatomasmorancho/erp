@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.CategoriaDAO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -47,6 +48,11 @@ public class CategoriaService implements CategoriaServiceInterface{
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
         */
         return (List<Categoria>) categoria.findAll(); 
+    }
+    
+    @Override
+    public String getRolUserCurrent(User username) {
+        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
     }
 
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/

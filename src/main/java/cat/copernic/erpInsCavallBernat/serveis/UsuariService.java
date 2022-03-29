@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.UsuariDAO;
@@ -91,6 +87,11 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     public List<Usuari> llistarUsuaris() {
         return (List<Usuari>) usuariDAO.findAll();
     }
+    
+    @Override
+    public String getRolUserCurrent(User username) {
+        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
+    }
 
     @Override
     public void crearUsuari(Usuari usuari) {
@@ -108,11 +109,4 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
         return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
     }
     
-
-    @Override
-    public List<Usuari> cercarUsuariPerNom(String nom) {
-        return (List<Usuari>) usuariDAO.findByNom(nom);
-    }
-    
-
 }

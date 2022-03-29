@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Dashboard</title>
         <meta charset="UTF-8">
@@ -18,7 +19,6 @@
     <body>
         <header th:replace="layout/navBar :: navBar" />
         
-        <h1 class="center">ERP INS CAVALL BERNAT</h1>
-        
+        <h1 class="center" th:text="#{titol}"/>
     </body>
 </html>

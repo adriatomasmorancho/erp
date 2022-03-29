@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -31,16 +29,10 @@ public class ControladorUsuari {
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
         
         var usuaris = usuariService.llistarUsuaris();
+        var rol = usuariService.getRolUserCurrent(username);
 
         model.addAttribute("usuaris", usuaris);
-        
-        return "usuaris";
-    }
-    
-    @GetMapping("/usuarisNom") //Pàgina usuaris de la cerca per Nom de l'aplicació localhost:8080
-    public String cercarUsuarisPerNom(@RequestParam String nom, Model model, @ModelAttribute("usuaris") Usuari usuari) {
-
-        model.addAttribute("usuarisPerNom", usuariService.cercarUsuariPerNom(nom));
+        model.addAttribute("rol", rol);
         
         return "usuaris";
     }
