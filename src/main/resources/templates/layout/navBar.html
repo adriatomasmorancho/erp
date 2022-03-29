@@ -32,6 +32,9 @@
                          <li class="nav-item">
                             <a class="nav-link" href="/categories" th:text="#{categories}"/>
                         </li>
+                         <li class="nav-item">
+                            <a class="nav-link" href="/comandesProfessor">Les Meves Comandes </a>
+                        </li>
                     </ul>
                     <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
@@ -42,6 +45,9 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="/usuaris" th:text="#{usuari}"/>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comandesAdministrador">Comandes </a>
                         </li>
                     </ul>
                     <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
