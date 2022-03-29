@@ -5,7 +5,6 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Categoria;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.serveis.CategoriaServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

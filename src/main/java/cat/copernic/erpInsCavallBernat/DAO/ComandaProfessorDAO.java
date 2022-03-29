@@ -4,10 +4,16 @@
  */
 package cat.copernic.erpInsCavallBernat.DAO;
 
+
+import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import org.springframework.data.repository.CrudRepository;
+
 /**
  *
- * @author ivan
+ * @author adria
  */
-public class ComandaProfessorDAO {
-    
+public interface ComandaProfessorDAO extends CrudRepository<ComandaProfessor,Long> {
+   
+  
 }
+

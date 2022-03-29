@@ -4,10 +4,15 @@
  */
 package cat.copernic.erpInsCavallBernat.DAO;
 
+
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
+import org.springframework.data.repository.CrudRepository;
+
 /**
  *
- * @author ivan
+ * @author adria
  */
-public class LineaComandaDAO {
-    
+public interface LineaComandaDAO extends CrudRepository<LineaComanda,Long> {
+   
+  
 }
