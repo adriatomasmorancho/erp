@@ -36,9 +36,6 @@ public class LineaComanda implements Serializable {
     @NotNull
     private long  quantitat;
     
-   @NotNull
-    private boolean valida;
-    
     @NotEmpty
     private long observacio;
     

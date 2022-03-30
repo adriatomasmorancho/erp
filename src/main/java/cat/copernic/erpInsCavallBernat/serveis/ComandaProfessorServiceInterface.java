@@ -12,13 +12,13 @@ import java.util.List;
 //Interface on definirem els mètodes  personalitzats per la nostra aplicació
 public interface ComandaProfessorServiceInterface {
     
-    public List<ComandaProfessor> llistarComandesProfessor(); //Mètode que implementarem per llistar productes
+    public List<ComandaProfessor> llistarComandesProfessor(); //Mètode que implementarem per llistar comandes
    
-    public void crearComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per afegir un gos
+    public void crearComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per afegir una comanda
     
-    public void eliminarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per eliminar un producte
+    public void eliminarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per eliminar una comanda
     
-    public ComandaProfessor cercarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per cercar un producte
+    public ComandaProfessor cercarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per cercar una comanda
 
   
 }
