@@ -34,7 +34,7 @@ public class CategoriaService implements CategoriaServiceInterface{
     @Autowired
     private CategoriaDAO categoria; 
 
-    /*LListar productes de la taula producte de la BBDD erp*/
+    /*LListar categories de la taula categoria de la BBDD erp*/
     @Override
     /*La notació @Transactional fa referència a la classe Transactional de Spring Framework.
      *En aquest cas no hi haurà ni COMMITS, ni ROLLBACKS, ja que no modifiquem la informació
@@ -44,8 +44,8 @@ public class CategoriaService implements CategoriaServiceInterface{
     @Transactional(readOnly=true) 
     public List<Categoria> llistarCategories() {
         
-        /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de productes de la BBDD.
-         *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
+        /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de categories de la BBDD.
+         *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de categoria
         */
         return (List<Categoria>) categoria.findAll(); 
     }
@@ -55,39 +55,39 @@ public class CategoriaService implements CategoriaServiceInterface{
         return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
     }
 
-    /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
+    /*Afegir la categoria passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
     public void crearCategoria(Categoria categoria) {
         
-        /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
-         *a la taula producte de la BBDD erp.
+        /*Cridem al mètode save() de CrudRepository perquè afegeixi la categoria passat com a paràmetre,
+         *a la taula categoria de la BBDD erp.
         */
         this.categoria.save(categoria); 
     }
 
-    /*Eliminar el producte passat per paràmetre de la taula producte de la BBDD erp*/
+    /*Eliminar la categoria passat per paràmetre de la taula producte de la BBDD erp*/
     @Override
-    @Transactional //Igual que en el mètode afegirProducte, modifiquem la informació de la BBDD
+    @Transactional //Igual que en el mètode afegirCategoria, modifiquem la informació de la BBDD
     public void eliminarCategoria(Categoria categoria) {
         
-        /*Cridem al mètode delete() de CrudRepository perquè elimini el producte passat com a paràmetre,
-         *de la taula producte de la BBDD erp.
+        /*Cridem al mètode delete() de CrudRepository perquè elimini la categoria passat com a paràmetre,
+         *de la taula categoria de la BBDD erp.
         */
         this.categoria.delete(categoria);
         
     }
 
-    /*Cercar el producte passat per paràmetre en la taula producte de la BBDD erp*/
+    /*Cercar la categoria passat per paràmetre en la taula categoria de la BBDD erp*/
     @Override
-    @Transactional(readOnly=true) //Igual que en el mètode llistarProductes, no modifiquem la informació de la BBDD
+    @Transactional(readOnly=true) //Igual que en el mètode llistarCategories, no modifiquem la informació de la BBDD
     public Categoria cercarCategoria(Categoria categoria) {
         
-        /*Cridem al mètode findById() de CrudRepository perquè ens retorni el producte passat com a paràmetre.
+        /*Cridem al mètode findById() de CrudRepository perquè ens retorni la categoria passada com a paràmetre.
          *El paràmetre que li passem a aquest mètode, ha de ser la clau primària de l'entitat, en el nostre 
-         *cas el producte.
+         *cas la categoria.
          *
-         *Si el producte no existei retornarà null (orElse(null)).
+         *Si la categoria no existei retornarà null (orElse(null)).
         */ 
 
         return this.categoria.findById(categoria.getId_Categoria()).orElse(null);
