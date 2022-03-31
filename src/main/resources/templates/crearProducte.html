@@ -62,11 +62,11 @@
                 <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
             </p>
             <p>
-                <label for="proveidor" th:text="#{producte.proveidor1}"/>            
-                <select name="proveidor" id="cifProveidor" th:field="*{cifProveidor}">
-                    <option value="08226">Mercadona</option>
-                    </select>
-                <span th:if="${#fields.hasErrors('cifProveidor')}" th:errors="*{cifProveidor}"/>
+                <label for="proveidor" th:text="#{producte.proveidor1}"/> 
+                <select th:field="*{proveidor}">
+                    <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.cif}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
             </p>
             
             <label for="crearProducte" th:text="#{crear}"/>

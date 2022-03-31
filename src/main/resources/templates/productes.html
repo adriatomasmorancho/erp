@@ -28,7 +28,6 @@
                                 <th th:text="#{producte.categoria}"/>
                                 <th th:text="#{producte.stock}"/>
                                 <th th:text="#{producte.unitat}"/>
-                                <th th:text="#{producte.proveidor}"/>
                                 <th th:text="#{editar}"/>
                                 <th th:text="#{eliminar}"/>
                             </tr>
@@ -40,7 +39,6 @@
                                 <td th:text="${producte.categoria}"></td>
                                 <td th:text="${producte.stock}"></td>
                                 <td th:text="${producte.unitat}"></td>
-                                <td th:text="${producte.cifProveidor}"></td>
                                 <td><a th:href="@{/editarProducte/}+${producte.id_Producte}" ><i class="bi bi-pencil-fill"></i></a></td>
                                 <td><a th:href="@{/eliminarProducte/}+${producte.id_Producte}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
