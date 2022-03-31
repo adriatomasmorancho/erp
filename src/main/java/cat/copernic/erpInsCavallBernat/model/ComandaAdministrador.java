@@ -18,42 +18,20 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "comanda")
-public class ComandaProfessor implements Serializable {
+@Table(name = "comanda_centralitzada")
+public class ComandaAdministrador implements Serializable {
 
     //Identificació de la classe per poder deserialitzar de manera correcta
     private static final long serialVersionUID = 1L;
 
     @Id //Indica al sistema que l'atribut id_Producte és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
-    private long id_Comanda_Professor;
-    /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
-     *que volem que aparegui.
-     */
-     @NotEmpty //Validem un nombre mínim de caràcters
-    private String nom;
+    private long id_Comanda_Administrador;
+
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
     @NotEmpty
-    private Date data;
-    
-    @NotEmpty
     private Date  data_Arribada;
-    
-    @NotNull
-    private long  id_usuari;
-    
-    @NotNull
-    private long  id_centralitzada;
-    
-   @NotNull
-    private boolean valida;
-    
-    @NotNull
-    private long id_antiga;
-    
-     @NotEmpty
-    private String  modul;
   
 }

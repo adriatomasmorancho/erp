@@ -9,11 +9,9 @@
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar" />
-        
-        <div style="width: 50%; margin: 0 auto;">
+        <div>
             <h1 align="center" th:text="#{usuari.llistatUsuaris}"/>
             <p/>
-
             <p/>
             <div th:if="${usuaris!=null && !usuaris.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>

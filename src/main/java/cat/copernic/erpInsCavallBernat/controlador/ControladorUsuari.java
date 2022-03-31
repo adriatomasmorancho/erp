@@ -1,5 +1,6 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
+import cat.copernic.erpInsCavallBernat.DAO.UsuariDAO;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -24,15 +26,21 @@ public class ControladorUsuari {
     
     @Autowired
     private UsuariServiceInterface usuariService;
+    private UsuariDAO usuariDAO;
     
     @GetMapping("/usuaris") //Pàgina usuaris de l'aplicació localhost:5050
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
         
         var usuaris = usuariService.llistarUsuaris();
         var rol = usuariService.getRolUserCurrent(username);
+        var email = "";
+        //var cercarUsername = usuariDAO.findByUsername(email);
 
         model.addAttribute("usuaris", usuaris);
         model.addAttribute("rol", rol);
+        
+        model.addAttribute("email", email);
+        //model.addAttribute("cercarUsername", cercarUsername);
         
         return "usuaris";
     }

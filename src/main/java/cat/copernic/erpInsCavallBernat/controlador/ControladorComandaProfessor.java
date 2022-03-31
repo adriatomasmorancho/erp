@@ -64,7 +64,7 @@ public class ControladorComandaProfessor {
     @GetMapping("/mesInfoComandaProfessor/{id_ComandaProfessor}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
-        log.info(String.valueOf(comandaProfessor.getId_ComandaProfessor()));
+        log.info(String.valueOf(comandaProfessor.getId_Comanda_Professor()));
         comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
         model.addAttribute("comandaProfessor", comandaProfessor);
 

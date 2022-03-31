@@ -3,6 +3,7 @@ package cat.copernic.erpInsCavallBernat.serveis;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 
 import java.util.List;
+import org.springframework.security.core.userdetails.User;
 
 /**
  *
@@ -13,6 +14,8 @@ import java.util.List;
 public interface ComandaProfessorServiceInterface {
     
     public List<ComandaProfessor> llistarComandesProfessor(); //Mètode que implementarem per llistar comandes
+    
+    public String getRolUserCurrent(User username);
    
     public void crearComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per afegir una comanda
     

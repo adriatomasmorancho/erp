@@ -15,41 +15,32 @@
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/}"th:text="#{back}"/>
-        <h1 align="center" th:text="#{comandes}"/>
+        <h1 align="center" th:text="#{nav.comandesCentralitzades}"/>
           <div align="center">
-                <form th:object="${productes}" method="get">
+                <form th:object="${comanda}" method="get">
                     <input type="text" class="form-control col-md-4"/>
                     <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
                 </form>
             </div>
-        <div th:if="${comandesProfessor!=null && !comandesProfessor.empty}" align="center">
+        <div th:if="${comandesAdministrador!=null && !comandesAdministrador.empty}" align="center">
             <table border="1">
                 <tr>
-                    <th th:text="#{comanda.nom}"/>
-                    <th th:text="#{comanda.dataCreacio}"/>
                     <th th:text="#{comanda.dataArribada}"/>
-                    <th th:text="#{comanda.professor}"/>
-                    <th th:text="#{comanda.modul}"/>
                     <th th:text="#{comanda.mesInfo}"/>
                     <th th:text="#{comanda.duplicar}"/>
                     <th th:text="#{editar}"/>
                     <th th:text="#{eliminar}"/>
                 </tr>
-                <tr th:each="comandaProfessor : ${comandesProfessor}"> 
-                    <td th:text="${comandaProfessor.nom}"></td>
-                    <td th:text="${comandaProfessor.data}"></td>
-                    <td th:text="${comandaProfessor.data_Arribada}"></td>
-                    <td th:text="${comandaProfessor.data_Arribada}"></td>
-                    <td th:text="${comandaProfessor.modul}"></td>
-                    <td><a th:href="@{/mesInfoComandaAdministrador/}+${comandaProfessor.id_ComandaProfessor}" ><i class="bi bi-pencil-fill"></i></a></td>
-                    <td><a th:href="@{/editarComandaAdministrador/}+${comandaProfessor.id_ComandaProfessor}" ><i class="bi bi-pencil-fill"></i></a></td>
-                    <td><a th:href="@{/eliminarComandaAdministrador/}+${comandaProfessor.id_ComandaProfessor}" ><i class="bi bi-trash-fill"></i></a></td>
+                <tr th:each="comandaAdministrador: ${comandesAdministrador}"> 
+                    <td th:text="${comandaAdministrador.data_arribada}"></td>
+                    <td><a th:href="@{/mesInfoComandaAdministrador/}+${comandaAdministrador.id_ComandaAdministrador}" ><i class="bi bi-pencil-fill"></i></a></td>
+                    <td><a th:href="@{/editarComandaAdministrador/}+${comandaAdministrador.id_ComandaAdministrador}" ><i class="bi bi-pencil-fill"></i></a></td>
+                    <td><a th:href="@{/eliminarComandaAdministrador/}+${comandaAdministrador.id_ComandaAdministrador}" ><i class="bi bi-trash-fill"></i></a></td>
                     
                 </tr>
             </table>
         </div>
-        <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
+        <div th:if="${comandesAdministrador==null || comandesAdministrador.empty}">
             No hi ha Comandes a la llista.
         </div>    
         <div align="center"><!-- Posem un enllaç per a crear un usuari -->

@@ -21,19 +21,22 @@
                 <div th:if="${rol}==Administrador" class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/usuaris" th:text="#{usuari}"/>
+                            <a class="nav-link" href="/usuaris" th:text="#{nav.usuaris}"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/productes" th:text="#{producte}"/>
+                            <a class="nav-link" href="/productes" th:text="#{nav.productes}"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/proveidors" th:text="#{proveidor}"/>
+                            <a class="nav-link" href="/proveidors" th:text="#{nav.proveidors}"/>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link" href="/categories" th:text="#{categories}"/>
+                            <a class="nav-link" href="/categories" th:text="#{nav.categories}"/>
                         </li>
                          <li class="nav-item">
-                            <a class="nav-link" href="/comandesProfessor">Les Meves Comandes </a>
+                            <a class="nav-link" href="/comandesProfessor" th:text="#{nav.lesMevesComandes}"/>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/comandesAdministrador" th:text="#{nav.comandesCentralitzades}"/>
                         </li>
                     </ul>
                     <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
@@ -44,13 +47,10 @@
                 <div th:unless="${rol}==Administrador" class="collapse navbar-collapse" id="navbarSupportedContent2" >
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/usuaris" th:text="#{usuari}"/>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/comandesAdministrador">Comandes </a>
+                            <a class="nav-link" href="/comandesProfessor" th:text="#{nav.lesMevesComandes}"/>
                         </li>
                     </ul>
-                    <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
                     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
                         <input hidden type="submit" value="Sign Out"/>
                     </form> 

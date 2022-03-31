@@ -5,8 +5,8 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 
-import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
-import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
+import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,56 +27,56 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ControladorComandaAdministrador {
     
     @Autowired
-    private ComandaProfessorServiceInterface comandaProfessorService;
+    private ComandaAdministradorServiceInterface comandaAdministradorService;
     
     @GetMapping("/comandesAdministrador") //Pàgina productes de l'aplicació localhost:5050
-    public String comandesAdministrador(Model model, @AuthenticationPrincipal ComandaProfessor id_ComandaProfessor) {
+    public String comandesAdministrador(Model model, @AuthenticationPrincipal ComandaAdministrador id_ComandaAdministrador) {
         
-        var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+        var comandesAdministrador = comandaAdministradorService.llistarComandesAdministrador();
 
-        model.addAttribute("comandesProfessor", comandesProfessor);
+        model.addAttribute("comandesAdministrador", comandesAdministrador);
         
         return "comandesAdministrador";
     }
     
     @GetMapping("/crearComandaAdministrador") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearAdministrador(ComandaProfessor comandaProfessor) {
+    public String crearAdministrador(ComandaAdministrador comandaAdministrador) {
 
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
     
     @PostMapping("/guardarComandaAdministrador") //action = guardarProveidor
-    public String guardarComandaAdministrador(@Valid ComandaProfessor comandaProfessor, Errors errors) {
+    public String guardarComandaAdministrador(@Valid ComandaAdministrador comandaAdministrador, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
             return "crearComandaAdministrador";
         }
-        comandaProfessorService.crearComandaProfessor(comandaProfessor);
+        comandaAdministradorService.crearComandaAdministrador(comandaAdministrador);
         return "redirect:/comandesAdministrador";
     }
     
-   @GetMapping("/eliminarComandaAdministrador/{id_ComandaProfessor}")
-    public String eliminarComandaAdministrador(ComandaProfessor comandaProfessor) {
-        comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
+   @GetMapping("/eliminarComandaAdministrador/{id_ComandaAdministrador}")
+    public String eliminarComandaAdministrador(ComandaAdministrador comandaAdministrador) {
+        comandaAdministradorService.eliminarComandaAdministrador(comandaAdministrador);
         return "redirect:/comandesAdministrador";
     }
     
-    @GetMapping("/editarComandaAdministrador/{id_ComandaProfessor}")
-    public String editarComandaAdministrador(ComandaProfessor comandaProfessor, Model model) {
+    @GetMapping("/editarComandaAdministrador/{id_ComandaAdministrador}")
+    public String editarComandaAdministrador(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaProfessor.getId_ComandaProfessor()));
-        comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
-        model.addAttribute("comandaProfessor", comandaProfessor);
+        log.info(String.valueOf(comandaAdministrador.getId_Comanda_Administrador()));
+        comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
+        model.addAttribute("comandaAdministrador", comandaAdministrador);
 
         return "editarComandaAdministrador";
     }
     
-    @GetMapping("/mesInfoComandaAdministrador/{id_ComandaProfessor}")
-    public String editar(ComandaProfessor comandaProfessor, Model model) {
+    @GetMapping("/mesInfoComandaAdministrador/{id_ComandaAdministrador}")
+    public String editar(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaProfessor.getId_ComandaProfessor()));
-        comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
-        model.addAttribute("comandaProfessor", comandaProfessor);
+        log.info(String.valueOf(comandaAdministrador.getId_Comanda_Administrador()));
+        comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
+        model.addAttribute("comandaAdministrador", comandaAdministrador);
 
         return "mesInfoComandaAdministrador";
     }

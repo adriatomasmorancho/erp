@@ -30,7 +30,7 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
      *els quals ens permeten interactuar amb les taules de la BBDD pels usuaris i rols
     */
     @Autowired
-    private UsuariDAO usuariDAO; 
+    private UsuariDAO usuariDAO;
     
     /*Únic mètode de la interface UserDetailsService que retornarà un usuari a partir del nom d'usuari.
      *L'usuari que retorna es de tipus UserDetails que és una interface de Spring Security que defineix
