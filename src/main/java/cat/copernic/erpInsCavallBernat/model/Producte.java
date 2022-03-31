@@ -43,8 +43,9 @@ public class Producte implements Serializable {
     @NotNull
     private double preu;
     
-    @NotNull
-    private int categoria;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria", referencedColumnName = "id_categoria")
+    private Categoria categoria;
     
     @NotNull
     private int stock;

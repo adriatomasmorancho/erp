@@ -43,9 +43,9 @@
             </p>
             <p>
                 <label for="categoria" th:text="#{producte.categoria1}"/>
-                <select name="categoria" id="categoria" th:field="*{categoria}">
-                   <option value="1">pa i altres</option>
-                    </select>
+                <select th:field="*{categoria}">
+                    <option th:each="categoria : ${categories}" th:value="${categoria.id_Categoria}" th:text="${categoria.nom}"></option>
+                </select>
                 <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
             </p>
             <p>
