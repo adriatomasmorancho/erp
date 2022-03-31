@@ -64,7 +64,7 @@ public class ControladorComandaAdministrador {
     @GetMapping("/editarComandaAdministrador/{id_ComandaAdministrador}")
     public String editarComandaAdministrador(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaAdministrador.getId_Comanda_Administrador()));
+        log.info(String.valueOf(comandaAdministrador.getId_comandaCentralitzada()));
         comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
         model.addAttribute("comandaAdministrador", comandaAdministrador);
 
@@ -74,7 +74,7 @@ public class ControladorComandaAdministrador {
     @GetMapping("/mesInfoComandaAdministrador/{id_ComandaAdministrador}")
     public String editar(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaAdministrador.getId_Comanda_Administrador()));
+        log.info(String.valueOf(comandaAdministrador.getId_comandaCentralitzada()));
         comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
         model.addAttribute("comandaAdministrador", comandaAdministrador);
 

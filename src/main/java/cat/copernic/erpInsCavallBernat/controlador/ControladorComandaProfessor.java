@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -30,11 +31,13 @@ public class ControladorComandaProfessor {
     private ComandaProfessorServiceInterface comandaProfessorService;
     
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
-    public String comandesProfessor(Model model, @AuthenticationPrincipal ComandaProfessor id_ComandaProfessor) {
+    public String comandesProfessor(Model model, ComandaProfessor id_ComandaProfessor, @AuthenticationPrincipal User username) {
         
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+        var rol = comandaProfessorService.getRolUserCurrent(username);
 
         model.addAttribute("comandesProfessor", comandesProfessor);
+        model.addAttribute("rol", rol);
         
         return "comandesProfessor";
     }
@@ -61,7 +64,7 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/mesInfoComandaProfessor/{id_ComandaProfessor}")
+    @GetMapping("/mesInfoComandaProfessor/{id_Comanda_Professor}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
         log.info(String.valueOf(comandaProfessor.getId_Comanda_Professor()));

@@ -1,6 +1,7 @@
 package cat.copernic.erpInsCavallBernat.model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -30,30 +31,30 @@ public class ComandaProfessor implements Serializable {
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
-     @NotEmpty //Validem un nombre mínim de caràcters
+    @NotEmpty //Validem un nombre mínim de caràcters
     private String nom;
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
-    @NotEmpty
-    private Date data;
-    
-    @NotEmpty
-    private Date  data_Arribada;
     
     @NotNull
-    private long  id_usuari;
-    
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String data;
+
     @NotNull
-    private long  id_centralitzada;
-    
-   @NotNull
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private String data_Arribada;
+
+    @NotNull
+    private long id_usuari;
+
+    private long id_centralitzada;
+
     private boolean valida;
-    
-    @NotNull
+
     private long id_antiga;
-    
-     @NotEmpty
-    private String  modul;
-  
+
+    @NotEmpty
+    private String modul;
+
 }

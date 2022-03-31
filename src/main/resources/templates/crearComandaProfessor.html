@@ -26,41 +26,49 @@
         <header th:replace="layout/navBar :: navBar" />
         <a th:href="@{/comandesProfessor}"th:text="#{back}"/>
         <div class="card center" style="width: 25rem;">
-        <div class="card-body">
-        <h2 class="card-title" th:text="#{comanda.novaComanda}"/>
-        <p>          
-        <form th:action="@{/guardarComandaProfessor}" method="post" th:object="${comandaProfessor}">
-            <input type="hidden" name="id_ComandaProfessor" th:field="*{id_ComandaProfessor}"/>           
-            <p>
-                <label for="nom" th:text="#{comanda.nom1}"/>
-                <input type="text" name="nom" th:field="*{nom}"/>
-                <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
-            </p>
-             <p>
-                <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                <input type="date" name="dataArribada" th:field="*{data_Arribada}"/>
-                <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
-            </p>
-            <p>
-                <label for="modul" th:text="#{comanda.modul1}"/>
-                <select name="modul" id="modul" th:field="*{modul}">
-                   <option value="M01">M01</option>
-                   <option value="M02">M02</option>
-                   <option value="M03">M03</option>
-                    </select>
-                <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
-            </p>
-            
-            <label for="crearComandaProfessor" th:text="#{crear}"/>
-            <input type="submit" name="enviar" value=""/>
-            
-           <label for="crearCategoria" th:text="#{cancel}"/>
-           <a th:href="@{/categories}"></a>
-                
-        </form>
-    </p>
-    </div>
+            <div class="card-body">
+                <h2 class="card-title" th:text="#{comanda.novaComanda}"/>
+                <p>          
+                <form th:action="@{/guardarComandaProfessor}" method="post" th:object="${comandaProfessor}">
+                    <input type="hidden" name="id_ComandaProfessor" th:field="*{id_Comanda_Professor}"/>           
+                    <p>
+                        <label for="nom" th:text="#{comanda.nom1}"/>
+                        <input type="text" name="nom" th:field="*{nom}"/>
+                    <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+                    </p>
+                    <p>
+                        <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
+                        <input type="date" name="dataArribada" th:field="*{data_Arribada}"/>
+                    <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
+                    </p>
+                    <p>
+                        <label for="modul" th:text="#{comanda.modul1}"/>
+                        <select name="modul" id="modul" th:field="*{modul}">
+                            <option value="M01">M01</option>
+                            <option value="M02">M02</option>
+                            <option value="M03">M03</option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
+                    </p>
+                    <p>
+                        <label for="id_centralitzada" th:text="#{nav.comandesCentralitzades}"/>
+                        <input type="text" name="id_centralitzada" th:field="*{id_centralitzada}"/>
+                    </p>
+                    <p>
+                        <label for="id_usuari" th:text="#{usuari}"/>
+                        <input type="text" name="id_usuari" th:field="*{id_centralitzada}"/>
+                    </p>
+
+                    <label for="crearComandaProfessor" th:text="#{crear}"/>
+                    <input type="submit" name="enviar" value=""/>
+
+                    <label for="crearCategoria" th:text="#{cancel}"/>
+                    <a th:href="@{/categories}"></a>
+
+                </form>
+                </p>
+            </div>
         </div>
-    <footer/>  
-</body>
+        <footer/>  
+    </body>
 </html>

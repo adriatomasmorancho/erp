@@ -26,7 +26,7 @@ public class ComandaAdministrador implements Serializable {
 
     @Id //Indica al sistema que l'atribut id_Producte és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
-    private long id_Comanda_Administrador;
+    private long id_comandaCentralitzada;
 
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
