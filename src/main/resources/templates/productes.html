@@ -37,10 +37,10 @@
                             <tr th:each="producte : ${productes}"> 
                                 <td th:text="${producte.nom}"></td>
                                 <td th:text="${producte.preu}"></td>
-                                <td th:text="${producte.categoria}"></td>
+                                <td th:text="${producte.categoria.nom}"></td>
                                 <td th:text="${producte.stock}"></td>
                                 <td th:text="${producte.unitat}"></td>
-                                <td th:text="${producte.cifProveidor}"></td>
+                                <td th:text="${producte.proveidor.nom}"></td>
                                 <td><a th:href="@{/editarProducte/}+${producte.id_Producte}" ><i class="bi bi-pencil-fill"></i></a></td>
                                 <td><a th:href="@{/eliminarProducte/}+${producte.id_Producte}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
