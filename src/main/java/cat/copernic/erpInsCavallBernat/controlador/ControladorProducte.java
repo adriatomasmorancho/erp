@@ -1,7 +1,10 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
+import cat.copernic.erpInsCavallBernat.model.Proveidor;
+import cat.copernic.erpInsCavallBernat.serveis.CategoriaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ProveidorServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,12 @@ public class ControladorProducte {
     @Autowired
     private ProducteServiceInterface producteService;
     
+    //Need proveidors for createProducte foreign key
+    @Autowired
+    private ProveidorServiceInterface proveidorService;
+    @Autowired
+    private CategoriaServiceInterface categoriaService;
+    
     @GetMapping("/productes") //Pàgina productes de l'aplicació localhost:5050
     public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
         
@@ -38,8 +47,11 @@ public class ControladorProducte {
     }
     
     @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearProducte(Producte producte) {
-
+    public String crearProducte(Model model, Producte producte) {
+        var proveidors = proveidorService.llistarProveidors();
+        var categories = categoriaService.llistarCategories();
+        model.addAttribute("proveidors", proveidors);
+        model.addAttribute("categories", categories);
         return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
     
