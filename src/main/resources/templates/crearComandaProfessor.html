@@ -30,13 +30,13 @@
         <h2 class="card-title" th:text="#{comanda.novaComanda}"/>
         <p>          
         <form th:action="@{/guardarComandaProfessor}" method="post" th:object="${comandaProfessor}">
-            <input type="hidden" name="id_ComandaProfessor" th:field="*{id_ComandaProfessor}"/>           
+            <input type="hidden" name="id_ComandaProfessor" th:field="*{id_Comanda_Professor}"/>           
             <p>
                 <label for="nom" th:text="#{comanda.nom1}"/>
                 <input type="text" name="nom" th:field="*{nom}"/>
                 <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
             </p>
-             <p>
+            <p>
                 <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
                 <input type="date" name="dataArribada" th:field="*{data_Arribada}"/>
                 <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
@@ -50,6 +50,30 @@
                     </select>
                 <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
             </p>
+            <div align="center">
+            <form  method="get" th:object="${producte}">
+            <table border="1">
+                <tr>
+                    <th th:text="#{eliminar}"/>
+                    <th th:text="#{comanda.nom}"/>
+                    <th th:text="#{comanda.quantitat}"/>
+                    <th th:text="#{producte.preu}"/>
+                    <th th:text="#{producte.unitat}"/>
+                    <th th:text="#{comanda.observacions}"/>
+                    <th th:text="#{comanda.preElaboracions}"/>
+                </tr>
+                <tr th:each="producte: ${productes}"> 
+                   <!-- <td><a th:href="@{/eliminarComandaProfessor/}+${comandaProfessor.id_Comanda_Professor}" ><i class="bi bi-trash-fill"></i></a></td>
+                  -->  <td th:text="${producte.nom}"></td>
+                   <!-- <td><input type="text" name="quantitat" th:field="*{liniaComanda.quantitat}"/></td>-->
+                    <td th:text="${producte.preu}"></td>
+                    <td th:text="${producte.unitat}"></td>
+                  <!--  <td><input type="text" name="observacio" th:field="*{liniaComanda.observacio}"/></td>
+                  <td><input type="text" name="preElaboracions" th:field="*{liniaComanda.pre_elaboracions}"/></td>-->    
+                </tr>
+            </table>
+            </form>
+        </div>
             
             <label for="crearComandaProfessor" th:text="#{crear}"/>
             <input type="submit" name="enviar" value=""/>

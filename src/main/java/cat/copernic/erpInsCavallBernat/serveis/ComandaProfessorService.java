@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
+import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.Producte;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 
@@ -34,7 +36,7 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     */
     @Autowired
     private ComandaProfessorDAO comandaProfessor; 
-     
+    private ProducteDAO producte; 
 
     /*LListar productes de la taula producte de la BBDD erp*/
     @Override
@@ -50,6 +52,21 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
         */
         return (List<ComandaProfessor>) comandaProfessor.findAll(); 
+    }
+    
+    @Override
+    /*La notació @Transactional fa referència a la classe Transactional de Spring Framework.
+     *En aquest cas no hi haurà ni COMMITS, ni ROLLBACKS, ja que no modifiquem la informació
+     *de la BBDD, per tant, utilitzarem aquesta notació passant-li com a paràmetre readOnly=true
+     *perquè només hem de llegir de la BBDD.
+    */    
+    @Transactional(readOnly=true) 
+    public List<Producte> llistarProductes() {
+        
+        /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de productes de la BBDD.
+         *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
+        */
+        return (List<Producte>) producte.findAll(); 
     }
     
     @Override

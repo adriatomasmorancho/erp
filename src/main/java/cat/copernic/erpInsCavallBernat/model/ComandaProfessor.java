@@ -35,10 +35,10 @@ public class ComandaProfessor implements Serializable {
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
-    @NotEmpty
+    @NotNull
     private Date data;
     
-    @NotEmpty
+    @NotNull
     private Date  data_Arribada;
     
     @NotNull

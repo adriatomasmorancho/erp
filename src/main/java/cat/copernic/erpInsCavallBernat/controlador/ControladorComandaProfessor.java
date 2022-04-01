@@ -7,6 +7,7 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,18 @@ public class ControladorComandaProfessor {
     @Autowired
     private ComandaProfessorServiceInterface comandaProfessorService;
     
+   
+    
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, @AuthenticationPrincipal ComandaProfessor id_ComandaProfessor) {
+        
+        var productes = comandaProfessorService.llistarProductes();
         
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
 
         model.addAttribute("comandesProfessor", comandesProfessor);
+        
+        model.addAttribute("productes", productes);
         
         return "comandesProfessor";
     }
@@ -55,13 +62,13 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/eliminarComandaProfessor/{id_ComandaProfessor}")
+    @GetMapping("/eliminarComandaProfessor/{id_Comanda_Professor}")
     public String eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
         comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/mesInfoComandaProfessor/{id_ComandaProfessor}")
+    @GetMapping("/mesInfoComandaProfessor/{id_Comanda_Professor}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
         log.info(String.valueOf(comandaProfessor.getId_Comanda_Professor()));
