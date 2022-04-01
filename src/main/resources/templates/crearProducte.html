@@ -64,7 +64,7 @@
             <p>
                 <label for="proveidor" th:text="#{producte.proveidor1}"/> 
                 <select th:field="*{proveidor}">
-                    <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.cif}"></option>
+                    <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.nom}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
             </p>
