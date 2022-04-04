@@ -6,6 +6,7 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;

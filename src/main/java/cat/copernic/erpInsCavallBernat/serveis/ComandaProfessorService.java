@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
-import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
 

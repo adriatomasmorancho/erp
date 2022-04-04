@@ -6,9 +6,7 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.LineaComandaDAO;
-import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +98,7 @@ public class LineaComandaService implements LineaComandaServiceInterface{
          *Si el producte no existei retornarà null (orElse(null)).
         */ 
 
-        return this.lineaComanda.findById(lineaComanda.getId_linea_comanda()).orElse(null);
+          return this.lineaComanda.findById(lineaComanda.getId_linea_comanda()).orElse(null);
         
     }
      
