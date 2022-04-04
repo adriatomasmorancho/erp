@@ -17,8 +17,6 @@ public interface ComandaProfessorServiceInterface {
     public List<ComandaProfessor> llistarComandesProfessor(); //Mètode que implementarem per llistar comandes
     
     public String getRolUserCurrent(User username);
-    
-    public List<Producte> llistarProductes();
    
     public void crearComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per afegir una comanda
     

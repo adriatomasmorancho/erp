@@ -7,6 +7,7 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -30,25 +31,36 @@ public class ControladorComandaProfessor {
     @Autowired
     private ComandaProfessorServiceInterface comandaProfessorService;
     
+    @Autowired
+    private ProducteServiceInterface producteService;
+    
+    @Autowired
+    private LineaComandaServiceInterface lineaComandaService;
+    
    
     
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, @AuthenticationPrincipal ComandaProfessor id_ComandaProfessor) {
         
-        var productes = comandaProfessorService.llistarProductes();
         
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
 
         model.addAttribute("comandesProfessor", comandesProfessor);
         
-        model.addAttribute("productes", productes);
-        
         return "comandesProfessor";
     }
     
     @GetMapping("/crearComandaProfessor") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearComandaProfessor(ComandaProfessor comandaProfessor) {
-
+    public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor) {
+        
+        var productes = producteService.llistarProductes();
+        
+        model.addAttribute("productes", productes);
+        
+        var lineasComanda = lineaComandaService.llistarLineaComanda();
+        
+        model.addAttribute("lineasComanda", lineasComanda);
+       
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
     
@@ -62,16 +74,16 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/eliminarComandaProfessor/{id_Comanda_Professor}")
+    @GetMapping("/eliminarComandaProfessor/{id_comanda_}")
     public String eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
         comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/mesInfoComandaProfessor/{id_Comanda_Professor}")
+    @GetMapping("/mesInfoComandaProfessor/{id_comanda}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
-        log.info(String.valueOf(comandaProfessor.getId_Comanda_Professor()));
+        log.info(String.valueOf(comandaProfessor.getId_comanda()));
         comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
         model.addAttribute("comandaProfessor", comandaProfessor);
 

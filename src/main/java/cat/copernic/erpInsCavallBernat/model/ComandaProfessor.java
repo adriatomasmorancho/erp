@@ -2,10 +2,13 @@ package cat.copernic.erpInsCavallBernat.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,7 +29,7 @@ public class ComandaProfessor implements Serializable {
 
     @Id //Indica al sistema que l'atribut id_Producte és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
-    private long id_Comanda_Professor;
+    private long id_comanda;
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
@@ -47,7 +50,7 @@ public class ComandaProfessor implements Serializable {
     @NotNull
     private long  id_centralitzada;
     
-   @NotNull
+    @NotNull
     private boolean valida;
     
     @NotNull

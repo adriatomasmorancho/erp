@@ -1,28 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package cat.copernic.erpInsCavallBernat.serveis;
 
-
+import cat.copernic.erpInsCavallBernat.DAO.LineaComandaDAO;
+import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
+import cat.copernic.erpInsCavallBernat.model.Producte;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
-import cat.copernic.erpInsCavallBernat.DAO.ProducteDAO;
-import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
-import cat.copernic.erpInsCavallBernat.model.Producte;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 
 /**
  *
  * @author adria
  */
-
 /*Anotació que permet al sistema que reconegui aquesta classe com una classe de servei
  *i que permet injectar aquesta classe en el controlador
 */
-@Service ("comandaProfessorDetailsService")
+@Service ("lineaComandaDetailsService")
 @Slf4j
-public class ComandaProfessorService implements ComandaProfessorServiceInterface{
+public class LineaComandaService implements LineaComandaServiceInterface{
     
     /*Quan treballem en la capa de servei amb classes de tipus DAO, com és el cas, estem
      *treballant amb transaccions SQL, és a dir, quan fem una consulta a la BBDD, si aquesta
@@ -35,7 +38,8 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
      *accedirà directament a la capa de dades, si no que accedirà mitjançant la capa de servei.
     */
     @Autowired
-    private ComandaProfessorDAO comandaProfessor; 
+    private LineaComandaDAO lineaComanda; 
+   
   
 
     /*LListar productes de la taula producte de la BBDD erp*/
@@ -46,12 +50,12 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
      *perquè només hem de llegir de la BBDD.
     */    
     @Transactional(readOnly=true) 
-    public List<ComandaProfessor> llistarComandesProfessor() {
+    public List<LineaComanda> llistarLineaComanda() {
         
         /*Cridem al mètode findAll() de CrudRepository perquè ens retorni el llistat de productes de la BBDD.
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
         */
-        return (List<ComandaProfessor>) comandaProfessor.findAll(); 
+        return (List<LineaComanda>) lineaComanda.findAll(); 
     }
     
     
@@ -63,23 +67,23 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
     @Transactional
-    public void crearComandaProfessor(ComandaProfessor comandaProfessor) {
+    public void crearLineaComanda(LineaComanda lineaComanda) {
         
         /*Cridem al mètode save() de CrudRepository perquè afegeixi el producte passat com a paràmetre,
          *a la taula producte de la BBDD erp.
         */
-        this.comandaProfessor.save(comandaProfessor); 
+        this.lineaComanda.save(lineaComanda); 
     }
 
     /*Eliminar el producte passat per paràmetre de la taula producte de la BBDD erp*/
     @Override
     @Transactional //Igual que en el mètode afegirProducte, modifiquem la informació de la BBDD
-    public void eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
+    public void eliminarLineaComanda(LineaComanda lineaComanda) {
         
         /*Cridem al mètode delete() de CrudRepository perquè elimini el producte passat com a paràmetre,
          *de la taula producte de la BBDD erp.
         */
-        this.comandaProfessor.delete(comandaProfessor);
+        this.lineaComanda.delete(lineaComanda);
         
         
     }
@@ -87,7 +91,7 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     /*Cercar el producte passat per paràmetre en la taula producte de la BBDD erp*/
     @Override
     @Transactional(readOnly=true) //Igual que en el mètode llistarProductes, no modifiquem la informació de la BBDD
-    public ComandaProfessor cercarComandaProfessor(ComandaProfessor comandaProfessor) {
+    public LineaComanda cercarLineaComanda(LineaComanda lineaComanda) {
         
         /*Cridem al mètode findById() de CrudRepository perquè ens retorni el producte passat com a paràmetre.
          *El paràmetre que li passem a aquest mètode, ha de ser la clau primària de l'entitat, en el nostre 
@@ -96,9 +100,10 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
          *Si el producte no existei retornarà null (orElse(null)).
         */ 
 
-        return this.comandaProfessor.findById(comandaProfessor.getId_comanda()).orElse(null);
+        return this.lineaComanda.findById(lineaComanda.getId_linea_comanda()).orElse(null);
         
     }
+     
    
 
     
