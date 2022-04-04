@@ -27,7 +27,7 @@ public class ComandaProfessor implements Serializable {
 
     @Id //Indica al sistema que l'atribut id_Producte és la clau primària de la BBDD
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Indica al sistema com generarem l'id
-    private long id_Comanda_Professor;
+    private long id_comanda;
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
@@ -38,21 +38,20 @@ public class ComandaProfessor implements Serializable {
      */
     
     @NotNull
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String data;
 
     @NotNull
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String data_Arribada;
 
-    @NotNull
-    private long id_usuari;
+    private long id_usuari = 1;
 
-    private long id_centralitzada;
+    private long id_centralitzada = 0;
 
-    private boolean valida;
+    private boolean valida = false;
 
-    private long id_antiga;
+    private long id_antiga = id_comanda;
 
     @NotEmpty
     private String modul;
