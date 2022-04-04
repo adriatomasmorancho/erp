@@ -25,18 +25,16 @@ public class LineaComanda implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id //Indica al sistema que l'atribut id_comanda és la clau primària de la BBDD
-    @NotNull
-   // @OneToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_linea_comanda", referencedColumnName = "id_comanda")
-    private long id_linea_comanda;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_linea_comanda", referencedColumnName = "id_comanda")
+    private ComandaProfessor id_linea_comanda;
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */
     
-   // @OneToOne(cascade = CascadeType.ALL)
-   //@JoinColumn(name = "id_producte", referencedColumnName = "id_producte")
-    @NotNull
-    private long  id_Producte;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_producte", referencedColumnName = "id_producte")
+    private Producte  id_Producte;
     
     @NotNull
     private long  quantitat;
