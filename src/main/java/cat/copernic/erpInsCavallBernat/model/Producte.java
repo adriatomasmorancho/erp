@@ -1,10 +1,13 @@
 package cat.copernic.erpInsCavallBernat.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -40,13 +43,15 @@ public class Producte implements Serializable {
     @NotNull
     private double preu;
     
-    @NotNull
-    private int categoria;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "categoria", referencedColumnName = "id_categoria")
+    private Categoria categoria;
     
     @NotNull
     private int stock;
     
-    @NotEmpty
-    private String cifProveidor;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cif_proveidor", referencedColumnName = "cif")
+    private Proveidor proveidor;
   
 }
