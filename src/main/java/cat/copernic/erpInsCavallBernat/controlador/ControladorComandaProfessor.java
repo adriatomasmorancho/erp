@@ -6,10 +6,13 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -31,19 +34,30 @@ public class ControladorComandaProfessor {
     private ComandaProfessorServiceInterface comandaProfessorService;
     
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
-    public String comandesProfessor(Model model, ComandaProfessor id_ComandaProfessor, @AuthenticationPrincipal User username) {
+    public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
         
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         var rol = comandaProfessorService.getRolUserCurrent(username);
+        log.info("USERNAME::: " + username);
+        var usuari = username.getUsername();
+        log.info("USUARI::: " + usuari);
+        var fecha = comandaProfessorService.getCurrentDate();
+        log.info("FECHA:::: " + fecha);
 
         model.addAttribute("comandesProfessor", comandesProfessor);
         model.addAttribute("rol", rol);
+        model.addAttribute("usuari", usuari);
+        model.addAttribute("fecha", fecha);
         
         return "comandesProfessor";
     }
     
     @GetMapping("/crearComandaProfessor") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearComandaProfessor(ComandaProfessor comandaProfessor) {
+    public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor) {
+        var data = comandaProfessorService.getCurrentDate();
+        comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
+        log.info("FECHA:::: " + data);
+        model.addAttribute("data", data);
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -58,16 +72,16 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/eliminarComandaProfessor/{id_ComandaProfessor}")
+    @GetMapping("/eliminarComandaProfessor/{id_comanda}")
     public String eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
         comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/mesInfoComandaProfessor/{id_Comanda_Professor}")
+    @GetMapping("/mesInfoComandaProfessor/{id_comanda}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
-        log.info(String.valueOf(comandaProfessor.getId_Comanda_Professor()));
+        log.info(String.valueOf(comandaProfessor.getId_comanda()));
         comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
         model.addAttribute("comandaProfessor", comandaProfessor);
 
