@@ -8,6 +8,7 @@ public class ErpInsCavallBernatApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ErpInsCavallBernatApplication.class, args);
+           
 	}
 
 }

@@ -1,6 +1,7 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.Producte;
 
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
