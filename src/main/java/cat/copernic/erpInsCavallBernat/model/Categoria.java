@@ -37,6 +37,5 @@ public class Categoria implements Serializable {
     /*Validació per comprovar que el sexe no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
-   
   
 }

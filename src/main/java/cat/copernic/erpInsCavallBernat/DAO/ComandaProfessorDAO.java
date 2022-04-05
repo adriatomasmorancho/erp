@@ -13,7 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author adria
  */
 public interface ComandaProfessorDAO extends CrudRepository<ComandaProfessor,Long> {
-   
+   ComandaProfessor findByNom(String nom);
   
 }
 

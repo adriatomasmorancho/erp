@@ -23,6 +23,8 @@ public interface ComandaProfessorServiceInterface {
     public void eliminarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per eliminar una comanda
     
     public ComandaProfessor cercarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per cercar una comanda
+    
+    public String getCurrentDate();
 
   
 }

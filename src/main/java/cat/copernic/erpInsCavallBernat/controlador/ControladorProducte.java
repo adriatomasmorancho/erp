@@ -1,7 +1,6 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.Producte;
-import cat.copernic.erpInsCavallBernat.model.Proveidor;
 import cat.copernic.erpInsCavallBernat.serveis.CategoriaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProveidorServiceInterface;

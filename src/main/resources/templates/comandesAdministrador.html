@@ -17,7 +17,7 @@
         <header th:replace="layout/navBar :: navBar" />
         <h1 align="center" th:text="#{nav.comandesCentralitzades}"/>
           <div align="center">
-                <form th:object="${comanda}" method="get">
+                <form th:object="${comandesAdministrador}" method="get">
                     <input type="text" class="form-control col-md-4"/>
                     <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
                 </form>
