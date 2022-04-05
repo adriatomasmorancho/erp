@@ -4,10 +4,11 @@
  */
 package cat.copernic.erpInsCavallBernat.controlador;
 
-
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -25,17 +26,22 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * @author adria
  */
-
 @Controller
 @Slf4j
 public class ControladorComandaProfessor {
-    
+
     @Autowired
     private ComandaProfessorServiceInterface comandaProfessorService;
-    
+
+    @Autowired
+    private ProducteServiceInterface producteService;
+
+    @Autowired
+    private LineaComandaServiceInterface lineaComandaService;
+
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
-        
+
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         var rol = comandaProfessorService.getRolUserCurrent(username);
         log.info("USERNAME::: " + username);
@@ -48,20 +54,24 @@ public class ControladorComandaProfessor {
         model.addAttribute("rol", rol);
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
-        
+
         return "comandesProfessor";
     }
-    
+
     @GetMapping("/crearComandaProfessor") //URL a la pàgina amb el formulari de les dades del producte
     public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor) {
         var data = comandaProfessorService.getCurrentDate();
         comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
         log.info("FECHA:::: " + data);
         model.addAttribute("data", data);
+        var productes = producteService.llistarProductes();
+        var lineasComanda = lineaComandaService.llistarLineaComanda();
+        model.addAttribute("lineasComanda", lineasComanda);
+        model.addAttribute("productes", productes);
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
-    
+
     @PostMapping("/guardarComandaProfessor") //action = guardarProveidor
     public String guardarComandaProfessor(@Valid ComandaProfessor comandaProfessor, Errors errors) {
         if (errors.hasErrors()) {
@@ -71,13 +81,13 @@ public class ControladorComandaProfessor {
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
-    
+
     @GetMapping("/eliminarComandaProfessor/{id_comanda}")
     public String eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
         comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
-    
+
     @GetMapping("/mesInfoComandaProfessor/{id_comanda}")
     public String editar(ComandaProfessor comandaProfessor, Model model) {
 
@@ -87,5 +97,5 @@ public class ControladorComandaProfessor {
 
         return "mesInfoComandaProfessor";
     }
-    
+
 }
