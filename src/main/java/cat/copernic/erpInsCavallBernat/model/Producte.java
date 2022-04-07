@@ -37,8 +37,9 @@ public class Producte implements Serializable {
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
-    @NotEmpty
-    private String unitat;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_unitat", referencedColumnName = "id_unitat")
+    private Unitat unitat;
     
     @NotNull
     private double preu;

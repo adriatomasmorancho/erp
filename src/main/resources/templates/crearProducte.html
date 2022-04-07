@@ -44,9 +44,8 @@
                     </p>
                     <p>
                         <label for="unitat" th:text="#{producte.unitat1}"/>
-                        <select class="form-select" name="unitat" id="unitat" th:field="*{unitat}">
-                            <option value="Kg">Kg</option>
-                            <option value="Litre">Litre</option>
+                        <select class="form-select" th:field="*{unitat}">
+                            <option th:each="unitat : ${unitats}" th:value="${unitat.id_unitat}" th:text="${unitat.nom}"></option>
                         </select>
                         <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
                     </p>

@@ -4,6 +4,7 @@ import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.serveis.CategoriaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProveidorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.UnitatServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class ControladorProducte {
     private ProveidorServiceInterface proveidorService;
     @Autowired
     private CategoriaServiceInterface categoriaService;
+     @Autowired
+    private UnitatServiceInterface unitatService;
 
     @GetMapping("/productes") //Pàgina productes de l'aplicació localhost:5050
     public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
@@ -43,8 +46,10 @@ public class ControladorProducte {
 
         var proveidors = proveidorService.llistarProveidors();
         var categories = categoriaService.llistarCategories();
+        var unitats = unitatService.llistarUnitats();
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
+        model.addAttribute("unitats", unitats);
 
         return "productes";
     }
@@ -53,8 +58,10 @@ public class ControladorProducte {
     public String crearProducte(Model model, @AuthenticationPrincipal User username, Producte producte) {
         var proveidors = proveidorService.llistarProveidors();
         var categories = categoriaService.llistarCategories();
+        var unitats = unitatService.llistarUnitats();
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
+        model.addAttribute("unitats", unitats);
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
         return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
@@ -85,8 +92,10 @@ public class ControladorProducte {
 
         var proveidors = proveidorService.llistarProveidors();
         var categories = categoriaService.llistarCategories();
+        var unitats = unitatService.llistarUnitats();
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
+        model.addAttribute("unitats", unitats);
 
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
