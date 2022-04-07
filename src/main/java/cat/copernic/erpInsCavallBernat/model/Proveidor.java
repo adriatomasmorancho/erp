@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
@@ -29,6 +30,7 @@ public class Proveidor implements Serializable {
     private String nom;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String email;
+    @NotNull
     private int telefon;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String adreca;

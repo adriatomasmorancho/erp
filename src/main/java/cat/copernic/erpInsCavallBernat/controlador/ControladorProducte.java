@@ -19,41 +19,47 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * @author ivan
  */
-
 @Controller
 @Slf4j
 public class ControladorProducte {
-    
+
     @Autowired
     private ProducteServiceInterface producteService;
-    
+
     //Need proveidors for createProducte foreign key
     @Autowired
     private ProveidorServiceInterface proveidorService;
     @Autowired
     private CategoriaServiceInterface categoriaService;
-    
+
     @GetMapping("/productes") //Pàgina productes de l'aplicació localhost:5050
     public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
-        
+
         var productes = producteService.llistarProductes();
         var rol = producteService.getRolUserCurrent(username);
 
         model.addAttribute("productes", productes);
         model.addAttribute("rol", rol);
-        
-        return "productes";
-    }
-    
-    @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearProducte(Model model, Producte producte) {
+
         var proveidors = proveidorService.llistarProveidors();
         var categories = categoriaService.llistarCategories();
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
+
+        return "productes";
+    }
+
+    @GetMapping("/crearProducte") //URL a la pàgina amb el formulari de les dades del producte
+    public String crearProducte(Model model, @AuthenticationPrincipal User username, Producte producte) {
+        var proveidors = proveidorService.llistarProveidors();
+        var categories = categoriaService.llistarCategories();
+        model.addAttribute("proveidors", proveidors);
+        model.addAttribute("categories", categories);
+        var rol = proveidorService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
         return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
-    
+
     @PostMapping("/guardarProducte") //action = guardarProveidor
     public String guardarProducte(@Valid Producte producte, Errors errors) {
         if (errors.hasErrors()) {
@@ -63,21 +69,29 @@ public class ControladorProducte {
         producteService.crearProducte(producte);
         return "redirect:/productes";
     }
-    
+
     @GetMapping("/eliminarProducte/{id_Producte}")
     public String eliminarProducte(Producte producte) {
         producteService.eliminarProducte(producte);
         return "redirect:/productes";
     }
-    
+
     @GetMapping("/editarProducte/{id_Producte}")
-    public String editar(Producte producte, Model model) {
+    public String editar(Model model, @AuthenticationPrincipal User username, Producte producte) {
 
         log.info(String.valueOf(producte.getId_Producte()));
         producte = producteService.cercarProducte(producte);
         model.addAttribute("producte", producte);
 
+        var proveidors = proveidorService.llistarProveidors();
+        var categories = categoriaService.llistarCategories();
+        model.addAttribute("proveidors", proveidors);
+        model.addAttribute("categories", categories);
+
+        var rol = proveidorService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
+
         return "editarProducte";
     }
-    
+
 }

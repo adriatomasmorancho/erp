@@ -17,32 +17,34 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * @author ivan
  */
-
 @Controller
 @Slf4j
 public class ControladorProveidor {
-    
+
     @Autowired
     private ProveidorServiceInterface proveidorService;
-    
+
     @GetMapping("/proveidors") //Pàgina proveidors de l'aplicació localhost:8080
     public String proveidors(Model model, @AuthenticationPrincipal User username, Proveidor cif) {
-        
+
         var proveidors = proveidorService.llistarProveidors();
         var rol = proveidorService.getRolUserCurrent(username);
 
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("rol", rol);
-        
+
         return "proveidors";
     }
-    
+
     @GetMapping("/crearProveidor") //URL a la pàgina amb el formulari de les dades del proveidor
-    public String crearProveidor(Proveidor proveidor) {
+    public String crearProveidor(Model model, @AuthenticationPrincipal User username, Proveidor proveidor) {
+
+        var rol = proveidorService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
 
         return "crearProveidor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels proveidors
     }
-    
+
     @PostMapping("/guardarProveidor") //action = guardarProveidor
     public String guardarProveidor(@Valid Proveidor proveidor, Errors errors) {
         if (errors.hasErrors()) {
@@ -52,21 +54,24 @@ public class ControladorProveidor {
         proveidorService.crearProveidor(proveidor);
         return "redirect:/proveidors";
     }
-    
+
     @GetMapping("/eliminarProveidor/{cif}")
     public String eliminarProveidor(Proveidor proveidor) {
         proveidorService.eliminarProveidor(proveidor);
         return "redirect:/proveidors";
     }
-    
+
     @GetMapping("/editarProveidor/{cif}")
-    public String editar(Proveidor proveidor, Model model) {
+    public String editar(Model model, @AuthenticationPrincipal User username, Proveidor proveidor) {
 
         log.info(String.valueOf(proveidor.getCif()));
         proveidor = proveidorService.cercarProveidor(proveidor);
         model.addAttribute("proveidor", proveidor);
 
+        var rol = proveidorService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
+
         return "editarProveidor";
     }
-    
+
 }

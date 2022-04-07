@@ -13,13 +13,14 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
     <body>
-        <header th:replace="layout/navBar :: navBar" />
+        <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
-            <h1 align="center" th:text="#{categories}"/>
             <p/>
-
+            <h1 align="center" th:text="#{categoria.llistatCategories}"/>
+            <p/>
             <p/>
             <div th:if="${categories!=null && !categories.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
@@ -54,9 +55,10 @@
                 No hi ha categories a la llista.
             </div>    
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <label for="crearCategoria" th:text="#{categoria.crearCategoria}"/>
+                <a th:href="@{/crearCategoria}" th:text="#{categoria.crearCategoria}"></a>
                 <a th:href="@{/crearCategoria}"><i class="bi bi-plus-circle"></i></a>
             </div>
+            <p/>
             <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
                 <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
