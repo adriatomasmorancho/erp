@@ -5,11 +5,14 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
+import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +87,16 @@ public class ControladorComandaProfessor {
         var fecha = dia + "/" + mes + "/" + año;
         comandaProfessor.setData_Arribada(fecha);
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
+        //Crear Linea Comanda Per cada producte
+            ComandaProfessor cp = comandaProfessor;
+            LineaComanda lineaComanda = new LineaComanda();
+            lineaComanda.setId_comanda(comandaProfessor);
+            lineaComanda.setId_Producte(comandaProfessor.getProducte());
+            lineaComanda.setQuantitat(comandaProfessor.getQuantitat());
+            lineaComanda.setPre_elavoracions(comandaProfessor.getPreElaboracions());
+            lineaComanda.setObservacio(comandaProfessor.getObservacions());
+            lineaComandaService.crearLineaComanda(lineaComanda);
+        
         return "redirect:/comandesProfessor";
     }
 

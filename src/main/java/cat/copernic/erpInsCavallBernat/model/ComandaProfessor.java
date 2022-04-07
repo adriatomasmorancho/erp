@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
@@ -52,6 +53,18 @@ public class ComandaProfessor implements Serializable {
     private boolean valida = false;
 
     private long id_antiga = id_comanda;
+    
+    @Transient
+    private Producte producte;
+    
+    @Transient
+    private long quantitat;
+    
+    @Transient
+    private String preElaboracions;
+    
+    @Transient
+    private String observacions;
 
     @NotEmpty
     private String modul;

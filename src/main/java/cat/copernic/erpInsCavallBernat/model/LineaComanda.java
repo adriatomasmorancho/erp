@@ -45,10 +45,8 @@ public class LineaComanda implements Serializable {
     @NotNull
     private long  quantitat;
     
-    @NotEmpty
-    private long observacio;
+    private String observacio;
     
-    @NotEmpty
     private String  pre_elavoracions;
   
 }
