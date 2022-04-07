@@ -50,8 +50,10 @@ public class ControladorUsuari {
      *atributs buits (recordem que el constructor construeix un objecte buit).
      */
     @GetMapping("/crearUsuari") //URL a la pàgina amb el formulari de les dades del usuari
-    public String crearUsuari(Usuari usuari) {
-
+    public String crearUsuari(Model model, @AuthenticationPrincipal User username, Usuari usuari) {
+        var rol = usuariService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
+        
         return "crearUsuari"; //Retorna la pàgina on es mostrarà el formulari de les dades dels usuaris
     }
 
@@ -93,7 +95,7 @@ public class ControladorUsuari {
      *IMPORTANT: id_usuari ha de tenir el mateix nom que l'atribut id de la classe Usuari.
      */
     @GetMapping("/editar/{id_usuari}")
-    public String editar(Usuari usuari, Model model) {
+    public String editar(Model model, @AuthenticationPrincipal User username, Usuari usuari) {
 
         log.info(String.valueOf(usuari.getId_usuari())); //Mostra id_usuari de Usuari
 
@@ -102,6 +104,9 @@ public class ControladorUsuari {
         usuari = usuariService.cercarUsuari(usuari);
 
         model.addAttribute("usuari", usuari); //Enviem les dades del gos resultant de la cerca a la pàgina formulariUsuari
+        
+        var rol = usuariService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
 
         return "editarUsuari"; //Retorna la pàgina amb el formulari de les dades del usuari
     }

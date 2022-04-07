@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
- * @author adria
+ * @author ivan
  */
 @Controller
 @Slf4j
@@ -75,6 +75,12 @@ public class ControladorComandaProfessor {
             log.info("S'ha produït un error");
             return "crearComandaProfessor";
         }
+        var dataArribada = comandaProfessor.getData_Arribada();
+        var dia = dataArribada.substring(8, dataArribada.length());
+        var mes = dataArribada.substring(5, 7);
+        var año = dataArribada.substring(0, 4);
+        var fecha = dia + "/" + mes + "/" + año;
+        comandaProfessor.setData_Arribada(fecha);
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }

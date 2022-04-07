@@ -15,12 +15,13 @@
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <header th:replace="layout/navBar :: navBar" />
-        <div>
+        <header th:replace="layout/navBar :: navBar"/>
+        <div style="width: 75%; margin: 0 auto;">
+            <p/>
             <h1 align="center" th:text="#{usuari.llistatUsuaris}"/>
             <p/>
             <p/>
-            <div th:if="${usuaris!=null && !usuaris.empty}" align="center">
+            <div th:if="${usuaris!=null && !usuaris.empty}">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
@@ -40,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="usuari : ${usuaris}" align="center"> 
+                            <tr th:each="usuari : ${usuaris}"> 
                                 <td th:text="${usuari.username}"/>
                                 <td th:text="${usuari.password}"/>
                                 <td th:text="${usuari.nom}"/>
@@ -59,13 +60,13 @@
                     });
                 </script>
             </div>
-            <div th:if="${usuaris==null || usuaris.empty}"><!--Si l'ArrayList de usuaris no està inicialitzat o no té contingut-->
+            <div th:if="${usuaris==null || usuaris.empty}" align="center"><!--Si l'ArrayList de usuaris no està inicialitzat o no té contingut-->
                 <!-- Mostrem missatge-->
                 No hi ha usuaris a la llista.
             </div>
             <p/>
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <a th:href="@{/crearUsuari}"th:text="#{usuari.crearUsuari}"></a>
+                <a th:href="@{/crearUsuari}" th:text="#{usuari.crearUsuari}"></a>
                 <a th:href="@{/crearUsuari}"><i class="bi bi-plus-circle"></i></a>
             </div>
             <p/>

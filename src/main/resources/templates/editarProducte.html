@@ -11,91 +11,57 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
-    <style>
-        .center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-    </style>
     <body> 
-        <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/productes}"th:text="#{back}"/>
+        <header th:replace="layout/navBar :: navBar"/>
         <div class="card center" style="width: 25rem;">
-        <div class="card-body">
-        <h2 class="card-title" th:text="#{producte.editarProducte}"/>
-
-       <p>
-            
-        <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
-            
-            <!-- Camp ocult on guardem l'id del producte per enviar-lo juntament amb les altres dades-->
-            <input type="hidden" name="id" th:field="*{id_Producte}"/>
-            
-            <p>
-                <label for="nom" th:text="#{producte.nom1}"/> <!--Etiqueta on indiquem a l'usuari que ha d'introduir el nom del producte-->
-                <!--Thymeleaf associarà les dades afegides mitjançant aquest input, a l'atribut (*) nom de l'objecte
-                    producte assignat a th:objecte-->
-                <input type="text" name="nom" th:field="*{nom}"/>
-                
-                <!--Afegim un contenidor de tipus span per gestionar la validació-->
-                <!--Comprovem si el camp "nom" conté errors mitjançant th:if="${#fields.hasErrors('nom')}", on passem com a
-                    paràmetre el nom del camp on volem comprovar si hi ha errors, en el nostre cas "nom", i ens retornarà
-                    verdader si conté errors i fals en cas contrari.
-                    Si conté errors, li demanarem a l'atribut nom del producte que ens mostri els errors mitjançant th:errors="*{nom}".
-                    Tot això és possible perquè en la classe Producte hem afegit les anotacions per les validacions.-->
-                <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
-            </p>
-
-            <p>
-                <label for="preu" th:text="#{producte.preu1}"/> <!--Etiqueta per el preu del producte-->            
-                <input type="text" name="preu" th:field="*{preu}"/> <!--Associem les dades introduïdes amb l'atribut preu-->
-                <!-- Gestió errors preu-->
-                <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
-            </p>
-            <p>
-                <label for="categoria" th:text="#{producte.categoria1}"/> 
-                <select select th:field="*{categoria}">
-                    <option value="1">pa i altres</option>       
-                    </select>
-                <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
-            </p>
-            <p>
-                <label for="stock" th:text="#{producte.stockActual}"/>           
-             <input type="text" name="stock" th:field="*{stock}"/> 
-             <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
-            </p>
-            <p>
-                <label for="unitat" th:text="#{producte.unitat}"/> 
-                <select select th:field="*{unitat}">
-                   <option value="Kg">Kg</option>
-                   <option value="Litre">Litre</option>
-                    </select>
-                <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
-            </p>
-            <p>
-                <label for="proveidor" th:text="#{producte.proveidor}"/>
-                <select select th:field="*{cifProveidor}">
-                     <option value="08226">Mercadona</option>
-        
-                    </select>
-                <span th:if="${#fields.hasErrors('cifProveidor')}" th:errors="*{cifProveidor}"/>
-            </p>
-
-            <!-- Botó per enviar les dades-->
-            <label for="actualitzar" th:text="#{actualitzar}"/>
-            <input type="submit" name="enviar" value="" th:href="@{/productes}"/>   
-            <label for="crearProducte" th:text="#{cancel}"/>
-            <a th:href="@{/productes}"></a>
-        </form>
-    </p>
-    </div>
+            <div class="card-body">
+                <h2 class="card-title" th:text="#{producte.editarProducte}"/>
+                <p>          
+                <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
+                    <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
+                    <p>
+                        <label for="nom" th:text="#{producte.nom1}"/>
+                        <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
+                    <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+                    </p>
+                    <p>
+                        <label for="preu" th:text="#{producte.preu1}"/>            
+                        <input class="form-control" type="number" name="preu" step="0.01" min="0" th:field="*{preu}"/> 
+                        <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
+                    </p>
+                    <p>
+                        <label for="categoria" th:text="#{producte.categoria1}"/>
+                        <select class="form-select" th:field="*{categoria}">
+                            <option th:each="categoria : ${categories}" th:value="${categoria.id_Categoria}" th:text="${categoria.nom}"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
+                    </p>
+                    <p>
+                        <input type="hidden" name="stock" th:field="*{stock}"/>
+                        <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
+                    </p>
+                    <p>
+                        <label for="unitat" th:text="#{producte.unitat1}"/>
+                        <select class="form-select" name="unitat" id="unitat" th:field="*{unitat}">
+                            <option value="Kg">Kg</option>
+                            <option value="Litre">Litre</option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
+                    </p>
+                    <p>
+                        <label for="proveidor" th:text="#{producte.proveidor1}"/> 
+                        <select class="form-select" th:field="*{proveidor}">
+                            <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.nom}"></option>
+                        </select>
+                        <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
+                    </p>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar"/>
+                </form>
+                </p>
+            </div>
         </div>
-    <footer/>
-    
-</body>
+        <footer/>  
+    </body>
 </html>
