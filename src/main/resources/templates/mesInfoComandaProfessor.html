@@ -34,7 +34,7 @@
         <form  method="get" th:object="${comandaProfessor}">
             
             <!-- Camp ocult on guardem l'id del producte per enviar-lo juntament amb les altres dades-->
-            <input type="hidden" name="id" th:field="*{id_Comanda_Professor}"/>
+            <input type="hidden" name="id" th:field="*{id_comanda}"/>
             
             <p>
                 <label for="nom" th:text="#{comanda.nom1}"/> 
@@ -50,7 +50,7 @@
             </p>
             <p>
                 <label for="modul" th:text="#{comanda.modul1}"/> 
-                <label for="modul1" th:text="*{modul}"/>               
+                <label for="modul1" th:text="*{modul.nom}"/>               
             </p>
             <!-- Botó per enviar les dades-->
            
