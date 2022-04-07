@@ -11,41 +11,26 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
-    <style>
-        .center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-    </style>
     <body> 
-        <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/categories}"th:text="#{back}"/>
+        <header th:replace="layout/navBar :: navBar"/>
         <div class="card center" style="width: 25rem;">
-        <div class="card-body">
-        <h2 class="card-title" th:text="#{categoria.novaCategoria}"/>
-        <p>          
-        <form th:action="@{/guardarCategoria}" method="post" th:object="${categoria}">
-            <input type="hidden" name="id_Categoria" th:field="*{id_Categoria}"/>           
-            <p>
-                <label for="nom" th:text="#{categoria.nom1}"/>
-                <input type="text" name="nom" th:field="*{nom}"/>
-                <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
-            </p>
-            <label for="crearCategoria" th:text="#{crear}"/>
-            <input type="submit" name="enviar" value=""/>
-            
-           <label for="crearCategoria" th:text="#{cancel}"/>
-           <a th:href="@{/categories}"></a>
-                
-        </form>
-    </p>
-    </div>
+            <div class="card-body">
+                <h2 class="card-title" th:text="#{categoria.novaCategoria}"/>
+                <p>          
+                <form th:action="@{/guardarCategoria}" method="post" th:object="${categoria}">
+                    <input type="hidden" name="id_Categoria" th:field="*{id_Categoria}"/>           
+                    <p>
+                        <label for="nom" th:text="#{categoria.nom1}"/>
+                        <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
+                    <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+                    </p>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
+                </form>
+                </p>
+            </div>
         </div>
-    <footer/>  
-</body>
+        <footer/>  
+    </body>
 </html>

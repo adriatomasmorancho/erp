@@ -8,11 +8,11 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     </head>
     <body>
-        <header th:replace="layout/navBar :: navBar" />
+        <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
-            <h1 align="center" th:text="#{producte}"/>
             <p/>
-
+            <h1 align="center" th:text="#{producte.llistatProductes}"/>
+            <p/>
             <p/>
             <div th:if="${productes!=null && !productes.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
@@ -57,9 +57,10 @@
                 No hi ha productes a la llista.
             </div>    
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <label for="crearProducte" th:text="#{producte.crearProducte}"/>
+                <a th:href="@{/crearProducte}" th:text="#{producte.crearProducte}"></a>
                 <a th:href="@{/crearProducte}"><i class="bi bi-plus-circle"></i></a>
             </div>
+            <p/>
             <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
                 <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>

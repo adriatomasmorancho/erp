@@ -21,14 +21,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * @author ivan
  */
-
 @Controller
 @Slf4j
 public class ControladorCategoria {
-    
+
     @Autowired
     private CategoriaServiceInterface categoriaService;
-    
+
     @GetMapping("/categories") //Pàgina productes de l'aplicació localhost:5050
     public String categories(Model model, Categoria id_Categoria, @AuthenticationPrincipal User username) {
         log.info("L'usuari autenticat és: " + username);
@@ -38,16 +37,19 @@ public class ControladorCategoria {
 
         model.addAttribute("categories", categories);
         model.addAttribute("rol", rol);
-        
+
         return "categories";
     }
-    
+
     @GetMapping("/crearCategoria") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearCategoria(Categoria categoria) {
+    public String crearCategoria(Model model, @AuthenticationPrincipal User username, Categoria categoria) {
+
+        var rol = categoriaService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
 
         return "crearCategoria"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
-    
+
     @PostMapping("/guardarCategoria") //action = guardarProveidor
     public String guardarCategoria(@Valid Categoria categoria, Errors errors) {
         if (errors.hasErrors()) {
@@ -57,22 +59,24 @@ public class ControladorCategoria {
         categoriaService.crearCategoria(categoria);
         return "redirect:/categories";
     }
-    
+
     @GetMapping("/eliminarCategoria/{id_Categoria}")
     public String eliminarCategoria(Categoria categoria) {
         categoriaService.eliminarCategoria(categoria);
         return "redirect:/categories";
     }
-    
+
     @GetMapping("/editarCategoria/{id_Categoria}")
-    public String editar(Categoria categoria, Model model) {
+    public String editar(Model model, @AuthenticationPrincipal User username, Categoria categoria) {
 
         log.info(String.valueOf(categoria.getId_Categoria()));
         categoria = categoriaService.cercarCategoria(categoria);
         model.addAttribute("categoria", categoria);
 
+        var rol = categoriaService.getRolUserCurrent(username);
+        model.addAttribute("rol", rol);
+
         return "editarCategoria";
     }
-    
-}
 
+}

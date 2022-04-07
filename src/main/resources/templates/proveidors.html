@@ -2,18 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Proveidors</title>
+        <title th:text="#{proveidors}"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     </head>
     <body>
-        <header th:replace="layout/navBar :: navBar" />
-
+        <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
-            <h1 align="center">Llistat de proveidors</h1>
             <p/>
-
+            <h1 align="center" th:text="#{proveidor.llistatProveidors}"/>
+            <p/>
             <p/>
             <div th:if="${proveidors!=null && !proveidors.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
@@ -24,14 +23,14 @@
                     <table id="table_id">
                         <thead>
                             <tr>
-                                <th>cif</th>
-                                <th>nom</th>
-                                <th>email</th>
-                                <th>telefon</th>
-                                <th>adreca</th>
-                                <th>contacte</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
+                                <th th:text="#{proveidor.cif}"/>
+                                <th th:text="#{proveidor.nom}"/>
+                                <th th:text="#{proveidor.email}"/>
+                                <th th:text="#{proveidor.telefon}"/>
+                                <th th:text="#{proveidor.adreca}"/>
+                                <th th:text="#{proveidor.contacte}"/>
+                                <th th:text="#{editar}"/>
+                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
