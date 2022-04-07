@@ -6,7 +6,6 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
 
@@ -17,15 +16,15 @@ import org.springframework.security.core.userdetails.User;
 //Interface on definirem els mètodes  personalitzats per la nostra aplicació
 public interface LineaComandaServiceInterface {
     
-    public List<LineaComanda> llistarLineaComanda(); //Mètode que implementarem per llistar comandes
+    public List<LineaComanda> llistarLineaComanda(); //Mètode que implementarem per llistar les lineas comandes
     
     public String getRolUserCurrent(User username);
    
-    public void crearLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per afegir una comanda
+    public void crearLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per afegir una linea comanda
     
-    public void eliminarLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per eliminar una comanda
+    public void eliminarLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per eliminar una linea comanda
     
-    public LineaComanda cercarLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per cercar una comanda
+    public LineaComanda cercarLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per cercar una linea comanda
     
     
 

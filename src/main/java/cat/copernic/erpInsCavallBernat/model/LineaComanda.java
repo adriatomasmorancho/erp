@@ -33,7 +33,7 @@ public class LineaComanda implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_comanda", referencedColumnName = "id_comanda")
     private ComandaProfessor id_comanda;
-    // private long id_linea_comanda;
+  
     /*Validació per comprovar que el nom no està buit. Com a paràmetre li passem el missatge
      *que volem que aparegui.
      */

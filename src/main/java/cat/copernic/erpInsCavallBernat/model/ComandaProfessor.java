@@ -3,10 +3,13 @@ package cat.copernic.erpInsCavallBernat.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotEmpty;
@@ -54,6 +57,10 @@ public class ComandaProfessor implements Serializable {
 
     private long id_antiga = id_comanda;
     
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_modul", referencedColumnName = "id_modul")
+    private Modul modul;
+    
     @Transient
     private Producte producte;
     
@@ -66,7 +73,6 @@ public class ComandaProfessor implements Serializable {
     @Transient
     private String observacions;
 
-    @NotEmpty
-    private String modul;
+   
 
 }

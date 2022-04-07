@@ -37,7 +37,7 @@
                     <td th:text="${comandaProfessor.nom}"></td>
                     <td th:text="${comandaProfessor.data}"></td>
                     <td th:text="${comandaProfessor.data_Arribada}"></td>
-                    <td th:text="${comandaProfessor.modul}"></td>
+                    <td th:text="${comandaProfessor.modul.nom}"></td>
                     <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
                     <td th:text="hola"></td>
                 </tr>

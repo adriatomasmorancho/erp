@@ -36,6 +36,10 @@ public class Proveidor implements Serializable {
     private String adreca;
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
     private String contacte;
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
+    private String descripcio;
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom
+    private String observacio;
 
 }
 

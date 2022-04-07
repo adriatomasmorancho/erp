@@ -2,19 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title th:text="#{producte}"/>
+        <title th:text="#{unitats}"/>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de bootstrap pels elements dinamics que utilitzarem-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
             <p/>
-            <h1 align="center" th:text="#{producte.llistatProductes}"/>
+            <h1 align="center" th:text="#{unitat.llistatUnitats}"/>
             <p/>
             <p/>
-            <div th:if="${productes!=null && !productes.empty}" align="center">
+            <div th:if="${unitats!=null && !unitats.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
@@ -23,26 +31,16 @@
                     <table id="table_id">
                         <thead>
                             <tr>
-                                <th th:text="#{producte.nom}"/>
-                                <th th:text="#{producte.preu}"/>
-                                <th th:text="#{producte.categoria}"/>
-                                <th th:text="#{producte.stock}"/>
-                                <th th:text="#{producte.unitat}"/>
-                                <th th:text="#{producte.proveidor}"/>
+                                <th th:text="#{unitat.nom}"/>
                                 <th th:text="#{editar}"/>
                                 <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="producte : ${productes}"> 
-                                <td th:text="${producte.nom}"></td>
-                                <td th:text="${producte.preu}"></td>
-                                <td th:text="${producte.categoria.nom}"></td>
-                                <td th:text="${producte.stock}"></td>
-                                <td th:text="${producte.unitat.nom}"></td>
-                                <td th:text="${producte.proveidor.nom}"></td>
-                                <td><a th:href="@{/editarProducte/}+${producte.id_Producte}" ><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminarProducte/}+${producte.id_Producte}" ><i class="bi bi-trash-fill"></i></a></td>
+                            <tr th:each="unitat : ${unitats}"> 
+                                <td th:text="${unitat.nom}"></td>
+                                <td><a th:href="@{/editarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-pencil-fill"></i></a></td>
+                                <td><a th:href="@{/eliminarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,16 +51,16 @@
                     });
                 </script>
             </div>
-            <div th:if="${productes==null || productes.empty}">
-                No hi ha productes a la llista.
+            <div th:if="${unitats==null || unitats.empty}">
+                No hi ha unitats a la llista.
             </div>    
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <a th:href="@{/crearProducte}" th:text="#{producte.crearProducte}"></a>
-                <a th:href="@{/crearProducte}"><i class="bi bi-plus-circle"></i></a>
+                <a th:href="@{/crearUnitat}" th:text="#{unitat.crearUnitat}"></a>
+                <a th:href="@{/crearUnitat}"><i class="bi bi-plus-circle"></i></a>
             </div>
             <p/>
             <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-                <a href="javascript: document.logoutForm.submit()" role="menuitem" th:text="#{logout}"/>
+                <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
                 <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
 
                 <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">

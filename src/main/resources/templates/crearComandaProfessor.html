@@ -56,11 +56,9 @@
                     <input type="hidden" name="valida" th:field="*{valida}"/> 
                     <input type="hidden" name="id_antiga" th:field="*{id_antiga}"/> 
                     <p>
-                        <label for="modul" th:text="#{comanda.modul1}"/>
-                        <select name="modul" id="modul" th:field="*{modul}">
-                            <option value="M01">M01</option>
-                            <option value="M02">M02</option>
-                            <option value="M03">M03</option>
+                       <label for="modul" th:text="#{modul.nom1}"/>
+                        <select class="form-select" th:field="*{modul}">
+                            <option th:each="modul : ${moduls}" th:value="${modul.id_modul}" th:text="${modul.nom}"></option>
                         </select>
                         <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
                     </p>
