@@ -56,7 +56,7 @@
                     <input type="hidden" name="valida" th:field="*{valida}"/> 
                     <input type="hidden" name="id_antiga" th:field="*{id_antiga}"/> 
                     <p>
-                       <label for="modul" th:text="#{comanda.modul1}"/>
+                        <label for="modul" th:text="#{comanda.modul1}"/>
                         <select class="form-select" th:field="*{modul}">
                             <option th:each="modul : ${moduls}" th:value="${modul.id_modul}" th:text="${modul.nom}"></option>
                         </select>
@@ -64,22 +64,35 @@
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.productes}"/>
-                        <select name="selectproducte" class="form-select" th:field="*{producte}">
-                            <option th:each="myproducte : ${productes}" th:value="${myproducte.id_Producte}" th:text="${myproducte.nom}"></option>
-                        </select>
+                    <table id="table_id">
+                        <thead>
+                            <tr>
+                                <th th:text="#{comanda.productes}"/>
+                                <th th:text="#{comanda.quantitat}"/>
+                                <th th:text="#{comanda.preElaboracions}"/>
+                                <th th:text="#{comanda.observacions}"/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <td>
+                                    <select name="selectproducte" class="form-select" th:field="*{producte}">
+                                        <option th:each="myproducte : ${productes}" th:value="${myproducte.id_Producte}" th:text="${myproducte.nom}"></option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="number" name="quantitat" th:field="*{quantitat}"/>
+                                </td>
+                                <td>
+                                    <input type="text" name="preElaboracions" th:field="*{preElaboracions}"/>
+                                </td>
+                                <td>
+                                    <input type="text" name="observacions" th:field="*{observacions}"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     </p>
-                    <p>
-                        <label for="quantitat" th:text="#{comanda.quantitat}"/>
-                        <input type="number" name="quantitat" th:field="*{quantitat}"/>
-                    </p>
-                    <p>
-                        <label for="preElaboracions" th:text="#{comanda.preElaboracions}"/>
-                        <input type="text" name="preElaboracions" th:field="*{preElaboracions}"/>
-                    </p>
-                    <p>
-                        <label for="observacions" th:text="#{comanda.observacions}"/>
-                        <input type="text" name="observacions" th:field="*{observacions}"/>
-                    </p>
+
                     <label for="crearComandaProfessor" th:text="#{crear}"/>
                     <input type="submit" name="enviar" value=""/>
 
