@@ -25,6 +25,9 @@ public interface ComandaProfessorServiceInterface {
     public ComandaProfessor cercarComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per cercar una comanda
     
     public String getCurrentDate();
-
+    
+    public List getMisComandes(User username);
+    
+    public List getIds(User username);
   
 }

@@ -20,11 +20,11 @@
                 <h2 class="card-title" th:text="#{usuari.editarUsuari}"/>
                 <p>
                     <!-- Creem un formulari per introduir les dades que el ControladorInici 
-                         assignarà als atributs del usuari passat com a paràmetre en el mètode 
-                         editarUsuari implementat en aquest ControladorInici. 
-                         Per associar le dades a l'objecte usuari, fem servir l'element th:objecte de 
-                         Thymeleaf, al qual li assignem el paràmetre usuari del mètode editarUsuari 
-                         o editar del controlador.-->
+                        assignarà als atributs del usuari passat com a paràmetre en el mètode 
+                        editarUsuari implementat en aquest ControladorInici. 
+                        Per associar le dades a l'objecte usuari, fem servir l'element th:objecte de 
+                        Thymeleaf, al qual li assignem el paràmetre usuari del mètode editarUsuari 
+                        o editar del controlador.-->
                 <form th:action="@{/guardarUsuari}" method="post" th:object="${usuari}">
                     <!-- Camp ocult on guardem l'id del usuari per enviar-lo juntament amb les altres dades-->
                     <input type="hidden" name="id_usuari" th:field="*{id_usuari}"/>
@@ -75,6 +75,8 @@
                     </p>
                     <!-- Botó per enviar les dades i afegir un nou usuari-->
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar"/>
+                    <br/>
+                    <a th:href ="@{/usuaris}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>
             </div>
         </div>

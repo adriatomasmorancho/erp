@@ -11,20 +11,10 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
-    <style>
-        .center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-    </style>
     <body> 
         <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/comandesProfessor}"th:text="#{back}"/>
         <div class="card center" style="width: 25rem;">
             <div class="card-body">
                 <h2 class="card-title" th:text="#{comanda.novaComanda}"/>
@@ -44,10 +34,8 @@
                     </p>
                     <p>
                         <label for="id_usuari" th:text="#{usuari}"/>
-                        <select name="id_usuari" id="id_usuari" th:field="*{id_usuari}">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                        <select class="form-select" name="id_usuari" id="id_usuari" th:field="*{id_usuari}">
+                            <option th:each="id : ${ids}" th:value="${id}" th:text="${id}"></option>
                         </select>
                         <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
                     </p>
@@ -92,17 +80,12 @@
                         </tbody>
                     </table>
                     </p>
-
-                    <label for="crearComandaProfessor" th:text="#{crear}"/>
-                    <input type="submit" name="enviar" value=""/>
-
-                    <label for="crearCategoria" th:text="#{cancel}"/>
-                    <a th:href="@{/categories}"></a>
-
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
+                    <br/>
+                    <a th:href ="@{/comandesProfessor}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>
                 </p>
             </div>
         </div>
-        <footer/>  
     </body>
 </html>

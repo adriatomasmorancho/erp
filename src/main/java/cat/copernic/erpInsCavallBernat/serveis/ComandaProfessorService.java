@@ -6,10 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
-import static java.lang.System.console;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -37,6 +36,8 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
      */
     @Autowired
     private ComandaProfessorDAO comandaProfessor;
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar productes de la taula producte de la BBDD erp*/
     @Override
@@ -96,7 +97,7 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         return this.comandaProfessor.findById(comandaProfessor.getId_comanda()).orElse(null);
 
     }
-    
+
     @Override
     public String getCurrentDate() {
         Date date = new Date();
@@ -104,5 +105,48 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         String fecha = dateFormat.format(date);
         return fecha;
 
+    }
+
+    @Override
+    public List getMisComandes(User username) {
+        var comandesProfessor = llistarComandesProfessor();
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        var misComandas = new ArrayList();
+        long myId = 0;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                log.info("ID:::: " + usuario.getId_usuari());
+                myId = usuario.getId_usuari();
+            }
+        }
+        for (var comanda : comandesProfessor) {
+            if (comanda.getId_usuari() == myId) {
+                misComandas.add(comanda);
+            }
+        }
+        log.info("MIS COMANDAS::: " + misComandas.toString());
+        return misComandas;
+    }
+
+    @Override
+    public List getIds(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        var rol = getRolUserCurrent(username);
+        var ids = new ArrayList();
+        if (rol.equals("Administrador")) {
+            for (var usuario : usuaris) {
+                ids.add(usuario.getId_usuari());
+            }
+        } else {
+            for (var usuario : usuaris) {
+                if (usuario.getUsername().equals(usuari)) {
+                    ids.add(usuario.getId_usuari());
+                }
+            }
+        }
+        log.info("IDS::: " + ids.toString());
+        return ids;
     }
 }

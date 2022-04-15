@@ -57,10 +57,11 @@
                         <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
+                    <br/>
+                    <a th:href ="@{/productes}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>
                 </p>
             </div>
         </div>
-        <footer/>  
     </body>
 </html>
