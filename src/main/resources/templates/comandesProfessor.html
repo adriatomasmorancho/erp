@@ -45,7 +45,27 @@
         </div>
         <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
             No hi ha Comandes a la llista.
-        </div>    
+        </div>
+        <div th:if="${misComandas!=null && !misComandas.empty}" align="center">
+            <table border="1">
+                <tr>
+                    <th th:text="#{comanda.nom}"/>
+                    <th th:text="#{comanda.dataCreacio}"/>
+                    <th th:text="#{comanda.dataArribada}"/>
+                    <th th:text="#{comanda.modul}"/>
+                    <th th:text="#{comanda.mesInfo}"/>
+                    <th th:text="#{comanda.duplicar}"/>
+                </tr>
+                <tr th:each="misComandas : ${misComandas}"> 
+                    <td th:text="${misComandas.nom}"></td>
+                    <td th:text="${misComandas.data}"></td>
+                    <td th:text="${misComandas.data_Arribada}"></td>
+                    <td th:text="${misComandas.modul.nom}"></td>
+                    <td><a th:href="@{/mesInfoComandaProfessor/}+${misComandas.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
+                    <td th:text="hola"></td>
+                </tr>
+            </table>
+        </div>
         <div align="center"><!-- Posem un enllaç per a crear un usuari -->
             <label for="crearComandaProfessor" th:text="#{comanda.crearComanda}"/>
             <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>

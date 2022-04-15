@@ -44,10 +44,8 @@
                     </p>
                     <p>
                         <label for="id_usuari" th:text="#{usuari}"/>
-                        <select name="id_usuari" id="id_usuari" th:field="*{id_usuari}">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                        <select class="form-select" name="id_usuari" id="id_usuari" th:field="*{id_usuari}">
+                            <option th:each="id : ${ids}" th:value="${id}" th:text="${id}"></option>
                         </select>
                         <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
                     </p>

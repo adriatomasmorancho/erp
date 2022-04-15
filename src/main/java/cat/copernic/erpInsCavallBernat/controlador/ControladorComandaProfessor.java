@@ -6,13 +6,11 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ModulServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -36,15 +34,14 @@ public class ControladorComandaProfessor {
 
     @Autowired
     private ComandaProfessorServiceInterface comandaProfessorService;
-
     @Autowired
     private ProducteServiceInterface producteService;
-
     @Autowired
     private LineaComandaServiceInterface lineaComandaService;
-    
     @Autowired
     private ModulServiceInterface modulComandaService;
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
@@ -62,11 +59,15 @@ public class ControladorComandaProfessor {
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
 
+        //model.addAttribute("myId", myId);
+        var misComandas = comandaProfessorService.getMisComandes(username);
+        model.addAttribute("misComandas", misComandas);
+
         return "comandesProfessor";
     }
 
     @GetMapping("/crearComandaProfessor") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor) {
+    public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
         var data = comandaProfessorService.getCurrentDate();
         comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
         log.info("FECHA:::: " + data);
@@ -74,9 +75,13 @@ public class ControladorComandaProfessor {
         var productes = producteService.llistarProductes();
         var lineasComanda = lineaComandaService.llistarLineaComanda();
         var moduls = modulComandaService.llistarModuls();
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        var ids = comandaProfessorService.getIds(username);
         model.addAttribute("lineasComanda", lineasComanda);
         model.addAttribute("productes", productes);
         model.addAttribute("moduls", moduls);
+        model.addAttribute("rol", rol);
+        model.addAttribute("ids", ids);
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -95,15 +100,15 @@ public class ControladorComandaProfessor {
         comandaProfessor.setData_Arribada(fecha);
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
         //Crear Linea Comanda Per cada producte
-            ComandaProfessor cp = comandaProfessor;
-            LineaComanda lineaComanda = new LineaComanda();
-            lineaComanda.setId_comanda(comandaProfessor);
-            lineaComanda.setId_Producte(comandaProfessor.getProducte());
-            lineaComanda.setQuantitat(comandaProfessor.getQuantitat());
-            lineaComanda.setPre_elavoracions(comandaProfessor.getPreElaboracions());
-            lineaComanda.setObservacio(comandaProfessor.getObservacions());
-            lineaComandaService.crearLineaComanda(lineaComanda);
-        
+        ComandaProfessor cp = comandaProfessor;
+        LineaComanda lineaComanda = new LineaComanda();
+        lineaComanda.setId_comanda(comandaProfessor);
+        lineaComanda.setId_Producte(comandaProfessor.getProducte());
+        lineaComanda.setQuantitat(comandaProfessor.getQuantitat());
+        lineaComanda.setPre_elavoracions(comandaProfessor.getPreElaboracions());
+        lineaComanda.setObservacio(comandaProfessor.getObservacions());
+        lineaComandaService.crearLineaComanda(lineaComanda);
+
         return "redirect:/comandesProfessor";
     }
 
