@@ -3,6 +3,7 @@ package cat.copernic.erpInsCavallBernat.model;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -72,6 +73,9 @@ public class ComandaProfessor implements Serializable {
     
     @Transient
     private String observacions;
+    
+    @Transient
+    private List<LineaComanda> lineaComanda;
 
    
 
