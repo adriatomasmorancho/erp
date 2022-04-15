@@ -110,7 +110,6 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     @Override
     public List getMisComandes(User username) {
         var comandesProfessor = llistarComandesProfessor();
-        var rol = getRolUserCurrent(username);
         var usuari = username.getUsername();
         var usuaris = usuariService.llistarUsuaris();
         var misComandas = new ArrayList();

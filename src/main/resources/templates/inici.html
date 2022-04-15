@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title>Menú Principal</title>
+        <title th:text="#{titol}"/>
         <meta charset="UTF-8">
         <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
-
     <body>
         <header th:replace="layout/navBar :: navBar"/>
-
         <h1 class="center" th:text="#{titol}"/>
     </body>
 </html>

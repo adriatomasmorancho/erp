@@ -27,10 +27,11 @@
                     <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar"/>
+                    <br/>
+                    <a th:href ="@{/categories}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>
                 </p>
             </div>
         </div>
-        <footer/>  
     </body>
 </html>

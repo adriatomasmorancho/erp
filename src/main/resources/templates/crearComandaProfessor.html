@@ -11,20 +11,10 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
-    <style>
-        .center {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-        }
-    </style>
     <body> 
         <header th:replace="layout/navBar :: navBar" />
-        <a th:href="@{/comandesProfessor}"th:text="#{back}"/>
         <div class="card center" style="width: 25rem;">
             <div class="card-body">
                 <h2 class="card-title" th:text="#{comanda.novaComanda}"/>
@@ -90,17 +80,12 @@
                         </tbody>
                     </table>
                     </p>
-
-                    <label for="crearComandaProfessor" th:text="#{crear}"/>
-                    <input type="submit" name="enviar" value=""/>
-
-                    <label for="crearCategoria" th:text="#{cancel}"/>
-                    <a th:href="@{/categories}"></a>
-
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
+                    <br/>
+                    <a th:href ="@{/comandesProfessor}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>
                 </p>
             </div>
         </div>
-        <footer/>  
     </body>
 </html>

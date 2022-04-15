@@ -13,71 +13,85 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
     <body>
-        <header th:replace="layout/navBar :: navBar" />
-        <h1 align="center" th:text="#{comanda}"/>
-          <div align="center">
-                <form th:object="${comandesProfessor}" method="get">
-                    <input type="text" class="form-control col-md-4"/>
-                    <button type="submit" class="btn btn-success mt-4 mb-4" th:text="#{cercar}"/>
-                </form>
+        <header th:replace="layout/navBar :: navBar"/>
+        <div style="width: 50%; margin: 0 auto;">
+            <br/>
+            <h1 align="center" th:text="#{comanda}"/>
+            <br/>
+            <br/>
+            <div th:if="${comandesProfessor!=null && !comandesProfessor.empty}" align="center">
+                <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
+                <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
+                <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
+                <div>
+                    <br/>
+                    <table id="table_id">
+                        <thead>
+                            <tr>
+                                <th th:text="#{comanda.nom}"/>
+                                <th th:text="#{comanda.dataCreacio}"/>
+                                <th th:text="#{comanda.dataArribada}"/>
+                                <th th:text="#{comanda.modul}"/>
+                                <th th:text="#{comanda.mesInfo}"/>
+                                <th th:text="#{comanda.duplicar}"/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="comandaProfessor : ${comandesProfessor}"> 
+                                <td th:text="${comandaProfessor.nom}"></td>
+                                <td th:text="${comandaProfessor.data}"></td>
+                                <td th:text="${comandaProfessor.data_Arribada}"></td>
+                                <td th:text="${comandaProfessor.modul.nom}"></td>
+                                <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
+                                <td th:text="hola"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#table_id').DataTable();
+                    });
+                </script>
             </div>
-        <div th:if="${comandesProfessor!=null && !comandesProfessor.empty}" align="center">
-            <table border="1">
-                <tr>
-                    <th th:text="#{comanda.nom}"/>
-                    <th th:text="#{comanda.dataCreacio}"/>
-                    <th th:text="#{comanda.dataArribada}"/>
-                    <th th:text="#{comanda.modul}"/>
-                    <th th:text="#{comanda.mesInfo}"/>
-                    <th th:text="#{comanda.duplicar}"/>
-                </tr>
-                <tr th:each="comandaProfessor : ${comandesProfessor}"> 
-                    <td th:text="${comandaProfessor.nom}"></td>
-                    <td th:text="${comandaProfessor.data}"></td>
-                    <td th:text="${comandaProfessor.data_Arribada}"></td>
-                    <td th:text="${comandaProfessor.modul.nom}"></td>
-                    <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
-                    <td th:text="hola"></td>
-                </tr>
-            </table>
-        </div>
-        <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
-            No hi ha Comandes a la llista.
-        </div>
-        <div th:if="${misComandas!=null && !misComandas.empty}" align="center">
-            <table border="1">
-                <tr>
-                    <th th:text="#{comanda.nom}"/>
-                    <th th:text="#{comanda.dataCreacio}"/>
-                    <th th:text="#{comanda.dataArribada}"/>
-                    <th th:text="#{comanda.modul}"/>
-                    <th th:text="#{comanda.mesInfo}"/>
-                    <th th:text="#{comanda.duplicar}"/>
-                </tr>
-                <tr th:each="misComandas : ${misComandas}"> 
-                    <td th:text="${misComandas.nom}"></td>
-                    <td th:text="${misComandas.data}"></td>
-                    <td th:text="${misComandas.data_Arribada}"></td>
-                    <td th:text="${misComandas.modul.nom}"></td>
-                    <td><a th:href="@{/mesInfoComandaProfessor/}+${misComandas.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
-                    <td th:text="hola"></td>
-                </tr>
-            </table>
-        </div>
-        <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-            <label for="crearComandaProfessor" th:text="#{comanda.crearComanda}"/>
-            <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>
-        </div>
-        <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-            <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-            <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
-
-            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-                <input hidden type="submit" value="Sign Out"/>
-            </form> 
-        </div>
-        <footer/>
+            <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
+                No hi ha Comandes a la llista.
+            </div>
+            <div th:if="${misComandas!=null && !misComandas.empty}" align="center">
+                <div>
+                    <br/>
+                    <table id="table_id2">
+                        <tr>
+                            <th th:text="#{comanda.nom}"/>
+                            <th th:text="#{comanda.dataCreacio}"/>
+                            <th th:text="#{comanda.dataArribada}"/>
+                            <th th:text="#{comanda.modul}"/>
+                            <th th:text="#{comanda.mesInfo}"/>
+                            <th th:text="#{comanda.duplicar}"/>
+                        </tr>
+                        <tr th:each="misComandas : ${misComandas}"> 
+                            <td th:text="${misComandas.nom}"></td>
+                            <td th:text="${misComandas.data}"></td>
+                            <td th:text="${misComandas.data_Arribada}"></td>
+                            <td th:text="${misComandas.modul.nom}"></td>
+                            <td><a th:href="@{/mesInfoComandaProfessor/}+${misComandas.id_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
+                            <td th:text="hola"></td>
+                        </tr>
+                    </table>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#table_id2').DataTable();
+                    });
+                </script>
+            </div>
+            <br/>
+            <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+                <a th:href="@{/crearComandaProfessor}" th:text="#{comanda.crearComanda}"></a>
+                <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>
+            </div>
     </body>
 </html>

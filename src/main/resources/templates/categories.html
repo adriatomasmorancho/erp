@@ -18,10 +18,10 @@
     <body>
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
-            <p/>
+            <br/>
             <h1 align="center" th:text="#{categoria.llistatCategories}"/>
-            <p/>
-            <p/>
+            <br/>
+            <br/>
             <div th:if="${categories!=null && !categories.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
@@ -53,20 +53,11 @@
             </div>
             <div th:if="${categories==null || categories.empty}">
                 No hi ha categories a la llista.
-            </div>    
+            </div>
+            <br/>
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
                 <a th:href="@{/crearCategoria}" th:text="#{categoria.crearCategoria}"></a>
                 <a th:href="@{/crearCategoria}"><i class="bi bi-plus-circle"></i></a>
             </div>
-            <p/>
-            <div align="center"><!-- Posem un enllaç per a tancar la sessio i redireccionar al login -->
-                <a href="javascript: document.logoutForm.submit()" role="menuitem">Tancar Sessió</a>
-                <a href="javascript: document.logoutForm.submit()" role="menuitem"><i class="bi bi-power"></i></a>
-
-                <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
-                    <input hidden type="submit" value="Sign Out"/>
-                </form> 
-            </div>
-            <footer/>
     </body>
 </html>

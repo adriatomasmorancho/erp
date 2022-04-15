@@ -10,8 +10,6 @@ import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ModulServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
-import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
-import java.util.ArrayList;
 
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +38,6 @@ public class ControladorComandaProfessor {
     private LineaComandaServiceInterface lineaComandaService;
     @Autowired
     private ModulServiceInterface modulComandaService;
-    @Autowired
-    private UsuariServiceInterface usuariService;
 
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
@@ -99,8 +95,8 @@ public class ControladorComandaProfessor {
         var fecha = dia + "/" + mes + "/" + año;
         comandaProfessor.setData_Arribada(fecha);
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
+        
         //Crear Linea Comanda Per cada producte
-        ComandaProfessor cp = comandaProfessor;
         LineaComanda lineaComanda = new LineaComanda();
         lineaComanda.setId_comanda(comandaProfessor);
         lineaComanda.setId_Producte(comandaProfessor.getProducte());
