@@ -6,7 +6,9 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.LineaComandaDAO;
+import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,20 @@ public class LineaComandaService implements LineaComandaServiceInterface{
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de linia comanda
         */
         return (List<LineaComanda>) lineaComanda.findAll(); 
+    }
+    
+    @Override
+    public List<LineaComanda> llistarLineaComandaWhereComanda(ComandaProfessor cp) {
+        List<LineaComanda> myList = (List<LineaComanda>)lineaComanda.findAll();
+        List<LineaComanda> myFinalList = new ArrayList<>();
+        
+        for(LineaComanda lc: myList){
+            if(lc.getId_comanda().getId_comanda() == cp.getId_comanda()){
+                myFinalList.add(lc);
+            }
+        }
+        
+        return myFinalList;
     }
     
     

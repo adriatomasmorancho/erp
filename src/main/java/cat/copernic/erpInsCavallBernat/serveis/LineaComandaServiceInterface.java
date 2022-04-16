@@ -5,6 +5,7 @@
  */
 package cat.copernic.erpInsCavallBernat.serveis;
 
+import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +18,8 @@ import org.springframework.security.core.userdetails.User;
 public interface LineaComandaServiceInterface {
     
     public List<LineaComanda> llistarLineaComanda(); //Mètode que implementarem per llistar les lineas comandes
+    
+    public List<LineaComanda> llistarLineaComandaWhereComanda(ComandaProfessor cp);
     
     public String getRolUserCurrent(User username);
    

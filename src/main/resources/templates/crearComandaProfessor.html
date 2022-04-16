@@ -50,36 +50,6 @@
                         </select>
                         <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
                     </p>
-                    <p>
-                        <label for="selectproducte" th:text="#{comanda.productes}"/>
-                    <table id="table_id">
-                        <thead>
-                            <tr>
-                                <th th:text="#{comanda.productes}"/>
-                                <th th:text="#{comanda.quantitat}"/>
-                                <th th:text="#{comanda.preElaboracions}"/>
-                                <th th:text="#{comanda.observacions}"/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <td>
-                                    <select name="selectproducte" class="form-select" th:field="*{producte}">
-                                        <option th:each="myproducte : ${productes}" th:value="${myproducte.id_Producte}" th:text="${myproducte.nom}"></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="number" name="quantitat" th:field="*{quantitat}"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="preElaboracions" th:field="*{preElaboracions}"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="observacions" th:field="*{observacions}"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
                     <br/>
                     <a th:href ="@{/comandesProfessor}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
