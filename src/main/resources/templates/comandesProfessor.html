@@ -36,6 +36,7 @@
                                 <th th:text="#{comanda.dataArribada}"/>
                                 <th th:text="#{comanda.modul}"/>
                                 <th th:text="#{comanda.productes}"/>
+                                <th th:text="#{comanda.editar}"/>
                                 <th th:text="#{comanda.duplicar}"/>
                                 <th th:text="#{comanda.mesInfo}"/>
                             </tr>
@@ -47,6 +48,7 @@
                                 <td th:text="${comandaProfessor.data_Arribada}"></td>
                                 <td th:text="${comandaProfessor.modul.nom}"></td>
                                 <td><a th:href="@{/crearComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-box"></i></a></td>
+                                <td><a th:href="@{/editarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
                                 <td><a th:href="@{/duplicarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
                                 <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
                             </tr>
@@ -72,6 +74,7 @@
                             <th th:text="#{comanda.dataArribada}"/>
                             <th th:text="#{comanda.modul}"/>
                             <th th:text="#{comanda.productes}"/>
+                            <th th:text="#{comanda.editar}"/>
                             <th th:text="#{comanda.duplicar}"/>
                             <th th:text="#{comanda.mesInfo}"/>
                         </tr>
@@ -81,6 +84,7 @@
                             <td th:text="${misComandas.data_Arribada}"></td>
                             <td th:text="${misComandas.modul.nom}"></td>
                             <td><a th:href="@{/crearComandaProfessorProductes/}+${misComandas.id_comanda}"><i class="bi bi-box"></i></a></td>
+                            <td><a th:href="@{/editarComandaProfessorProductes/}+${misComandas.id_comanda}"><i class="bi bi-pencil"></i></a></td>
                             <td><a th:href="@{/duplicarComandaProfessorProductes/}+${misComandas.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
                             <td><a th:href="@{/mesInfoComandaProfessor/}+${misComandas.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
                         </tr>

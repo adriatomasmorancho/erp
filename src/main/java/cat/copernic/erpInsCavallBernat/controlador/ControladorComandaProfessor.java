@@ -109,6 +109,26 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
+    @GetMapping("/editarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
+    public String editarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
+        var data = comandaProfessorService.getCurrentDate();
+        comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
+        log.info("FECHA:::: " + data);
+        model.addAttribute("data", data);
+        var productes = producteService.llistarProductes();
+        var lineasComanda = lineaComandaService.llistarLineaComanda();
+        var moduls = modulComandaService.llistarModuls();
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        var ids = comandaProfessorService.getIds(username);
+        model.addAttribute("lineasComanda", lineasComanda);
+        model.addAttribute("productes", productes);
+        model.addAttribute("moduls", moduls);
+        model.addAttribute("rol", rol);
+        model.addAttribute("ids", ids);
+
+        return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+    }
+    
     @GetMapping("/afegirProducteComanda/{id_comanda}") //action = guardarProveidor
     public String afegirProducteComanda(Model model, ComandaProfessor id_comanda, Errors errors, LineaComanda lineaComanda) {
         var productes = producteService.llistarProductes();
