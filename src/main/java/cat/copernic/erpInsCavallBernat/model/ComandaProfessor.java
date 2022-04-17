@@ -61,22 +61,4 @@ public class ComandaProfessor implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_modul", referencedColumnName = "id_modul")
     private Modul modul;
-    
-    @Transient
-    private Producte producte;
-    
-    @Transient
-    private long quantitat;
-    
-    @Transient
-    private String preElaboracions;
-    
-    @Transient
-    private String observacions;
-    
-    @Transient
-    private List<LineaComanda> lineaComanda;
-
-   
-
 }

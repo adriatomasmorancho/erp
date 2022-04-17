@@ -23,13 +23,13 @@
                     <input type="hidden" name="id_comanda" th:field="*{id_comanda}"/>           
                     <p>
                         <label for="nom" th:text="#{comanda.nom1}"/>
-                        <input type="text" name="nom" th:field="*{nom}"/>
+                        <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
                     <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
                     </p>
                     <input type="hidden" name="data" th:field="*{data}"/> 
                     <p>
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <input type="date" name="dataArribada" th:field="*{data_Arribada}"/>
+                        <input class="form-control" type="date" name="dataArribada" th:field="*{data_Arribada}"/>
                     <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
                     </p>
                     <p>
@@ -49,36 +49,6 @@
                             <option th:each="modul : ${moduls}" th:value="${modul.id_modul}" th:text="${modul.nom}"></option>
                         </select>
                         <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
-                    </p>
-                    <p>
-                        <label for="selectproducte" th:text="#{comanda.productes}"/>
-                    <table id="table_id">
-                        <thead>
-                            <tr>
-                                <th th:text="#{comanda.productes}"/>
-                                <th th:text="#{comanda.quantitat}"/>
-                                <th th:text="#{comanda.preElaboracions}"/>
-                                <th th:text="#{comanda.observacions}"/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                <td>
-                                    <select name="selectproducte" class="form-select" th:field="*{producte}">
-                                        <option th:each="myproducte : ${productes}" th:value="${myproducte.id_Producte}" th:text="${myproducte.nom}"></option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="number" name="quantitat" th:field="*{quantitat}"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="preElaboracions" th:field="*{preElaboracions}"/>
-                                </td>
-                                <td>
-                                    <input type="text" name="observacions" th:field="*{observacions}"/>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
                     <br/>
