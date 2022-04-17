@@ -19,8 +19,9 @@
             <div class="card-body">
                 <h2 class="card-title" th:text="#{comanda.editarComanda}"/>
                 <p>          
-                <form th:action="@{/guardarLineaComandaEditat}" method="post" th:object="${lineaComanda}">
-                    <input type="text"  value="${myLineaComanda}" th:field="*{id_comanda}"/>
+                <form th:action="@{/guardarLineaComanda}" method="post" th:object="${lineaComanda}">
+                    <input type="hidden"  th:field="*{id_linea_comanda}"/>
+                    <input type="hidden"  value="${lineaComanda.id_comanda}" th:field="*{id_comanda}"/>
                    <p>
                         <label for="selectproducte" th:text="#{comanda.productes}"/>
                         <select name="selectproducte" class="form-select" th:field="*{id_Producte}">
@@ -29,15 +30,15 @@
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.quantitat}"/>
-                        <input type="number" name="quantitat" value="${myLineaComanda.quantitat}" th:field="*{quantitat}"/>
+                        <input type="number" name="quantitat" value="${quantitat}" th:field="*{quantitat}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.preElaboracions}"/>
-                        <input type="text" name="preElaboracions" value="${myLineaComanda.pre_elavoracions}" th:field="*{pre_elavoracions}"/>
+                        <input type="text" name="preElaboracions" value="${pre_elavoracions}" th:field="*{pre_elavoracions}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.observacions}"/>
-                        <input type="text" name="observacions" value="${myLineaComanda.observacio}" th:field="*{observacio}"/>
+                        <input type="text" name="observacions" value="${observacio}" th:field="*{observacio}"/>
                     </p>
 
                     </p>

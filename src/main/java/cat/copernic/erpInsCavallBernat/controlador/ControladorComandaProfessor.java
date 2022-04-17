@@ -118,11 +118,11 @@ public class ControladorComandaProfessor {
         return "crearComandaProfessorAfegirProducte";
     }
     
-    @GetMapping("/editarLineaComanda/{id_linea_comanda}") //action = editarComanda
-    public String editarProducteComanda(Model model, LineaComanda id_linea_comanda, Errors errors, LineaComanda lineaComanda) {
+    @GetMapping("/editarLineaComanda/{lineaComanda}") //action = editarComanda
+    public String editarProducteComanda(Model model, LineaComanda lineaComanda, Errors errors) {
         var productes = producteService.llistarProductes();
         model.addAttribute("productes", productes);
-        model.addAttribute("myLineaComanda", id_linea_comanda);
+        model.addAttribute("lineaComanda", lineaComanda);
         
         return "crearComandaProfessorEditarProducte";
     }
@@ -134,21 +134,6 @@ public class ControladorComandaProfessor {
             return "guardarLineaComanda";
         }
         
-        //Crear Linea Comanda
-        lineaComandaService.crearLineaComanda(lineaComanda);
-
-        return "redirect:/comandesProfessor";
-    }
-    
-    @PostMapping("/guardarLineaComandaEditat") //action = guardarProveidor
-    public String editarLineaComanda(@Valid LineaComanda lineaComanda, Errors errors) {
-        if (errors.hasErrors()) {
-            log.info("S'ha produït un error");
-            return "guardarLineaComanda";
-        }
-        
-        //Eliminar Linea Comanda
-        lineaComandaService.eliminarLineaComanda(lineaComanda);
         //Crear Linea Comanda
         lineaComandaService.crearLineaComanda(lineaComanda);
 
