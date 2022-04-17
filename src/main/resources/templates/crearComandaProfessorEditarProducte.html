@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title th:text="#{comanda.crearComanda}"/>
+        <title th:text="#{comanda.editarComanda}"/>
         <meta charset="UTF-8"/>
         <!--Enllaç als estils de Bootstrap-->
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -30,17 +30,16 @@
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.quantitat}"/>
-                        <input type="number" name="quantitat" value="${quantitat}" th:field="*{quantitat}"/>
+                        <input class="form-control" type="number" name="quantitat" step="1" min="1" value="${quantitat}" th:field="*{quantitat}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.preElaboracions}"/>
-                        <input type="text" name="preElaboracions" value="${pre_elavoracions}" th:field="*{pre_elavoracions}"/>
+                        <textarea class="form-control" type="textarea" name="preElaboracions" value="${pre_elavoracions}" th:field="*{pre_elavoracions}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.observacions}"/>
-                        <input type="text" name="observacions" value="${observacio}" th:field="*{observacio}"/>
+                        <textarea class="form-control" type="textarea" name="observacions" value="${observacio}" th:field="*{observacio}"/>
                     </p>
-
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar Producte"/>
                     <br/>

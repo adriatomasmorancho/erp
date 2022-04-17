@@ -29,17 +29,16 @@
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.quantitat}"/>
-                        <input type="number" name="quantitat" th:field="*{quantitat}"/>
+                        <input class="form-control" type="number" name="quantitat" step="1" min="1" th:field="*{quantitat}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.preElaboracions}"/>
-                        <input type="text" name="preElaboracions" th:field="*{pre_elavoracions}"/>
+                        <textarea class="form-control" type="textarea" name="preElaboracions" th:field="*{pre_elavoracions}"/>
                     </p>
                     <p>
                         <label for="selectproducte" th:text="#{comanda.observacions}"/>
-                        <input type="text" name="observacions" th:field="*{observacio}"/>
+                        <textarea class="form-control" type="textarea" name="observacions" th:field="*{observacio}"/>
                     </p>
-
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Producte"/>
                     <br/>
