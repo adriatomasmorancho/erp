@@ -23,13 +23,13 @@
                     <input type="hidden" name="id_comanda" th:field="*{id_comanda}"/>           
                     <p>
                         <label for="nom" th:text="#{comanda.nom1}"/>
-                        <input type="text" name="nom" th:field="*{nom}"/>
+                        <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
                     <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
                     </p>
                     <input type="hidden" name="data" th:field="*{data}"/> 
                     <p>
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <input type="date" name="dataArribada" th:field="*{data_Arribada}"/>
+                        <input class="form-control" type="date" name="dataArribada" th:field="*{data_Arribada}"/>
                     <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
                     </p>
                     <p>
