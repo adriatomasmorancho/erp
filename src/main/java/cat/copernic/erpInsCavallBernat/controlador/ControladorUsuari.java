@@ -1,6 +1,8 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
+import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
+import cat.copernic.erpInsCavallBernat.serveis.RolServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,9 @@ public class ControladorUsuari {
     
     @Autowired
     private UsuariServiceInterface usuariService;
+    
+//    @Autowired
+//    private RolServiceInterface rolService;
     
     @GetMapping("/usuaris") //Pàgina usuaris de l'aplicació localhost:5050
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
@@ -72,7 +77,7 @@ public class ControladorUsuari {
      *si el formulari té errors.
      */
     @PostMapping("/guardarUsuari") //action = guardarUsuari
-    public String guardarUsuari(@Valid Usuari usuari, Errors errors) {
+    public String guardarUsuari(@Valid Usuari usuari, /*Rol rol,*/ Errors errors) {
 
         if (errors.hasErrors()) { //Si s'han produït errors...
             log.info("S'ha produït un error");
@@ -80,7 +85,7 @@ public class ControladorUsuari {
         }
 
         usuariService.crearUsuari(usuari); //Afegim el usuari passat per paràmetre a la base de dades
-
+       // rolService.crearRol(rol);
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }
 
@@ -117,11 +122,12 @@ public class ControladorUsuari {
      *IMPORTANT: id_usuari ha de tenir el mateix nom que l'atribut id de la classe Usuari.
      */
     @GetMapping("/eliminar/{id_usuari}")
-    public String eliminar(Usuari usuari) {
+    public String eliminar(Usuari usuari/*, Rol rol*/) {
 
         /*Eliminem el usuari passat per paràmetre amb l'id_usuari de @GetMapping mitjançant 
          *el mètode eliminarUsuari de la capa de servei.*/
         usuariService.eliminarUsuari(usuari);
+      //  rolService.eliminarRol(rol);
 
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }
