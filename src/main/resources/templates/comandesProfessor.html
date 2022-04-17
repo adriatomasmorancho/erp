@@ -39,6 +39,7 @@
                                 <th th:text="#{comanda.editar}"/>
                                 <th th:text="#{comanda.duplicar}"/>
                                 <th th:text="#{comanda.mesInfo}"/>
+                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,6 +52,7 @@
                                 <td><a th:href="@{/editarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
                                 <td><a th:href="@{/duplicarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
                                 <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                                <td><a th:href="@{/eliminarComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-trash"></i></a></td>
                             </tr>
                         </tbody>
                     </table>

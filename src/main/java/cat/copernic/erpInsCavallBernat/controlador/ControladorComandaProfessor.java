@@ -129,6 +129,35 @@ public class ControladorComandaProfessor {
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
     
+    @GetMapping("/duplicarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
+    public String duplicarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
+        
+        ComandaProfessor novaComanda = new ComandaProfessor();
+        novaComanda.setNom(comandaProfessor.getNom() + "_Duplicada");
+        novaComanda.setData(comandaProfessor.getData());
+        novaComanda.setData_Arribada(comandaProfessor.getData_Arribada());
+        novaComanda.setId_usuari(comandaProfessor.getId_usuari());
+        novaComanda.setId_centralitzada(comandaProfessor.getId_centralitzada());
+        novaComanda.setValida(comandaProfessor.isValida());
+        novaComanda.setId_antiga(comandaProfessor.getId_antiga());
+        novaComanda.setModul(comandaProfessor.getModul());
+        
+        comandaProfessorService.crearComandaProfessor(novaComanda);
+                
+        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comandaProfessor)){
+            LineaComanda newLc = new LineaComanda();
+            newLc.setId_Producte(lc.getId_Producte());
+            newLc.setId_comanda(novaComanda);
+            newLc.setObservacio(lc.getObservacio());
+            newLc.setPre_elavoracions(lc.getPre_elavoracions());
+            newLc.setQuantitat(lc.getQuantitat());
+            newLc.setId_linea_comanda(newLc.getId_linea_comanda());
+            lineaComandaService.crearLineaComanda(newLc);
+        }
+
+        return "redirect:/comandesProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+    }
+    
     @GetMapping("/afegirProducteComanda/{id_comanda}") //action = guardarProveidor
     public String afegirProducteComanda(Model model, ComandaProfessor id_comanda, Errors errors, LineaComanda lineaComanda) {
         var productes = producteService.llistarProductes();
@@ -156,6 +185,23 @@ public class ControladorComandaProfessor {
         
         //Crear Linea Comanda
         lineaComandaService.crearLineaComanda(lineaComanda);
+
+        return "redirect:/comandesProfessor";
+    }
+    
+    @GetMapping("/eliminarComandaProfessor/{comanda}") //action = guardarProveidor
+    public String eliminarComandaProfessor(@Valid ComandaProfessor comanda, Errors errors) {
+        if (errors.hasErrors()) {
+            log.info("S'ha produït un error");
+            return "guardarLineaComanda";
+        }
+        
+        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comanda)){
+            lineaComandaService.eliminarLineaComanda(lc);
+        }
+        
+        //Eliminar Comanda Professor
+        comandaProfessorService.eliminarComandaProfessor(comanda);
 
         return "redirect:/comandesProfessor";
     }
