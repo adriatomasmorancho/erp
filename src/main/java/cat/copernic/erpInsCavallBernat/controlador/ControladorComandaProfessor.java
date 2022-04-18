@@ -189,19 +189,15 @@ public class ControladorComandaProfessor {
         return "redirect:/comandesProfessor";
     }
     
-    @GetMapping("/eliminarComandaProfessor/{comanda}") //action = guardarProveidor
-    public String eliminarComandaProfessor(@Valid ComandaProfessor comanda, Errors errors) {
-        if (errors.hasErrors()) {
-            log.info("S'ha produït un error");
-            return "guardarLineaComanda";
-        }
+    @GetMapping("/eliminarComandaProfessor/{id_comanda}") //action = guardarProveidor
+    public String eliminarComandaProfessor(@Valid ComandaProfessor id_comanda, Errors errors) {
         
-        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comanda)){
+        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(id_comanda)){
             lineaComandaService.eliminarLineaComanda(lc);
         }
         
         //Eliminar Comanda Professor
-        comandaProfessorService.eliminarComandaProfessor(comanda);
+        comandaProfessorService.eliminarComandaProfessor(id_comanda);
 
         return "redirect:/comandesProfessor";
     }
@@ -216,12 +212,6 @@ public class ControladorComandaProfessor {
         //Eliminar Linea Comanda
         lineaComandaService.eliminarLineaComanda(id_linea_comanda);
 
-        return "redirect:/comandesProfessor";
-    }
-
-    @GetMapping("/eliminarComandaProfessor/{id_comanda}")
-    public String eliminarComandaProfessor(ComandaProfessor comandaProfessor) {
-        comandaProfessorService.eliminarComandaProfessor(comandaProfessor);
         return "redirect:/comandesProfessor";
     }
 
