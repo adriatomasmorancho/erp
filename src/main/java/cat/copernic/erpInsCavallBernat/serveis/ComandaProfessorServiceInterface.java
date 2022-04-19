@@ -26,6 +26,8 @@ public interface ComandaProfessorServiceInterface {
     
     public String getCurrentDate();
     
+    public String getActualDatePlusDays(int days);
+    
     public List getMisComandes(User username);
     
     public List getIds(User username);

@@ -10,6 +10,8 @@ import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ModulServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -100,6 +102,14 @@ public class ControladorComandaProfessor {
         model.addAttribute("moduls", moduls);
         model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
+        
+        //Calcular data+dies
+        var dataPlusTime = comandaProfessorService.getActualDatePlusDays(15);
+        List<String> myList = Arrays.asList(dataPlusTime.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }

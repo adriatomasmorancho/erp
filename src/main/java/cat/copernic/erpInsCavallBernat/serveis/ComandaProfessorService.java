@@ -9,6 +9,7 @@ import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -101,6 +102,19 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     @Override
     public String getCurrentDate() {
         Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String fecha = dateFormat.format(date);
+        return fecha;
+
+    }
+    
+    @Override
+    public String getActualDatePlusDays(int days) {
+        Date date = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        date = c.getTime();
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String fecha = dateFormat.format(date);
         return fecha;
