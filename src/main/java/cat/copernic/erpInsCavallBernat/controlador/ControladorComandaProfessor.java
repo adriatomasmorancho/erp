@@ -146,7 +146,7 @@ public class ControladorComandaProfessor {
         comandaProfessor.setData_Arribada(fecha);
         comandaProfessorService.crearComandaProfessor(comandaProfessor);
 
-        return "redirect:/comandesProfessor";
+        return "redirect:/crearComandaProfessorProductes/" + comandaProfessor.getId_comanda();
     }
 
     @GetMapping("/editarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
@@ -232,7 +232,7 @@ public class ControladorComandaProfessor {
         //Crear Linea Comanda
         lineaComandaService.crearLineaComanda(lineaComanda);
 
-        return "redirect:/comandesProfessor";
+        return "redirect:/crearComandaProfessorProductes/" + lineaComanda.getId_comanda().getId_comanda();
     }
 
     @GetMapping("/eliminarComandaProfessor/{id_comanda}") //action = guardarProveidor
