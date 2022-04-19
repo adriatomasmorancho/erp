@@ -62,6 +62,28 @@ public class ControladorComandaProfessor {
         return "comandesProfessor";
     }
 
+    @GetMapping("/totesComandes") //Pàgina productes de l'aplicació localhost:5050
+    public String totesComandes(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
+        var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        log.info("USERNAME::: " + username);
+        var usuari = username.getUsername();
+        log.info("USUARI::: " + usuari);
+        var fecha = comandaProfessorService.getCurrentDate();
+        log.info("FECHA:::: " + fecha);
+
+        model.addAttribute("comandesProfessor", comandesProfessor);
+        model.addAttribute("rol", rol);
+        model.addAttribute("usuari", usuari);
+        model.addAttribute("fecha", fecha);
+
+        //model.addAttribute("myId", myId);
+        var misComandas = comandaProfessorService.getMisComandes(username);
+        model.addAttribute("misComandas", misComandas);
+
+        return "totesComandes";
+    }
+
     @GetMapping("/crearComandaProfessor") //URL a la pàgina amb el formulari de les dades del producte
     public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
         var data = comandaProfessorService.getCurrentDate();
@@ -81,7 +103,7 @@ public class ControladorComandaProfessor {
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
-    
+
     @GetMapping("/crearComandaProfessorProductes/{id_comanda}") //Pàgina productes de l'aplicació localhost:5050
     public String productesComandaProfessor(Model model, ComandaProfessor id_comanda) {
 
@@ -108,7 +130,7 @@ public class ControladorComandaProfessor {
 
         return "redirect:/comandesProfessor";
     }
-    
+
     @GetMapping("/editarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
     public String editarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
         var data = comandaProfessorService.getCurrentDate();
@@ -128,10 +150,10 @@ public class ControladorComandaProfessor {
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
-    
+
     @GetMapping("/duplicarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
     public String duplicarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
-        
+
         ComandaProfessor novaComanda = new ComandaProfessor();
         novaComanda.setNom(comandaProfessor.getNom() + "_Duplicada");
         novaComanda.setData(comandaProfessor.getData());
@@ -141,10 +163,10 @@ public class ControladorComandaProfessor {
         novaComanda.setValida(comandaProfessor.isValida());
         novaComanda.setId_antiga(comandaProfessor.getId_antiga());
         novaComanda.setModul(comandaProfessor.getModul());
-        
+
         comandaProfessorService.crearComandaProfessor(novaComanda);
-                
-        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comandaProfessor)){
+
+        for (LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comandaProfessor)) {
             LineaComanda newLc = new LineaComanda();
             newLc.setId_Producte(lc.getId_Producte());
             newLc.setId_comanda(novaComanda);
@@ -154,61 +176,67 @@ public class ControladorComandaProfessor {
             newLc.setId_linea_comanda(newLc.getId_linea_comanda());
             lineaComandaService.crearLineaComanda(newLc);
         }
-
-        return "redirect:/comandesProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+        
+        //Retorna la pàgina on es mostrarà el formulari de les dades dels productes segons el rol de l'usuari
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        if (rol.equals("Administrador")) {
+            return "redirect:/totesComandes";
+        } else {
+            return "redirect:/comandesProfessor";
+        }
     }
-    
+
     @GetMapping("/afegirProducteComanda/{id_comanda}") //action = guardarProveidor
     public String afegirProducteComanda(Model model, ComandaProfessor id_comanda, Errors errors, LineaComanda lineaComanda) {
         var productes = producteService.llistarProductes();
         model.addAttribute("productes", productes);
         model.addAttribute("id_comanda", id_comanda.getId_comanda());
-        
+
         return "crearComandaProfessorAfegirProducte";
     }
-    
+
     @GetMapping("/editarLineaComanda/{lineaComanda}") //action = editarComanda
     public String editarProducteComanda(Model model, LineaComanda lineaComanda, Errors errors) {
         var productes = producteService.llistarProductes();
         model.addAttribute("productes", productes);
         model.addAttribute("lineaComanda", lineaComanda);
-        
+
         return "crearComandaProfessorEditarProducte";
     }
-    
+
     @PostMapping("/guardarLineaComanda") //action = guardarProveidor
     public String guardarLineaComanda(@Valid LineaComanda lineaComanda, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
             return "guardarLineaComanda";
         }
-        
+
         //Crear Linea Comanda
         lineaComandaService.crearLineaComanda(lineaComanda);
 
         return "redirect:/comandesProfessor";
     }
-    
+
     @GetMapping("/eliminarComandaProfessor/{id_comanda}") //action = guardarProveidor
     public String eliminarComandaProfessor(@Valid ComandaProfessor id_comanda, Errors errors) {
-        
-        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(id_comanda)){
+
+        for (LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(id_comanda)) {
             lineaComandaService.eliminarLineaComanda(lc);
         }
-        
+
         //Eliminar Comanda Professor
         comandaProfessorService.eliminarComandaProfessor(id_comanda);
 
-        return "redirect:/comandesProfessor";
+        return "redirect:/totesComandes";
     }
-    
+
     @GetMapping("/eliminarLineaComanda/{id_linea_comanda}") //action = guardarProveidor
     public String eliminarLineaComanda(@Valid LineaComanda id_linea_comanda, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
             return "guardarLineaComanda";
         }
-        
+
         //Eliminar Linea Comanda
         lineaComandaService.eliminarLineaComanda(id_linea_comanda);
 

@@ -39,7 +39,7 @@
                         <label for="modul1" th:text="*{modul.nom}"/>               
                     </p>
                     <!-- Botó per enviar les dades-->
-                    <a th:href ="@{/comandesProfessor}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Sortir"/></a>
+                    <input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" onclick='javascript:window.history.back()' value="Sortir"/>
                 </form>
                 </p>
             </div>
