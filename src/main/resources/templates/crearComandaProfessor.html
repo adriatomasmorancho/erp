@@ -35,9 +35,9 @@
                     <p>
                         <label for="id_usuari" th:text="#{usuari}"/>
                         <select class="form-select" name="id_usuari" id="id_usuari" th:field="*{id_usuari}">
-                            <option th:each="id : ${ids}" th:value="${id}" th:text="${id}"></option>
+                            <option th:each="usuari : ${ids}" th:value="${usuari.id_usuari}" th:text="${usuari.nom} + ' ' + ${usuari.cognoms} + ' [' + ${usuari.username} + ']'"></option>
                         </select>
-                        <span th:if="${#fields.hasErrors('modul')}" th:errors="*{modul}"/>
+                        <span th:if="${#fields.hasErrors('id_usuari')}" th:errors="*{id_usuari}"/>
                     </p>
 
                     <input type="hidden" name="id_centralitzada" th:field="*{id_centralitzada}"/>

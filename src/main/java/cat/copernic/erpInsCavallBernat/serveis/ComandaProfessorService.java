@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -127,15 +128,14 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         var usuari = username.getUsername();
         var usuaris = usuariService.llistarUsuaris();
         var misComandas = new ArrayList();
-        long myId = 0;
+        Usuari usr = null;
         for (var usuario : usuaris) {
             if (usuario.getUsername().equals(usuari)) {
-                log.info("ID:::: " + usuario.getId_usuari());
-                myId = usuario.getId_usuari();
+                usr = usuario;
             }
         }
         for (var comanda : comandesProfessor) {
-            if (comanda.getId_usuari() == myId) {
+            if (comanda.getId_usuari() == usr) {
                 misComandas.add(comanda);
             }
         }
@@ -148,19 +148,18 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         var usuari = username.getUsername();
         var usuaris = usuariService.llistarUsuaris();
         var rol = getRolUserCurrent(username);
-        var ids = new ArrayList();
+        List<Usuari> ids = new ArrayList<>();
         if (rol.equals("Administrador")) {
             for (var usuario : usuaris) {
-                ids.add(usuario.getId_usuari());
+                ids.add(usuario);
             }
         } else {
             for (var usuario : usuaris) {
                 if (usuario.getUsername().equals(usuari)) {
-                    ids.add(usuario.getId_usuari());
+                    ids.add(usuario);
                 }
             }
         }
-        log.info("IDS::: " + ids.toString());
         return ids;
     }
 }

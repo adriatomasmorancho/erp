@@ -50,7 +50,9 @@ public class ComandaProfessor implements Serializable {
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private String data_Arribada;
 
-    private long id_usuari = 1;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_usuari", referencedColumnName = "id_usuari")
+    private Usuari id_usuari;
 
     private long id_centralitzada = 0;
 
