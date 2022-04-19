@@ -58,9 +58,9 @@
             <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
                 No hi ha Comandes a la llista.
             </div>
-            <!--<div align="center"><!-- Posem un enllaç per a crear un usuari 
-                <a th:href="@{/crearComandaProfessor}" th:text="#{comanda.crearComanda}"></a>
-                <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>
-            </div> -->
+              <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+                <a th:href="@{/crearComandaAdministrador}" th:text="#{comanda.centralitzarSeleccio}"></a>
+                <a th:href="@{/crearComandaAdministrador}"><i class="bi bi-plus-circle"></i></a>
+            </div> 
     </body>
 </html>
