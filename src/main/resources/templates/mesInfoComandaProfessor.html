@@ -38,6 +38,10 @@
                         <label for="modul" th:text="#{comanda.modul1}"/> 
                         <label for="modul1" th:text="*{modul.nom}"/>               
                     </p>
+                    <p>
+                        <label for="preu" th:text="#{comanda.preutotal}"/> 
+                        <label for="preu" th:text="${total}"/>   
+                    </p>
                     <!-- Botó per enviar les dades-->
                     <input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" onclick='javascript:window.history.back()' value="Sortir"/>
                 </form>

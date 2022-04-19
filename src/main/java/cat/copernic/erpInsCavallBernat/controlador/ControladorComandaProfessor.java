@@ -267,6 +267,14 @@ public class ControladorComandaProfessor {
         log.info(String.valueOf(comandaProfessor.getId_comanda()));
         comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
         model.addAttribute("comandaProfessor", comandaProfessor);
+        
+        //Calulcar total
+        double total = 0;
+        for(LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comandaProfessor)){
+            total += lc.getId_Producte().getPreu()*lc.getQuantitat();
+        }
+        String finalTotal = Double.toString(total) + "€";
+        model.addAttribute("total", finalTotal);
 
         return "mesInfoComandaProfessor";
     }
