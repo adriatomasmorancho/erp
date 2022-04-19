@@ -126,7 +126,7 @@ public class ControladorComandaProfessor {
         for(LineaComanda lc : lineaComanda){
             total += lc.getId_Producte().getPreu()*lc.getQuantitat();
         }
-        String finalTotal = "Total: " + Double.toString(total);
+        String finalTotal = "Total: " + Double.toString(total) + "€";
         model.addAttribute("total", finalTotal);
         
         return "crearComandaProfessorProductes";
