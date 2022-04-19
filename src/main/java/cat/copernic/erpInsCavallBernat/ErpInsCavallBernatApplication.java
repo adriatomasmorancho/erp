@@ -10,5 +10,5 @@ public class ErpInsCavallBernatApplication {
 		SpringApplication.run(ErpInsCavallBernatApplication.class, args);
            
 	}
-/**/
+
 }
