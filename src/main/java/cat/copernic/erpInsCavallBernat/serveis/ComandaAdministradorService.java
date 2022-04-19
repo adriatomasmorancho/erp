@@ -93,7 +93,7 @@ public class ComandaAdministradorService implements ComandaAdministradorServiceI
          *Si el producte no existei retornarà null (orElse(null)).
         */ 
 
-        return this.comandaAdministrador.findById(comandaAdministrador.getId_comandaCentralitzada()).orElse(null);
+        return this.comandaAdministrador.findById(comandaAdministrador.getId_comanda_centralitzada()).orElse(null);
         
     }
    

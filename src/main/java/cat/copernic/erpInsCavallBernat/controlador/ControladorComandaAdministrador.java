@@ -6,7 +6,9 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 
 import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
+import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,29 +31,37 @@ public class ControladorComandaAdministrador {
     @Autowired
     private ComandaAdministradorServiceInterface comandaAdministradorService;
     
+    @Autowired
+    private ComandaProfessorServiceInterface comandaProfessorService;
+    
     @GetMapping("/comandesAdministrador") //Pàgina productes de l'aplicació localhost:5050
-    public String comandesAdministrador(Model model, @AuthenticationPrincipal ComandaAdministrador id_ComandaAdministrador) {
+    public String comandesAdministrador(Model model, @AuthenticationPrincipal ComandaAdministrador id_comanda_centralitzada, ComandaProfessor id_comanda) {
         
         var comandesAdministrador = comandaAdministradorService.llistarComandesAdministrador();
 
         model.addAttribute("comandesAdministrador", comandesAdministrador);
         
+        var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+
+        model.addAttribute("comandesProfessor", comandesProfessor);
+        
         return "comandesAdministrador";
     }
     
     @GetMapping("/crearComandaAdministrador") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearAdministrador(ComandaAdministrador comandaAdministrador) {
-
+    public String crearAdministrador(ComandaAdministrador id_comanda_centralitzada, Model model) {
+        var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+        model.addAttribute("comandesProfessor", comandesProfessor);
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
     
     @PostMapping("/guardarComandaAdministrador") //action = guardarProveidor
-    public String guardarComandaAdministrador(@Valid ComandaAdministrador comandaAdministrador, Errors errors) {
+    public String guardarComandaAdministrador(@Valid ComandaAdministrador id_comanda_centralitzada, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
             return "crearComandaAdministrador";
         }
-        comandaAdministradorService.crearComandaAdministrador(comandaAdministrador);
+        comandaAdministradorService.crearComandaAdministrador(id_comanda_centralitzada);
         return "redirect:/comandesAdministrador";
     }
     
@@ -64,7 +74,7 @@ public class ControladorComandaAdministrador {
     @GetMapping("/editarComandaAdministrador/{id_ComandaAdministrador}")
     public String editarComandaAdministrador(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaAdministrador.getId_comandaCentralitzada()));
+        log.info(String.valueOf(comandaAdministrador.getId_comanda_centralitzada()));
         comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
         model.addAttribute("comandaAdministrador", comandaAdministrador);
 
@@ -74,7 +84,7 @@ public class ControladorComandaAdministrador {
     @GetMapping("/mesInfoComandaAdministrador/{id_ComandaAdministrador}")
     public String editar(ComandaAdministrador comandaAdministrador, Model model) {
 
-        log.info(String.valueOf(comandaAdministrador.getId_comandaCentralitzada()));
+        log.info(String.valueOf(comandaAdministrador.getId_comanda_centralitzada()));
         comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
         model.addAttribute("comandaAdministrador", comandaAdministrador);
 
