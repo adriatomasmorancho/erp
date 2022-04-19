@@ -31,6 +31,7 @@
                         <thead>
                             <tr>
                                 <th th:text="#{comandaProducte.nom}"/>
+                                <th th:text="#{comandaProducte.preu}"/>
                                 <th th:text="#{comandaProducte.Quantitat}"/>
                                 <th th:text="#{comandaProducte.PreElaboracions}"/>
                                 <th th:text="#{comandaProducte.Observacions}"/>
@@ -39,8 +40,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="producte : ${lineaComandes}"> 
+                            <tr th:each="producte : ${lineaComandes}">
                                 <td th:text="${producte.id_Producte.nom}"></td>
+                                <td th:text="${producte.id_Producte.preu}"></td>
                                 <td th:text="${producte.quantitat}"></td>
                                 <td th:text="${producte.pre_elavoracions}"></td>
                                 <td th:text="${producte.observacio}"></td>
@@ -55,6 +57,7 @@
                         $('#table_id').DataTable();
                     });
                 </script>
+                <h1 th:text="${total}"></h1>
             </div>
             <div th:if="${lineaComandes==null || lineaComandes.empty}">
                 No hi ha cap producte a la comanda.

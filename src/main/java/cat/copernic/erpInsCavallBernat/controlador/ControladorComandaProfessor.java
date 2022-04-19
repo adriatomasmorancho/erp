@@ -110,7 +110,15 @@ public class ControladorComandaProfessor {
         var lineaComanda = lineaComandaService.llistarLineaComandaWhereComanda(id_comanda);
         model.addAttribute("lineaComandes", lineaComanda);
         model.addAttribute("id_comanda", id_comanda.getId_comanda());
-
+        
+        //Calulcar total
+        double total = 0;
+        for(LineaComanda lc : lineaComanda){
+            total += lc.getId_Producte().getPreu()*lc.getQuantitat();
+        }
+        String finalTotal = "Total: " + Double.toString(total);
+        model.addAttribute("total", finalTotal);
+        
         return "crearComandaProfessorProductes";
     }
 
