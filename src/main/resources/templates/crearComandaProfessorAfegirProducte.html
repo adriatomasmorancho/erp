@@ -21,7 +21,7 @@
                 <p>          
                 <form th:action="@{/guardarLineaComanda}" method="post" th:object="${lineaComanda}">
                     <input type="hidden"  value="${id_comanda}" th:field="*{id_comanda}"/>
-                   <p>
+                    <p>
                         <label for="selectproducte" th:text="#{comanda.productes}"/>
                         <select name="selectproducte" class="form-select" th:field="*{id_Producte}">
                             <option th:each="myproducte : ${productes}" th:value="${myproducte.id_Producte}" th:text="${myproducte.nom}"></option>
@@ -42,8 +42,7 @@
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Producte"/>
                     <br/>
-                    <a th:href ="@{/comandesProfessor}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
-                </form>
+                    <input class="btn btn-primary btn-lg btn-block" type="button" name="cancelar" onclick='javascript:window.history.back()' value="Cancelar"/>                </form>
                 </p>
             </div>
         </div>

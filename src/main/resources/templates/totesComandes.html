@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
-        <title th:text="#{comanda}"/>
+        <title th:text="#{nav.totesLesComandes}"/>
         <meta charset="UTF-8">
         <!--Enllaç als estils de Bootstrap-->
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
@@ -19,10 +19,10 @@
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
             <br/>
-            <h1 align="center" th:text="#{comanda}"/>
+            <h1 align="center" th:text="#{nav.totesLesComandes}"/>
             <br/>
             <br/>
-            <div th:if="${misComandas!=null && !misComandas.empty}" align="center">
+            <div th:if="${comandesProfessor!=null && !comandesProfessor.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
@@ -35,18 +35,24 @@
                                 <th th:text="#{comanda.dataCreacio}"/>
                                 <th th:text="#{comanda.dataArribada}"/>
                                 <th th:text="#{comanda.modul}"/>
+                                <th th:text="#{comanda.productes}"/>
+                                <th th:text="#{comanda.editar}"/>
                                 <th th:text="#{comanda.duplicar}"/>
                                 <th th:text="#{comanda.mesInfo}"/>
+                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="misComandas : ${misComandas}"> 
-                                <td th:text="${misComandas.nom}"></td>
-                                <td th:text="${misComandas.data}"></td>
-                                <td th:text="${misComandas.data_Arribada}"></td>
-                                <td th:text="${misComandas.modul.nom}"></td>
-                                <td><a th:href="@{/duplicarComandaProfessorProductes/}+${misComandas.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
-                                <td><a th:href="@{/mesInfoComandaProfessor/}+${misComandas.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                            <tr th:each="comandaProfessor : ${comandesProfessor}"> 
+                                <td th:text="${comandaProfessor.nom}"></td>
+                                <td th:text="${comandaProfessor.data}"></td>
+                                <td th:text="${comandaProfessor.data_Arribada}"></td>
+                                <td th:text="${comandaProfessor.modul.nom}"></td>
+                                <td><a th:href="@{/crearComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-box"></i></a></td>
+                                <td><a th:href="@{/editarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
+                                <td><a th:href="@{/duplicarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
+                                <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                                <td><a th:href="@{/eliminarComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-trash"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
@@ -57,7 +63,7 @@
                     });
                 </script>
             </div>
-            <div th:if="${misComandas==null || misComandas.empty}">
+            <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
                 No hi ha Comandes a la llista.
             </div>
             <br/>
