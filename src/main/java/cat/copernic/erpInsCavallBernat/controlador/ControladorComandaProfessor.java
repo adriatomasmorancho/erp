@@ -164,7 +164,7 @@ public class ControladorComandaProfessor {
         return "redirect:/crearComandaProfessorProductes/" + comandaProfessor.getId_comanda();
     }
 
-    @GetMapping("/editarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
+    @GetMapping("/editarComanda/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
     public String editarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
         var data = comandaProfessorService.getCurrentDate();
         comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
@@ -184,7 +184,7 @@ public class ControladorComandaProfessor {
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 
-        return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+        return "editarComanda"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
 
     @GetMapping("/duplicarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
