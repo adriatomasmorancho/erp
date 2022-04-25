@@ -23,4 +23,8 @@ public interface CategoriaServiceInterface {
     public Categoria cercarCategoria(Categoria categoria); //Mètode que implementarem per cercar una categoria
     
     public String rolUsername(User username);
+    
+    public Categoria findByName (String categoria); //Mètode que implementarem per cercar una categoria per nom
+    
+    public void editarCategoria (Categoria categoria, String newName); //Mètode que canvia el nom de la categoria
 }
