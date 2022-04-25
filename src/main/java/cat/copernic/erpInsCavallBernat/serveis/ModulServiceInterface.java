@@ -15,16 +15,21 @@ import org.springframework.security.core.userdetails.User;
  */
 public interface ModulServiceInterface {
     
- public List<Modul> llistarModuls(); //Mètode que implementarem per llistar categories
+ public List<Modul> llistarModuls(); //Mètode que implementarem per llistar moduls
     
     public String getRolUserCurrent(User username);
     
-    public void crearModul(Modul modul); //Mètode que implementarem per afegir una categoria
+    public void crearModul(Modul modul); //Mètode que implementarem per afegir un Modul
     
-    public void eliminarModul(Modul modul); //Mètode que implementarem per eliminar una categoria
+    public void eliminarModul(Modul modul); //Mètode que implementarem per eliminar un Modul
     
-    public Modul cercarModul(Modul modul); //Mètode que implementarem per cercar una categoria
+    public Modul cercarModul(Modul modul); //Mètode que implementarem per cercar un Modul
     
+    public Modul findByName(String modul); //Mètode que implementarem per cercar un Modul
+    
+    public void editarModul(Modul modul, String NewName); //Mètode que implementarem per editar un Modul
+   
     public String rolUsername(User username);
+   
 }
 
