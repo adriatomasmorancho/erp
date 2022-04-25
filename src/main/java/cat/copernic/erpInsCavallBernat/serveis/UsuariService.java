@@ -30,6 +30,9 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
      */
     @Autowired
     private UsuariDAO usuariDAO;
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*Únic mètode de la interface UserDetailsService que retornarà un usuari a partir del nom d'usuari.
      *L'usuari que retorna es de tipus UserDetails que és una interface de Spring Security que defineix
@@ -104,6 +107,19 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     @Override
     public Usuari cercarUsuari(Usuari usuari) {
         return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
 
 }

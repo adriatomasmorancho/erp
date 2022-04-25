@@ -23,6 +23,9 @@ public class ProveidorService implements ProveidorServiceInterface {
     
     @Autowired
     private ProveidorDAO proveidorDAO;
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     @Override
     @Transactional(readOnly = true)
@@ -53,6 +56,19 @@ public class ProveidorService implements ProveidorServiceInterface {
     @Override
     public List<Proveidor> cercarProveidorByCif(String nom) {
         return (List<Proveidor>) proveidorDAO.findByCif(nom);
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
 
 }

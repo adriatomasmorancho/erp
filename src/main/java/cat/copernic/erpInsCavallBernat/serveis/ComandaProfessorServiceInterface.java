@@ -31,5 +31,7 @@ public interface ComandaProfessorServiceInterface {
     public List getMisComandes(User username);
     
     public List getIds(User username);
+    
+    public String rolUsername(User username);
   
 }

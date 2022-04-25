@@ -32,6 +32,8 @@ public class ControladorInici {
         var rol = usuariService.getRolUserCurrent(username);
         log.info("ROL::: " + rol);
         //var rol = username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
+        var miRol = usuariService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         model.addAttribute("rol", rol);
 

@@ -17,4 +17,5 @@ public interface ProveidorServiceInterface {
     public void eliminarProveidor(Proveidor proveidor);
     public Proveidor cercarProveidor(Proveidor proveidor);
     public List<Proveidor> cercarProveidorByCif(String nom);
+    public String rolUsername(User username);
 }

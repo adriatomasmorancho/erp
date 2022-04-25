@@ -21,4 +21,6 @@ public interface CategoriaServiceInterface {
     public void eliminarCategoria(Categoria categoria); //Mètode que implementarem per eliminar una categoria
     
     public Categoria cercarCategoria(Categoria categoria); //Mètode que implementarem per cercar una categoria
+    
+    public String rolUsername(User username);
 }

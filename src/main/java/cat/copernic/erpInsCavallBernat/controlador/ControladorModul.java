@@ -40,6 +40,9 @@ public class ControladorModul {
 
         model.addAttribute("moduls", moduls);
         model.addAttribute("rol", rol);
+        
+        var miRol = modulService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "moduls";
     }
@@ -49,6 +52,9 @@ public class ControladorModul {
 
         var rol = modulService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = modulService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearModul"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -78,6 +84,9 @@ public class ControladorModul {
 
         var rol = modulService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = modulService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarModul";
     }

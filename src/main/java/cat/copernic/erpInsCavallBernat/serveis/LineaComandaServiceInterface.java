@@ -29,6 +29,8 @@ public interface LineaComandaServiceInterface {
     
     public LineaComanda cercarLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per cercar una linea comanda
     
+    public String rolUsername(User username);
+    
     
 
   

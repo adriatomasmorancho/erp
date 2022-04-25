@@ -22,6 +22,8 @@ public interface ComandaAdministradorServiceInterface {
     public void eliminarComandaAdministrador(ComandaAdministrador comandaAdministrador); //Mètode que implementarem per eliminar una comanda
     
     public ComandaAdministrador cercarComandaAdministrador(ComandaAdministrador comandaAdministrador); //Mètode que implementarem per cercar una comanda
+    
+    public String rolUsername(User username);
 
   
 }
