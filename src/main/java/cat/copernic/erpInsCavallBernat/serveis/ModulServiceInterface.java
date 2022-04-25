@@ -28,7 +28,8 @@ public interface ModulServiceInterface {
     public Modul findByName(String modul); //Mètode que implementarem per cercar un Modul
     
     public void editarModul(Modul modul, String NewName); //Mètode que implementarem per editar un Modul
-
+   
+    public String rolUsername(User username);
    
 }
 

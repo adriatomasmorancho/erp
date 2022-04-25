@@ -32,6 +32,9 @@ public class ControladorProveidor {
 
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("rol", rol);
+        
+        var miRol = proveidorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "proveidors";
     }
@@ -41,6 +44,9 @@ public class ControladorProveidor {
 
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = proveidorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearProveidor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels proveidors
     }
@@ -70,6 +76,9 @@ public class ControladorProveidor {
 
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = proveidorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarProveidor";
     }

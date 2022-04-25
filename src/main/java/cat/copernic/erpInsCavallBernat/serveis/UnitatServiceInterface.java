@@ -25,4 +25,10 @@ public interface UnitatServiceInterface {
     public void eliminarUnitat(Unitat unitat); //Mètode que implementarem per eliminar una categoria
     
     public Unitat cercarUnitat(Unitat unitat); //Mètode que implementarem per cercar una categoria
+    
+    public Unitat findByName (String unitat); //Mètode que cerca l'unitat pel nom
+    
+    public void editarUnitat (Unitat unitat, String nomUnitat); //Mètode que canvia el nom de l'unitat
+    
+    public String rolUsername(User username);
 }

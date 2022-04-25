@@ -35,6 +35,9 @@ public class UnitatService implements UnitatServiceInterface{
     */
     @Autowired
     private UnitatDAO unitat; 
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar categories de la taula categoria de la BBDD erp*/
     @Override
@@ -94,6 +97,32 @@ public class UnitatService implements UnitatServiceInterface{
 
         return this.unitat.findById(unitat.getId_unitat()).orElse(null);
         
+    }
+    
+    @Override
+    @Transactional(readOnly=true)
+    public Unitat findByName(String unitat) {
+        return this.unitat.findByNom(unitat);
+    }
+    
+    @Override
+    @Transactional
+    public void editarUnitat(Unitat unitat, String nomUnitat) {
+        unitat.setNom(nomUnitat);
+        this.unitat.save(unitat);
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
     
 }

@@ -39,6 +39,9 @@ public class ControladorUnitat {
 
         model.addAttribute("unitats", unitats);
         model.addAttribute("rol", rol);
+        
+        var miRol = unitatService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "unitats";
     }
@@ -48,6 +51,9 @@ public class ControladorUnitat {
 
         var rol = unitatService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = unitatService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearUnitat"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -77,6 +83,9 @@ public class ControladorUnitat {
 
         var rol = unitatService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = unitatService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarUnitat";
     }

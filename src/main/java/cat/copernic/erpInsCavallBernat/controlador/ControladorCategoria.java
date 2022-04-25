@@ -37,6 +37,10 @@ public class ControladorCategoria {
 
         model.addAttribute("categories", categories);
         model.addAttribute("rol", rol);
+        
+        var miRol = categoriaService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
 
         return "categories";
     }
@@ -46,6 +50,9 @@ public class ControladorCategoria {
 
         var rol = categoriaService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = categoriaService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearCategoria"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -75,6 +82,9 @@ public class ControladorCategoria {
 
         var rol = categoriaService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = categoriaService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarCategoria";
     }

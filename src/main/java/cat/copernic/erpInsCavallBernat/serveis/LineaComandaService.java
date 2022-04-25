@@ -40,7 +40,8 @@ public class LineaComandaService implements LineaComandaServiceInterface{
     @Autowired
     private LineaComandaDAO lineaComanda; 
    
-  
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar les lineas comanda de la taula producte de la BBDD erp*/
     @Override
@@ -119,6 +120,17 @@ public class LineaComandaService implements LineaComandaServiceInterface{
     }
      
    
-
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
+    }
     
 }

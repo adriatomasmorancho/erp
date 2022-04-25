@@ -21,5 +21,7 @@ public interface UsuariServiceInterface {
     public void eliminarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
     
     public Usuari cercarUsuari(Usuari usuari); //Mètode que implementarem per cercar un usuari
+    
+    public String rolUsername(User username);
 
 }

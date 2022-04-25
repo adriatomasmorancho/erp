@@ -47,6 +47,9 @@ public class ControladorUsuari {
         model.addAttribute("email", email);
         //model.addAttribute("cercarUsername", cercarUsername);
         
+        var miRol = usuariService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
         return "usuaris";
     }
 
@@ -58,6 +61,9 @@ public class ControladorUsuari {
     public String crearUsuari(Model model, @AuthenticationPrincipal User username, Usuari usuari) {
         var rol = usuariService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = usuariService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
         
         return "crearUsuari"; //Retorna la pàgina on es mostrarà el formulari de les dades dels usuaris
     }
@@ -120,6 +126,9 @@ public class ControladorUsuari {
         
         var rol = usuariService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = usuariService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarUsuari"; //Retorna la pàgina amb el formulari de les dades del usuari
     }

@@ -34,7 +34,9 @@ public class ComandaAdministradorService implements ComandaAdministradorServiceI
     */
     @Autowired
     private ComandaAdministradorDAO comandaAdministrador; 
-     
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar productes de la taula producte de la BBDD erp*/
     @Override
@@ -95,6 +97,19 @@ public class ComandaAdministradorService implements ComandaAdministradorServiceI
 
         return this.comandaAdministrador.findById(comandaAdministrador.getId_comanda_centralitzada()).orElse(null);
         
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
    
 }
