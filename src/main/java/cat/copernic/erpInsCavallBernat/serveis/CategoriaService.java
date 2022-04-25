@@ -110,4 +110,17 @@ public class CategoriaService implements CategoriaServiceInterface{
         
     }
     
+    @Override
+    @Transactional
+    public Categoria findByName (String categoria){
+        return this.categoria.findByNom(categoria);
+    }
+
+    @Override
+    @Transactional
+    public void editarCategoria(Categoria categoria, String newName) {
+        categoria.setNom(newName);
+        this.categoria.save(categoria);
+    }
+    
 }
