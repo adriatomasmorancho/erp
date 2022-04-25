@@ -31,19 +31,23 @@
                     <table id="table_id">
                         <thead>
                             <tr>
+                                <th/>
                                 <th th:text="#{comanda.nom}"/>
                                 <th th:text="#{comanda.dataCreacio}"/>
                                 <th th:text="#{comanda.dataArribada}"/>
                                 <th th:text="#{comanda.modul}"/>
+                                <th th:text="#{professor}"/>
                                 <th th:text="#{comanda.mesInfo}"/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="comandaProfessor : ${comandesProfessor}"> 
+                                <td><input type="checkbox" id="cbox1" value="first_checkbox"></td>
                                 <td th:text="${comandaProfessor.nom}"></td>
                                 <td th:text="${comandaProfessor.data}"></td>
                                 <td th:text="${comandaProfessor.data_Arribada}"></td>
                                 <td th:text="${comandaProfessor.modul.nom}"></td>
+                                <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
                                 <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
                             </tr>
                         </tbody>

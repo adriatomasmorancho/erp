@@ -35,7 +35,7 @@
                                 <th th:text="#{comanda.dataCreacio}"/>
                                 <th th:text="#{comanda.dataArribada}"/>
                                 <th th:text="#{comanda.modul}"/>
-                                <th th:text="Professor"/>
+                                <th th:text="#{professor}"/>
                                 <th th:text="#{comanda.productes}"/>
                                 <th th:text="#{comanda.editar}"/>
                                 <th th:text="#{comanda.duplicar}"/>
@@ -49,9 +49,7 @@
                                 <td th:text="${comandaProfessor.data}"></td>
                                 <td th:text="${comandaProfessor.data_Arribada}"></td>
                                 <td th:text="${comandaProfessor.modul.nom}"></td>
-                                <div th:each="usuari : ${ids}" th:if="${comandaProfessor.id_usuari}==${usuari.id_usuari}">
-                                <td th:text="${usuari.nom} + ' ' + ${usuari.cognoms}"></td>
-                                </div>
+                                <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
                                 <td><a th:href="@{/crearComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-box"></i></a></td>
                                 <td><a th:href="@{/editarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
                                 <td><a th:href="@{/duplicarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-clipboard"></i></a></td>

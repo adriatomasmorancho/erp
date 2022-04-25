@@ -94,5 +94,21 @@ public class ModulService implements ModulServiceInterface{
         return this.modul.findById(modul.getId_modul()).orElse(null);
         
     }
+        @Override
+    @Transactional(readOnly=true) //Igual que en el mètode llistarCategories, no modifiquem la informació de la BBDD
+    public Modul findByName(String modul) {
+        
+        return this.modul.findByNom(modul);
+        
+    }
+    
+         @Override
+    @Transactional 
+    public void editarModul(Modul modul, String newName) {
+        
+       modul.setNom(newName);
+       this.modul.save(modul);
+        
+    }
     
 }

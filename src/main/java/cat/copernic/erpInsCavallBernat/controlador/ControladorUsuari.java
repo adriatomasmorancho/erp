@@ -1,5 +1,6 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
+import cat.copernic.erpInsCavallBernat.eines.EncriptadorContrasenya;
 import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import cat.copernic.erpInsCavallBernat.serveis.RolServiceInterface;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -77,8 +79,16 @@ public class ControladorUsuari {
      *si el formulari té errors.
      */
     @PostMapping("/guardarUsuari") //action = guardarUsuari
-    public String guardarUsuari(@Valid Usuari usuari, /*Rol rol,*/ Errors errors) {
+    public String guardarUsuari(@Valid Usuari usuari, /*@RequestParam(value = "password") String passw, /*Rol rol,*/ Errors errors) {
 
+       /* String pass = usuari.getPassword();
+        
+        if(passw == null){
+            usuari.setPassword(pass);
+        }else{
+            usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(passw));
+        }
+        */
         if (errors.hasErrors()) { //Si s'han produït errors...
             log.info("S'ha produït un error");
             return "crearUsuari"; //Mostrem la pàgina del formulari
