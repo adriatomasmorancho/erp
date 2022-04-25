@@ -68,5 +68,11 @@
                 <a th:href="@{/afegirProducteComanda/}+${id_comanda}"><i class="bi bi-plus-circle"></i></a>
             </div>
             <br/>
-            <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href='/comandesProfessor'" th:value="#{confirmar}"/>    </body>
+            <div th:if="${miRol}==administrador" align="center">
+            <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href='/totesComandes'" th:value="#{confirmar}"/>
+            </div>
+            <div th:if="${miRol}==professor" align="center">
+            <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href='/comandesProfessor'" th:value="#{confirmar}"/>
+            </div>
+           </body>
 </html>

@@ -54,7 +54,7 @@
                         <textarea class="form-control" type="text" name="observacio" th:field="*{observacio}"/>
                         <span th:if="${#fields.hasErrors('observacio')}" th:errors="*{observacio}"/>
                     </p>
-                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Editar"/>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="actualitzar" value="Actualitzar"/>
                     <br/>
                     <a th:href ="@{/proveidors}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
                 </form>

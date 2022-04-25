@@ -51,7 +51,7 @@
                                 <td th:text="${comandaProfessor.modul.nom}"></td>
                                 <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
                                 <td><a th:href="@{/crearComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-box"></i></a></td>
-                                <td><a th:href="@{/editarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
+                                <td><a th:href="@{/editarComanda/}+${comandaProfessor.id_comanda}"><i class="bi bi-pencil"></i></a></td>
                                 <td><a th:href="@{/duplicarComandaProfessorProductes/}+${comandaProfessor.id_comanda}"><i class="bi bi-clipboard"></i></a></td>
                                 <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
                                 <td><a th:href="@{/eliminarComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-trash"></i></a></td>
