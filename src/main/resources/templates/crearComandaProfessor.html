@@ -29,7 +29,7 @@
                     <input type="hidden" name="data" th:field="*{data}"/> 
                     <p>
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <input class="form-control" type="date" name="dataArribada" th:min="${data_min_input}" th:field="*{data_Arribada}">
+                        <input class="form-control" type="date" name="dataArribada" th:min="${data_min_input}" th:field="*{data_Arribada}" required>
                     <div th:if="${#fields.hasErrors('data_Arribada')}" th:errors="*{data_Arribada}"/>
                     </p>
                     <p>
