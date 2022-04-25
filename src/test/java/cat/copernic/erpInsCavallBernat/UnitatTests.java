@@ -54,5 +54,6 @@ public class UnitatTests {
         unitatService.eliminarUnitat(unitatService.findByName(nouNomUnitat));
         assertEquals(null, unitatService.findByName(nouNomUnitat));
     }
+    
 
 }
