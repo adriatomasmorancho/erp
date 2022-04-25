@@ -190,8 +190,43 @@ public class ControladorComandaProfessor {
     @GetMapping("/duplicarComandaProfessorProductes/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
     public String duplicarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
 
+        var data = comandaProfessorService.getCurrentDate();
+        comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
+        log.info("FECHA:::: " + data);
+        model.addAttribute("data", data);
+        var productes = producteService.llistarProductes();
+        var lineasComanda = lineaComandaService.llistarLineaComanda();
+        var moduls = modulComandaService.llistarModuls();
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        var ids = comandaProfessorService.getIds(username);
+        model.addAttribute("lineasComanda", lineasComanda);
+        model.addAttribute("productes", productes);
+        model.addAttribute("moduls", moduls);
+        model.addAttribute("rol", rol);
+        model.addAttribute("ids", ids);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+
+        return "duplicarComanda"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+    }
+    
+    @PostMapping("/saveDuplicarComandaProfessorProductes")
+    public String saveDuplicarComandaProfessorProductes(@Valid ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username, Errors errors) {
+        if (errors.hasErrors()) {
+            log.info("S'ha produït un error");
+            return "crearComandaProfessor";
+        }
+        var dataArribada = comandaProfessor.getData_Arribada();
+        var dia = dataArribada.substring(8, dataArribada.length());
+        var mes = dataArribada.substring(5, 7);
+        var año = dataArribada.substring(0, 4);
+        var fecha = dia + "/" + mes + "/" + año;
+        comandaProfessor.setData_Arribada(fecha);
+
+        
         ComandaProfessor novaComanda = new ComandaProfessor();
-        novaComanda.setNom(comandaProfessor.getNom() + "_Duplicada");
+        novaComanda.setNom(comandaProfessor.getNom());
         novaComanda.setData(comandaProfessor.getData());
         novaComanda.setData_Arribada(comandaProfessor.getData_Arribada());
         novaComanda.setId_usuari(comandaProfessor.getId_usuari());
@@ -199,9 +234,9 @@ public class ControladorComandaProfessor {
         novaComanda.setValida(comandaProfessor.isValida());
         novaComanda.setId_antiga(comandaProfessor.getId_antiga());
         novaComanda.setModul(comandaProfessor.getModul());
-
+        
         comandaProfessorService.crearComandaProfessor(novaComanda);
-
+        
         for (LineaComanda lc : lineaComandaService.llistarLineaComandaWhereComanda(comandaProfessor)) {
             LineaComanda newLc = new LineaComanda();
             newLc.setId_Producte(lc.getId_Producte());
