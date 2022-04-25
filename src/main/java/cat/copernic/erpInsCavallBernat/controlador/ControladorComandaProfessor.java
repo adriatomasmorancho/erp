@@ -56,6 +56,9 @@ public class ControladorComandaProfessor {
         model.addAttribute("rol", rol);
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         //model.addAttribute("myId", myId);
         var misComandas = comandaProfessorService.getMisComandes(username);
@@ -78,6 +81,9 @@ public class ControladorComandaProfessor {
         model.addAttribute("rol", rol);
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         //model.addAttribute("myId", myId);
         var misComandas = comandaProfessorService.getMisComandes(username);
@@ -103,6 +109,9 @@ public class ControladorComandaProfessor {
         model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
         
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
         //Calcular data+dies
         var dataPlusTime = comandaProfessorService.getActualDatePlusDays(15);
         List<String> myList = Arrays.asList(dataPlusTime.split("/", -1));
@@ -115,11 +124,14 @@ public class ControladorComandaProfessor {
     }
 
     @GetMapping("/crearComandaProfessorProductes/{id_comanda}") //Pàgina productes de l'aplicació localhost:5050
-    public String productesComandaProfessor(Model model, ComandaProfessor id_comanda) {
+    public String productesComandaProfessor(Model model, @AuthenticationPrincipal User username, ComandaProfessor id_comanda) {
 
         var lineaComanda = lineaComandaService.llistarLineaComandaWhereComanda(id_comanda);
         model.addAttribute("lineaComandes", lineaComanda);
         model.addAttribute("id_comanda", id_comanda.getId_comanda());
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
         
         //Calulcar total
         double total = 0;
@@ -165,6 +177,9 @@ public class ControladorComandaProfessor {
         model.addAttribute("moduls", moduls);
         model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearComandaProfessor"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -196,8 +211,9 @@ public class ControladorComandaProfessor {
         }
         
         //Retorna la pàgina on es mostrarà el formulari de les dades dels productes segons el rol de l'usuari
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-        if (rol.equals("Administrador")) {
+        var miRol = comandaProfessorService.rolUsername(username);
+
+        if (miRol.equals("administrador")) {
             return "redirect:/totesComandes";
         } else {
             return "redirect:/comandesProfessor";
@@ -205,19 +221,25 @@ public class ControladorComandaProfessor {
     }
 
     @GetMapping("/afegirProducteComanda/{id_comanda}") //action = guardarProveidor
-    public String afegirProducteComanda(Model model, ComandaProfessor id_comanda, Errors errors, LineaComanda lineaComanda) {
+    public String afegirProducteComanda(Model model, @AuthenticationPrincipal User username, ComandaProfessor id_comanda, Errors errors, LineaComanda lineaComanda) {
         var productes = producteService.llistarProductes();
         model.addAttribute("productes", productes);
         model.addAttribute("id_comanda", id_comanda.getId_comanda());
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearComandaProfessorAfegirProducte";
     }
 
     @GetMapping("/editarLineaComanda/{lineaComanda}") //action = editarComanda
-    public String editarProducteComanda(Model model, LineaComanda lineaComanda, Errors errors) {
+    public String editarProducteComanda(Model model, @AuthenticationPrincipal User username, LineaComanda lineaComanda, Errors errors) {
         var productes = producteService.llistarProductes();
         model.addAttribute("productes", productes);
         model.addAttribute("lineaComanda", lineaComanda);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "crearComandaProfessorEditarProducte";
     }
@@ -262,7 +284,7 @@ public class ControladorComandaProfessor {
     }
 
     @GetMapping("/mesInfoComandaProfessor/{id_comanda}")
-    public String editar(ComandaProfessor comandaProfessor, Model model) {
+    public String editar(ComandaProfessor comandaProfessor, Model model, @AuthenticationPrincipal User username) {
 
         log.info(String.valueOf(comandaProfessor.getId_comanda()));
         comandaProfessor = comandaProfessorService.cercarComandaProfessor(comandaProfessor);
@@ -275,6 +297,9 @@ public class ControladorComandaProfessor {
         }
         String finalTotal = Double.toString(total) + "€";
         model.addAttribute("total", finalTotal);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "mesInfoComandaProfessor";
     }

@@ -21,4 +21,7 @@ public interface ProducteServiceInterface {
     public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un producte
     
     public Producte cercarProducte(Producte producte); //Mètode que implementarem per cercar un producte
+    
+    public String rolUsername(User username);
+    
 }

@@ -33,6 +33,9 @@ public class CategoriaService implements CategoriaServiceInterface{
     */
     @Autowired
     private CategoriaDAO categoria; 
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar categories de la taula categoria de la BBDD erp*/
     @Override
@@ -53,6 +56,19 @@ public class CategoriaService implements CategoriaServiceInterface{
     @Override
     public String getRolUserCurrent(User username) {
         return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
 
     /*Afegir la categoria passat per paràmetre a la taula producte de la BBDD erp*/

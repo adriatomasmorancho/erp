@@ -24,5 +24,7 @@ public interface ModulServiceInterface {
     public void eliminarModul(Modul modul); //Mètode que implementarem per eliminar una categoria
     
     public Modul cercarModul(Modul modul); //Mètode que implementarem per cercar una categoria
+    
+    public String rolUsername(User username);
 }
 

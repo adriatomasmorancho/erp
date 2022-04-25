@@ -47,6 +47,9 @@ public class ControladorComandaAdministrador {
         var rol = comandaProfessorService.getRolUserCurrent(username);
 
         model.addAttribute("rol", rol);
+        
+        var miRol = comandaAdministradorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "comandesAdministrador";
     }
@@ -57,6 +60,9 @@ public class ControladorComandaAdministrador {
         model.addAttribute("comandesProfessor", comandesProfessor);
         var rol = comandaProfessorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
 

@@ -34,6 +34,9 @@ public class ModulService implements ModulServiceInterface{
     */
     @Autowired
     private ModulDAO modul; 
+    
+    @Autowired
+    private UsuariServiceInterface usuariService;
 
     /*LListar categories de la taula categoria de la BBDD erp*/
     @Override
@@ -93,6 +96,19 @@ public class ModulService implements ModulServiceInterface{
 
         return this.modul.findById(modul.getId_modul()).orElse(null);
         
+    }
+    
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
     
 }

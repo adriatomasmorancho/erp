@@ -108,7 +108,7 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         return fecha;
 
     }
-    
+
     @Override
     public String getActualDatePlusDays(int days) {
         Date date = new Date();
@@ -161,5 +161,18 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
             }
         }
         return ids;
+    }
+
+    @Override
+    public String rolUsername(User username) {
+        var usuari = username.getUsername();
+        var usuaris = usuariService.llistarUsuaris();
+        String rol = null;
+        for (var usuario : usuaris) {
+            if (usuario.getUsername().equals(usuari)) {
+                rol = usuario.getRol();
+            }
+        }
+        return rol;
     }
 }

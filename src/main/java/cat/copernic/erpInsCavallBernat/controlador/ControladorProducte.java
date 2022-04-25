@@ -50,6 +50,9 @@ public class ControladorProducte {
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
         model.addAttribute("unitats", unitats);
+        
+        var miRol = producteService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "productes";
     }
@@ -64,6 +67,10 @@ public class ControladorProducte {
         model.addAttribute("unitats", unitats);
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = producteService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
         return "crearProducte"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
 
@@ -99,6 +106,9 @@ public class ControladorProducte {
 
         var rol = proveidorService.getRolUserCurrent(username);
         model.addAttribute("rol", rol);
+        
+        var miRol = producteService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
 
         return "editarProducte";
     }
