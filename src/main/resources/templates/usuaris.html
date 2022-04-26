@@ -13,6 +13,7 @@
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
         <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
         <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
     </head>
     <body>
         <header th:replace="layout/navBar :: navBar"/>
@@ -27,8 +28,8 @@
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
                 <div>
                     <br />
-                    <table id="table_id">
-                        <thead>
+                    <table id="table_id" class="table table-bordered">
+                        <thead class="thead-green">
                             <tr>
                                 <th th:text="#{usuari.email}"/>
                                 <th th:text="#{usuari.password}"/>

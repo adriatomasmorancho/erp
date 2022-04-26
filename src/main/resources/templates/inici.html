@@ -20,7 +20,8 @@
         <br/>
         <h1 align="center" th:text="#{titol}"/>
         <br/>
-        <div th:if="${rol}==Administrador" class="center">
+        <img src="https://agora.xtec.cat/inscavallbernat/wp-content/uploads/usu1351/2021/01/Logo-EHTV-300x300.jpeg" class="center">
+        <div th:if="${rol}==Administrador" class="left">
             <p>
                 <a th:href="@{/crearComandaProfessor}"><input class="btn btn-primary btn-lg" type="button" name="crear" value="Nova Comanda"/></a>
             </p>
@@ -31,7 +32,7 @@
                 <a th:href="@{/comandesAdministrador}"><input class="btn btn-primary btn-lg" type="button" name="comandesAdministrador" value="Comandes Centralitzades"/></a>        
             </p>
         </div>
-        <div th:unless="${rol}==Administrador" class="center">
+        <div th:unless="${rol}==Administrador" class="left">
             <p>
                 <a th:href="@{/crearComandaProfessor}"><input class="btn btn-primary btn-lg" type="button" name="crear" value="Nova Comanda"/></a>
             </p>
