@@ -17,12 +17,18 @@
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
+
+        .groc {
+            font-weight: bold;
+            color: yellow;
+        }
     </style>
     <body style="background-color:powderblue;">
         <div class="card text-white bg-secondary mb-3 center" style="width: 25rem;">
             <div class="card-body">
                 <h2 class="card-title" th:text="#{login}"/>
                 <form method="POST" th:action="@{/login}">
+                    <div class="groc" th:if="*{param.error}" th:text="#{errorLogin}"/>
                     <p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

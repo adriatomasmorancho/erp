@@ -40,7 +40,7 @@ public class LineaComanda implements Serializable {
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_producte", referencedColumnName = "id_producte")
-    private Producte  id_Producte;
+    private Producte id_Producte;
     
     @NotNull
     private long  quantitat;

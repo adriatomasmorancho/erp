@@ -78,8 +78,6 @@ public class ControladorComandaProfessor {
         var fecha = comandaProfessorService.getCurrentDate();
         log.info("FECHA:::: " + fecha);
         var ids = comandaProfessorService.getIds(username);
-        
-        
 
         model.addAttribute("comandesProfessor", comandesProfessor);
         model.addAttribute("rol", rol);
