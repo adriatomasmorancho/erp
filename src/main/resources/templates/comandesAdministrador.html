@@ -55,10 +55,5 @@
             <div th:if="${comandesAdministrador==null || comandesAdministrador.empty}">
                 No hi ha Comandes Centralitzades a la llista.
             </div>
-            <br/>
-            <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <a th:href="@{/crearComandaAdministrador}" th:text="#{comanda.crearNovaComanda}"></a>
-                <a th:href="@{/crearComandaAdministrador}"><i class="bi bi-plus-circle"></i></a>
-            </div>
     </body>
 </html>
