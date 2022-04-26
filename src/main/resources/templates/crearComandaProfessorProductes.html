@@ -33,6 +33,7 @@
                                 <th th:text="#{comandaProducte.nom}"/>
                                 <th th:text="#{comandaProducte.preu}"/>
                                 <th th:text="#{comandaProducte.Quantitat}"/>
+                                <th th:text="#{comandaProducte.Unitat}"/>
                                 <th th:text="#{comandaProducte.PreElaboracions}"/>
                                 <th th:text="#{comandaProducte.Observacions}"/>
                                 <th th:text="#{editar}"/>
@@ -44,6 +45,7 @@
                                 <td th:text="${producte.id_Producte.nom}"></td>
                                 <td th:text="${producte.id_Producte.preu}"></td>
                                 <td th:text="${producte.quantitat}"></td>
+                                <td th:text="${producte.id_Producte.unitat.nom}"></td>
                                 <td th:text="${producte.pre_elavoracions}"></td>
                                 <td th:text="${producte.observacio}"></td>
                                 <td><a th:href="@{/editarLineaComanda/}+${producte.id_linea_comanda}" ><i class="bi bi-pencil-fill"></i></a></td>
