@@ -10,6 +10,7 @@ import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ModulServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
+import cat.copernic.erpInsCavallBernat.serveis.UnitatServiceInterface;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class ControladorComandaProfessor {
     private LineaComandaServiceInterface lineaComandaService;
     @Autowired
     private ModulServiceInterface modulComandaService;
-
+    
     @GetMapping("/comandesProfessor") //Pàgina productes de l'aplicació localhost:5050
     public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
 
