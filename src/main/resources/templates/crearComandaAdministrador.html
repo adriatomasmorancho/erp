@@ -27,44 +27,53 @@
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
                 <div>
-                    <br/>
-                    <table id="table_id">
-                        <thead>
-                            <tr>
-                                <th/>
-                                <th th:text="#{comanda.nom}"/>
-                                <th th:text="#{comanda.dataCreacio}"/>
-                                <th th:text="#{comanda.dataArribada}"/>
-                                <th th:text="#{comanda.modul}"/>
-                                <th th:text="#{professor}"/>
-                                <th th:text="#{comanda.mesInfo}"/>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="comandaProfessor : ${comandesProfessor}"> 
-                                <td><input type="checkbox" id="cbox1" value="first_checkbox"></td>
-                                <td th:text="${comandaProfessor.nom}"></td>
-                                <td th:text="${comandaProfessor.data}"></td>
-                                <td th:text="${comandaProfessor.data_Arribada}"></td>
-                                <td th:text="${comandaProfessor.modul.nom}"></td>
-                                <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
-                                <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <form th:action="@{/guardarComandaAdministrador}" method="post" th:object="${comandaAdministrador}">
+                        <br/>
+                        <table id="table_id">
+                            <thead>
+                                <tr>
+                                    <th/>
+                                    <th th:text="#{comanda.nom}"/>
+                                    <th th:text="#{comanda.dataCreacio}"/>
+                                    <th th:text="#{comanda.dataArribada}"/>
+                                    <th th:text="#{comanda.modul}"/>
+                                    <th th:text="#{professor}"/>
+                                    <th th:text="#{comanda.mesInfo}"/>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="comandaProfessor : ${comandesProfessor}"> 
+                                    <td><input type="checkbox" th:id="${comandaProfessor.id_comanda}" value=""></td>
+                                    <td th:text="${comandaProfessor.nom}"></td>
+                                    <td th:text="${comandaProfessor.data}"></td>
+                                    <td th:text="${comandaProfessor.data_Arribada}"></td>
+                                    <td th:text="${comandaProfessor.modul.nom}"></td>
+                                    <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
+                                    <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
+                        <label for="dataArribada" th:text="${dataArribada}"/>
+                        <div th:field="*{data_Arribada}==${dataArribada}"/>
+                        <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+                            <br/>
+                            <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Centralitzar"/>
+                            <br/>
+                            <input class="btn btn-primary btn-lg btn-block" type="button" name="cancelar" onclick='javascript:window.history.back()' value="Cancelar"/>
+                        </div> 
+                    </form>
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#table_id').DataTable();
                     });
                 </script>
+                <br/>
+                <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
+                    No hi ha Comandes a la llista.
+                </div>
+
             </div>
-            <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
-                No hi ha Comandes a la llista.
-            </div>
-              <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <a th:href="@{/crearComandaAdministrador}" th:text="#{comanda.centralitzarSeleccio}"></a>
-                <a th:href="@{/crearComandaAdministrador}"><i class="bi bi-plus-circle"></i></a>
-            </div> 
     </body>
 </html>

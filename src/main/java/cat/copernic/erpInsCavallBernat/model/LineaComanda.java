@@ -43,7 +43,7 @@ public class LineaComanda implements Serializable {
     private Producte id_Producte;
     
     @NotNull
-    private long  quantitat;
+    private long quantitat;
     
     private String observacio;
     

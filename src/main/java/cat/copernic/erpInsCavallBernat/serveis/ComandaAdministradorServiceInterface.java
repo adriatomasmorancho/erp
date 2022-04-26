@@ -1,6 +1,7 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
+import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 
 import java.util.List;
 import org.springframework.security.core.userdetails.User;
@@ -25,5 +26,6 @@ public interface ComandaAdministradorServiceInterface {
     
     public String rolUsername(User username);
 
-  
+    public void centralitzarComanda(ComandaAdministrador comandaAdministrador);
+    
 }
