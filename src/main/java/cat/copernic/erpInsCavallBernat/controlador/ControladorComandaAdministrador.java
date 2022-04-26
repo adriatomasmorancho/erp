@@ -55,14 +55,16 @@ public class ControladorComandaAdministrador {
     }
 
     @GetMapping("/crearComandaAdministrador") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
+    public String crearComandaAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         model.addAttribute("comandesProfessor", comandesProfessor);
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
+        
+        var dataArribada = comandaProfessorService.getActualDatePlusDays(15);
+        model.addAttribute("dataArribada", dataArribada);
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
+        
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
 
@@ -70,7 +72,7 @@ public class ControladorComandaAdministrador {
     public String guardarComandaAdministrador(@Valid ComandaAdministrador id_comanda_centralitzada, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
-            return "crearComandaAdministrador";
+            return "comandesAdministrador";
         }
         comandaAdministradorService.crearComandaAdministrador(id_comanda_centralitzada);
         return "redirect:/comandesAdministrador";

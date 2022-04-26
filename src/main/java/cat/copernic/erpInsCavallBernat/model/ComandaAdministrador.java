@@ -32,6 +32,6 @@ public class ComandaAdministrador implements Serializable {
      *ens mostrarà el missatge per defecte del sitema.
      */
     @NotEmpty
-    private Date  data_Arribada;
+    private Date data_Arribada;
   
 }
