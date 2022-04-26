@@ -29,6 +29,7 @@
                 <div>
                     <form th:action="@{/guardarComandaAdministrador}" method="post" th:object="${comandaAdministrador}">
                         <br/>
+                        
                         <table id="table_id">
                             <thead>
                                 <tr>
@@ -53,9 +54,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        
+                        <!--Date -->
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <label for="dataArribada" th:text="${dataArribada}"/>
-                        <div th:field="*{data_Arribada}==${dataArribada}"/>
+                        <input class="form-control" type="date" name="dataArribada" th:field="*{data_Arribada}" required>
+                        
                         <div align="center"><!-- Posem un enllaç per a crear un usuari -->
                             <br/>
                             <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Centralitzar"/>

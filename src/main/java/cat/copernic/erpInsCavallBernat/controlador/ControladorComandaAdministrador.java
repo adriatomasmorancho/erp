@@ -8,6 +8,8 @@ import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +61,6 @@ public class ControladorComandaAdministrador {
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         model.addAttribute("comandesProfessor", comandesProfessor);
         
-        var dataArribada = comandaProfessorService.getActualDatePlusDays(15);
-        model.addAttribute("dataArribada", dataArribada);
-        
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
         
@@ -74,7 +73,22 @@ public class ControladorComandaAdministrador {
             log.info("S'ha produït un error");
             return "comandesAdministrador";
         }
+        //Create comanda Centralitzada
         comandaAdministradorService.crearComandaAdministrador(id_comanda_centralitzada);
+        
+        //Create list and add selected comandes to centralitzar
+        List<ComandaProfessor> lcp = new ArrayList<ComandaProfessor>();
+        lcp.add(comandaProfessorService.llistarComandesProfessor().get(0));
+        
+        //Get centralitzada Id
+        Long myId = comandaAdministradorService.cercarComandaAdministrador(id_comanda_centralitzada).getId_comanda_centralitzada();
+        
+        //Push the Id to all comandes involved in the operation
+        for(ComandaProfessor cp : lcp){
+            cp.setId_centralitzada(myId);
+            comandaProfessorService.crearComandaProfessor(cp);
+        }
+        
         return "redirect:/comandesAdministrador";
     }
 
