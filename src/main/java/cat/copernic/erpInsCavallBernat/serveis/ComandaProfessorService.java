@@ -175,4 +175,17 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         }
         return rol;
     }
+
+    @Override
+    public List<ComandaProfessor> llistarComandesProfessorWhereCentralitzada(long idCentralitzada) {
+        List<ComandaProfessor> lcp = (List<ComandaProfessor>) comandaProfessor.findAll();
+        List<ComandaProfessor> finalLcp = new ArrayList<>();
+        for(ComandaProfessor cp : lcp){
+            if(cp.getId_centralitzada() == idCentralitzada){
+                finalLcp.add(cp);
+            }
+        }
+        
+        return finalLcp;
+    }
 }

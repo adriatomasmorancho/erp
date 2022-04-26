@@ -117,5 +117,29 @@ public class ControladorComandaAdministrador {
 
         return "mesInfoComandaAdministrador";
     }
+    
+    @GetMapping("/comandesProfessorCentralitzades/{id_ComandaAdministrador}") //Pàgina productes de l'aplicació localhost:5050
+    public String comandesProfessorCentralitzades(Model model, ComandaProfessor id_ComandaAdministrador, @AuthenticationPrincipal User username) {
+
+        List comandesProfessor = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_ComandaAdministrador.getId_centralitzada());
+        
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        log.info("USERNAME::: " + username);
+        var usuari = username.getUsername();
+        log.info("USUARI::: " + usuari);
+        var fecha = comandaProfessorService.getCurrentDate();
+        log.info("FECHA:::: " + fecha);
+
+        model.addAttribute("comandesProfessor", comandesProfessor);
+        model.addAttribute("rol", rol);
+        model.addAttribute("usuari", usuari);
+        model.addAttribute("fecha", fecha);
+
+        //model.addAttribute("myId", myId);
+        var misComandas = comandaProfessorService.getMisComandes(username);
+        model.addAttribute("misComandas", misComandas);
+
+        return "comandesProfessorCentralitzades";
+    }
 
 }

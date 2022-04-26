@@ -39,7 +39,7 @@
                         <tbody>
                             <tr th:each="comandaAdministrador: ${comandesAdministrador}"> 
                                 <td th:text="${comandaAdministrador.data_Arribada}"></td>
-                                <td><a th:href="@{/mesInfoComandaAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-info-circle"></i></a></td>
+                                <td><a th:href="@{/comandesProfessorCentralitzades/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-info-circle"></i></a></td>
                                 <td><a th:href="@{/editarComandaAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-pencil-fill"></i></a></td>
                                 <td><a th:href="@{/eliminarComandaAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
