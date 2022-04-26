@@ -6,7 +6,31 @@
     transform: translate(-50%, -50%);
 }
 
+.left {
+    position: absolute;
+    left: 80%;
+    top: 0%;
+    bottom: 65%;
+    top: 35%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
 .groc {
     font-weight: bold;
     color: yellow;
 }
+.container {
+      text-align: center;
+    }
+
+.thead-green {
+      background-color: #418000;
+      color: white;
+    }
+    
+.navBar-green {
+      background-color: #418000;
+      color: white;
+    }
+    
