@@ -57,7 +57,8 @@
                         
                         <!--Date -->
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <input class="form-control" type="date" name="dataArribada" th:field="*{data_Arribada}" required>
+                        <label for="dataArribada" th:text="${today}"/>
+                        <input class="form-control" type="date" name="dataArribada" th:min="${data_min_input}" th:field="*{data_Arribada}" required>
                         
                         <div align="center"><!-- Posem un enllaç per a crear un usuari -->
                             <br/>

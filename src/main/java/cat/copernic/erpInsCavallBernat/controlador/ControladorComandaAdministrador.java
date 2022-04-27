@@ -9,6 +9,8 @@ import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -60,6 +62,14 @@ public class ControladorComandaAdministrador {
     public String crearComandaAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         model.addAttribute("comandesProfessor", comandesProfessor);
+        
+        //Limitar el día actual com a mínim per a escollir en la Data Arribada
+        var today = comandaProfessorService.getActualDatePlusDays(0);
+        List<String> myList = Arrays.asList(today.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
