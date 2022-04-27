@@ -90,21 +90,27 @@ public class ControladorComandaAdministrador {
         return "redirect:/editarComandaComandesAdministrador/" + id_comanda_centralitzada.getId_comanda_centralitzada();
     }
     
-    @GetMapping("/editarComandaComandesAdministrador/{id_ComandaAdministrador}")
-    public String editarComandaComandesAdministrador(ComandaAdministrador id_ComandaAdministrador, Model model) {
-        log.info("cadmin::" + id_ComandaAdministrador.toString());
-        model.addAttribute("crearComanda", new crearCentralitzada());
+    @GetMapping("/editarComandaComandesAdministrador/{id_comanda_centralitzada}")
+    public String editarComandaComandesAdministrador(Model model,ComandaAdministrador id_comanda_centralitzada) {
+        
+        crearCentralitzada cc = new crearCentralitzada();
+        cc.setCa(id_comanda_centralitzada);
+        model.addAttribute("crearComanda", cc);
         
         //Comandes ja centralitzades amb l'id_centralitzada de la comandaAdmin actual
-        var comandesProfessorCentralitzadesWithId = comandaProfessorService.llistarComandesProfessorWhereIsCentralitzada("11/12/2022");
+        var comandesProfessorCentralitzadesWithId = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_comanda_centralitzada.getId_comanda_centralitzada());
         model.addAttribute("comandesProfessorCentralitzades", comandesProfessorCentralitzadesWithId);
         
         //Coamndes NO CENTRALITZADES amb la data de la comanda igual que la de la centralitzada seleccionada
-        var comandesProfessorCentralitzadesWithDate = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_ComandaAdministrador.getId_comanda_centralitzada());
+        var comandesProfessorCentralitzadesWithDate = comandaProfessorService.llistarComandesProfessorWhereIsCentralitzada("11/12/2022");
         model.addAttribute("comandesProfessorNoCentralitzades", comandesProfessorCentralitzadesWithDate);
         
         //Set Id comanda centralitzada
-        model.addAttribute("centralitzada_id", id_ComandaAdministrador);
+        model.addAttribute("centralitzada_id", id_comanda_centralitzada);
+        
+        //Create Title to show with date
+        String textTitol = "Comandes Centralitzades " + id_comanda_centralitzada.getData_Arribada();
+        model.addAttribute("textTitol", textTitol);
         
         return "afegirComandesComandaAdministrador";
     }
@@ -117,7 +123,7 @@ public class ControladorComandaAdministrador {
         crearCentralitzada.getCp().setId_centralitzada(crearCentralitzada.getCa().getId_comanda_centralitzada());
         comandaProfessorService.crearComandaProfessor(crearCentralitzada.getCp());
         
-        return "redirect:/editarComandaComandesAdministrador/0";
+        return "redirect:/editarComandaComandesAdministrador/" + crearCentralitzada.getCa().getId_comanda_centralitzada();
     }
 
     @GetMapping("/eliminarComandaAdministrador/{id_ComandaAdministrador}")

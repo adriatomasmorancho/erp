@@ -19,7 +19,7 @@
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
             <br/>
-            <h1 align="center" th:text="#{comanda.perCentralitzar}"/>
+            <h1 align="center" th:text="${textTitol}"/>
             <br/>
             <br/>
             <div>
@@ -64,7 +64,7 @@
             <form th:action="@{/afegirComandaComandesAdministrador}" method="post" id="form" th:object="${crearComanda}">
                 <div align="center">
                     <p>
-                        <input type="text" name="ca" th:value="${centralitzada_id.id_comanda_centralitzada}" th:field="*{ca}"/> 
+                        <input type="hidden" name="ca" th:field="*{ca}"/> 
 
                         <label for="comandaProfessor" th:text="#{comandaProfessor.CentralitzarComanda}"/>
                         <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}">
