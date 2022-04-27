@@ -28,7 +28,7 @@
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
                 <div>
                     <br />
-                    <table id="table_id" class="table table-bordered">
+                    <table id="table_id" class="table table-bordered text-center">
                         <thead class="thead-green">
                             <tr>
                                 <th th:text="#{unitat.nom}"/>
@@ -37,7 +37,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="unitat : ${unitats}"> 
+                            <tr th:each="unitat : ${unitats}" > 
                                 <td th:text="${unitat.nom}"></td>
                                 <td><a th:href="@{/editarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-pencil-fill"></i></a></td>
                                 <td><a th:href="@{/eliminarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-trash-fill"></i></a></td>

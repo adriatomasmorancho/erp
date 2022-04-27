@@ -22,7 +22,8 @@
             <br/>
             <br/>
             <div th:if="${comandesAdministrador!=null && !comandesAdministrador.empty}" align="center">
-                <table border="1">
+                <table id="table_id" class="table table-bordered text-center">
+                    <thead class="thead-green">
                     <tr>
                         <th th:text="#{comanda.dataArribada}"/>
                         <th th:text="#{comanda.mesInfo}"/>
@@ -30,6 +31,7 @@
                         <th th:text="#{editar}"/>
                         <th th:text="#{eliminar}"/>
                     </tr>
+                    </thead>
                     <tr th:each="comandaAdministrador: ${comandesAdministrador}"> 
                         <td th:text="${comandaAdministrador.data_arribada}"></td>
                         <td><a th:href="@{/mesInfoComandaAdministrador/}+${comandaAdministrador.id_ComandaAdministrador}" ><i class="bi bi-pencil-fill"></i></a></td>
