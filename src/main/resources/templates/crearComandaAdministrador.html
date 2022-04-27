@@ -27,9 +27,9 @@
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
                 <div>
-                    <form th:action="@{/guardarComandaAdministrador}" method="post" th:object="${comandaAdministrador}">
+                    <form th:action="@{/guardarComandaAdministrador}" method="post" id="form" th:object="${comandaAdministrador}">
                         <br/>
-                        
+
                         <table id="table_id">
                             <thead>
                                 <tr>
@@ -44,7 +44,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="comandaProfessor : ${comandesProfessor}"> 
-                                    <td><input type="checkbox" th:id="${comandaProfessor.id_comanda}" value=""></td>
+                                    <td><input type="checkbox" th:id="${comandaProfessor.id_comanda}" th:name="${comandaProfessor.id_comanda}" value="${comandaProfessor.id_comanda}"></td>
                                     <td th:text="${comandaProfessor.nom}"></td>
                                     <td th:text="${comandaProfessor.data}"></td>
                                     <td th:text="${comandaProfessor.data_Arribada}"></td>
@@ -54,24 +54,31 @@
                                 </tr>
                             </tbody>
                         </table>
-                        
+
                         <!--Date -->
                         <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <label for="dataArribada" th:text="${today}"/>
                         <input class="form-control" type="date" name="dataArribada" th:min="${data_min_input}" th:field="*{data_Arribada}" required>
-                        
+
                         <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+                            <a href="javascript:seleccionar_todo()">Marcar todos</a> 
                             <br/>
                             <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Centralitzar"/>
                             <br/>
                             <input class="btn btn-primary btn-lg btn-block" type="button" name="cancelar" onclick='javascript:window.history.back()' value="Cancelar"/>
                         </div> 
+
                     </form>
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#table_id').DataTable();
                     });
+                </script>
+                <script type="text/javascript">
+                    function seleccionar_todo() {
+                        for (i = 0; i < document.form.elements.length; i++)
+                                document.form.elements[i].checked = true;
+                    }
                 </script>
                 <br/>
                 <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
