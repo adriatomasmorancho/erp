@@ -16,9 +16,14 @@
     transform: translate(-50%, -50%);
 }
 
-.groc {
+.text-center {
+    
+    text-align: center;
+}
+
+.red {
     font-weight: bold;
-    color: yellow;
+    color: red;
 }
 .container {
       text-align: center;
@@ -32,5 +37,8 @@
 .navBar-green {
       background-color: #418000;
       color: white;
+    }
+    .title-letter {
+        font-family: arial;
     }
     

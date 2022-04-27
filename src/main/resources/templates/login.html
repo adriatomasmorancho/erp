@@ -17,17 +17,23 @@
             transform: translate(-50%, -50%);
         }
 
-        .groc {
+        .red {
             font-weight: bold;
-            color: yellow;
+            color: red;
+        }
+        
+        .text-center{
+            text-align: center;
         }
     </style>
-    <body style="background-color:powderblue;">
-        <div class="card text-white bg-secondary mb-3 center" style="width: 25rem;">
-            <div class="card-body">
-                <h2 class="card-title" th:text="#{login}"/>
+    <body style="background-color:#418000;">
+        <div class="card text-black  mb-3 center" style="align-items: center; width: 25rem; background-color:white;">
+            <div class="card-body"> 
+                <img src="https://agora.xtec.cat/inscavallbernat/wp-content/uploads/usu1351/2021/01/Logo-EHTV-300x300.jpeg" > 
+                <br>  <br>  
+                <h2 class="card-title text-center" th:text="#{login}"/>
                 <form method="POST" th:action="@{/login}">
-                    <div class="groc" th:if="*{param.error}" th:text="#{errorLogin}"/>
+                    <div class="red" th:if="*{param.error}" th:text="#{errorLogin}"/>
                     <p>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
