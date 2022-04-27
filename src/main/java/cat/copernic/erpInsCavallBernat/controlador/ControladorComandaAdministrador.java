@@ -6,8 +6,13 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.crearCentralitzada;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,14 +60,21 @@ public class ControladorComandaAdministrador {
     }
 
     @GetMapping("/crearComandaAdministrador") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
+    public String crearComandaAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
         model.addAttribute("comandesProfessor", comandesProfessor);
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
+        
+        //Limitar el día actual com a mínim per a escollir en la Data Arribada
+        var today = comandaProfessorService.getActualDatePlusDays(0);
+        List<String> myList = Arrays.asList(today.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
+        
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
 
@@ -70,10 +82,48 @@ public class ControladorComandaAdministrador {
     public String guardarComandaAdministrador(@Valid ComandaAdministrador id_comanda_centralitzada, Errors errors) {
         if (errors.hasErrors()) {
             log.info("S'ha produït un error");
-            return "crearComandaAdministrador";
+            return "comandesAdministrador";
         }
+        //Create comanda Centralitzada
         comandaAdministradorService.crearComandaAdministrador(id_comanda_centralitzada);
-        return "redirect:/comandesAdministrador";
+        
+        return "redirect:/editarComandaComandesAdministrador/" + id_comanda_centralitzada.getId_comanda_centralitzada();
+    }
+    
+    @GetMapping("/editarComandaComandesAdministrador/{id_comanda_centralitzada}")
+    public String editarComandaComandesAdministrador(Model model,ComandaAdministrador id_comanda_centralitzada) {
+        
+        crearCentralitzada cc = new crearCentralitzada();
+        cc.setCa(id_comanda_centralitzada);
+        model.addAttribute("crearComanda", cc);
+        
+        //Comandes ja centralitzades amb l'id_centralitzada de la comandaAdmin actual
+        var comandesProfessorCentralitzadesWithId = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_comanda_centralitzada.getId_comanda_centralitzada());
+        model.addAttribute("comandesProfessorCentralitzades", comandesProfessorCentralitzadesWithId);
+        
+        //Coamndes NO CENTRALITZADES amb la data de la comanda igual que la de la centralitzada seleccionada
+        var comandesProfessorCentralitzadesWithDate = comandaProfessorService.llistarComandesProfessorWhereIsCentralitzada("11/12/2022");
+        model.addAttribute("comandesProfessorNoCentralitzades", comandesProfessorCentralitzadesWithDate);
+        
+        //Set Id comanda centralitzada
+        model.addAttribute("centralitzada_id", id_comanda_centralitzada);
+        
+        //Create Title to show with date
+        String textTitol = "Comandes Centralitzades " + id_comanda_centralitzada.getData_Arribada();
+        model.addAttribute("textTitol", textTitol);
+        
+        return "afegirComandesComandaAdministrador";
+    }
+    
+    @PostMapping("/afegirComandaComandesAdministrador") //action = guardarProveidor
+    public String afegirComandaComandesAdministrador(@Valid crearCentralitzada crearCentralitzada, Errors errors) {
+        log.info(crearCentralitzada.getCa().toString());
+        
+        //Set centralitzada's id
+        crearCentralitzada.getCp().setId_centralitzada(crearCentralitzada.getCa().getId_comanda_centralitzada());
+        comandaProfessorService.crearComandaProfessor(crearCentralitzada.getCp());
+        
+        return "redirect:/editarComandaComandesAdministrador/" + crearCentralitzada.getCa().getId_comanda_centralitzada();
     }
 
     @GetMapping("/eliminarComandaAdministrador/{id_ComandaAdministrador}")
@@ -100,6 +150,30 @@ public class ControladorComandaAdministrador {
         model.addAttribute("comandaAdministrador", comandaAdministrador);
 
         return "mesInfoComandaAdministrador";
+    }
+    
+    @GetMapping("/comandesProfessorCentralitzades/{id_ComandaAdministrador}") //Pàgina productes de l'aplicació localhost:5050
+    public String comandesProfessorCentralitzades(Model model, ComandaProfessor id_ComandaAdministrador, @AuthenticationPrincipal User username) {
+
+        List comandesProfessor = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_ComandaAdministrador.getId_centralitzada());
+        
+        var rol = comandaProfessorService.getRolUserCurrent(username);
+        log.info("USERNAME::: " + username);
+        var usuari = username.getUsername();
+        log.info("USUARI::: " + usuari);
+        var fecha = comandaProfessorService.getCurrentDate();
+        log.info("FECHA:::: " + fecha);
+
+        model.addAttribute("comandesProfessor", comandesProfessor);
+        model.addAttribute("rol", rol);
+        model.addAttribute("usuari", usuari);
+        model.addAttribute("fecha", fecha);
+
+        //model.addAttribute("myId", myId);
+        var misComandas = comandaProfessorService.getMisComandes(username);
+        model.addAttribute("misComandas", misComandas);
+
+        return "comandesProfessorCentralitzades";
     }
 
 }

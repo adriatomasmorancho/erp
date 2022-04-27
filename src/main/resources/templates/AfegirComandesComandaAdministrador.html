@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title th:text="#{comanda}"/>
+        <meta charset="UTF-8">
+        <!--Enllaç als estils de Bootstrap-->
+        <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!--Enllaç als estils de Font Awesome-->
+        <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+        <!--Llibreries jquery, popper i Java Script de bootstrap pels elements dinamics que utilitzarem-->
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <link th:href="@{/styles.css}" rel="stylesheet"></link>
+    </head>
+    <body>
+        <header th:replace="layout/navBar :: navBar"/>
+        <div style="width: 50%; margin: 0 auto;">
+            <br/>
+            <h1 align="center" th:text="${textTitol}"/>
+            <br/>
+            <br/>
+            <div>
+                <div th:if="${comandesProfessorCentralitzades!=null && !comandesProfessorCentralitzades.empty}" align="center">
+                    <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
+                    <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
+                    <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
+                    <table id="table_id">
+                        <thead>
+                            <tr>
+                                <th th:text="#{comanda.nom}"/>
+                                <th th:text="#{comanda.dataCreacio}"/>
+                                <th th:text="#{comanda.dataArribada}"/>
+                                <th th:text="#{comanda.modul}"/>
+                                <th th:text="#{professor}"/>
+                                <th th:text="#{comanda.mesInfo}"/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="comandaProfessor : ${comandesProfessorCentralitzades}"> 
+                                <td th:text="${comandaProfessor.nom}"></td>
+                                <td th:text="${comandaProfessor.data}"></td>
+                                <td th:text="${comandaProfessor.data_Arribada}"></td>
+                                <td th:text="${comandaProfessor.modul.nom}"></td>
+                                <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
+                                <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+
+                </div>
+            </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#table_id').DataTable();
+                });
+            </script>
+            <div th:if="${comandesProfessorCentralitzades==null || comandesProfessorCentralitzades.empty}">
+                No hi ha Comandes a la llista.
+            </div>
+            <form th:action="@{/afegirComandaComandesAdministrador}" method="post" id="form" th:object="${crearComanda}">
+                <div align="center">
+                    <p>
+                        <input type="hidden" name="ca" th:field="*{ca}"/> 
+
+                        <label for="comandaProfessor" th:text="#{comandaProfessor.CentralitzarComanda}"/>
+                        <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}">
+                            <option th:each="cps : ${comandesProfessorNoCentralitzades}" th:value="${cps.id_comanda}" th:text="${cps.nom}"></option>
+                        </select>
+                    </p>
+                    <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Comanda"/>
+                </div> 
+            </form>
+    </body>
+</html>

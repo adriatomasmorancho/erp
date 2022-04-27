@@ -16,6 +16,10 @@ public interface ComandaProfessorServiceInterface {
     
     public List<ComandaProfessor> llistarComandesProfessor(); //Mètode que implementarem per llistar comandes
     
+    public List<ComandaProfessor> llistarComandesProfessorWhereCentralitzada(long idCentralitzada);
+    
+    public List<ComandaProfessor> llistarComandesProfessorWhereIsCentralitzada(String date);
+    
     public String getRolUserCurrent(User username);
    
     public void crearComandaProfessor(ComandaProfessor comandaProfessor); //Mètode que implementarem per afegir una comanda

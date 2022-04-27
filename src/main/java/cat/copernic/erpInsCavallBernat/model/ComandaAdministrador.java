@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 /**
@@ -31,7 +32,8 @@ public class ComandaAdministrador implements Serializable {
     /*Validació per comprovar que el nom no està buit. Com a paràmetre no li passem res, per tant
      *ens mostrarà el missatge per defecte del sitema.
      */
-    @NotEmpty
-    private Date  data_Arribada;
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String data_Arribada;
   
 }

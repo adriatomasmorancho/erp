@@ -19,45 +19,47 @@
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
             <br/>
-            <h1 align="center" th:text="#{comanda.perCentralitzar}"/>
+            <h1 align="center" th:text="Comandes"/>
             <br/>
             <br/>
-            <div th:if="${comandesProfessor!=null && !comandesProfessor.empty}" align="center">
+            <div th:if="${misComandas!=null && !misComandas.empty}" align="center">
                 <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                 <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                 <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
                 <div>
-                    <form th:action="@{/guardarComandaAdministrador}" method="post" id="form" th:object="${comandaAdministrador}">
-                        <!--Date -->
-                        <label for="dataArribada" th:text="#{comanda.dataArribada1}"/>
-                        <input class="form-control" type="date" name="dataArribada" th:min="${data_min_input}" th:field="*{data_Arribada}" required>
-
-                        <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                            <a href="javascript:seleccionar_todo()">Marcar todos</a> 
-                            <br/>
-                            <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Centralitzar"/>
-                            <br/>
-                            <input class="btn btn-primary btn-lg btn-block" type="button" name="cancelar" onclick='javascript:window.history.back()' value="Cancelar"/>
-                        </div> 
-
-                    </form>
+                    <br/>
+                    <table id="table_id" class="table table-bordered">
+                        <thead class="thead-green">
+                            <tr>
+                                <th th:text="#{comanda.nom}"/>
+                                <th th:text="#{comanda.dataCreacio}"/>
+                                <th th:text="#{comanda.dataArribada}"/>
+                                <th th:text="#{comanda.modul}"/>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="misComandas : ${misComandas}"> 
+                                <td th:text="${misComandas.nom}"></td>
+                                <td th:text="${misComandas.data}"></td>
+                                <td th:text="${misComandas.data_Arribada}"></td>
+                                <td th:text="${misComandas.modul.nom}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#table_id').DataTable();
                     });
                 </script>
-                <script type="text/javascript">
-                    function seleccionar_todo() {
-                        for (i = 0; i < document.form.elements.length; i++)
-                                document.form.elements[i].checked = true;
-                    }
-                </script>
-                <br/>
-                <div th:if="${comandesProfessor==null || comandesProfessor.empty}">
-                    No hi ha Comandes a la llista.
-                </div>
-
+            </div>
+            <div th:if="${misComandas==null || misComandas.empty}">
+                No hi ha Comandes a la llista.
+            </div>
+            <br/>
+            <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+                <a th:href="@{/crearComandaProfessor}" th:text="#{comanda.crearComanda}"></a>
+                <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>
             </div>
     </body>
 </html>
