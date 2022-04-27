@@ -188,4 +188,18 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
         
         return finalLcp;
     }
+
+    @Override
+    public List<ComandaProfessor> llistarComandesProfessorWhereIsCentralitzada(String date) {
+        List<ComandaProfessor> lcp = (List<ComandaProfessor>) comandaProfessor.findAll();
+        List<ComandaProfessor> finalLcp = new ArrayList<>();
+        for(ComandaProfessor cp : lcp){
+            //TODO CHECK DATE!
+            if(cp.getId_centralitzada() == 0){
+                finalLcp.add(cp);
+            }
+        }
+        
+        return finalLcp;
+    }
 }

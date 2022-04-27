@@ -6,6 +6,7 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.crearCentralitzada;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import java.util.ArrayList;
@@ -86,20 +87,37 @@ public class ControladorComandaAdministrador {
         //Create comanda Centralitzada
         comandaAdministradorService.crearComandaAdministrador(id_comanda_centralitzada);
         
-        //Create list and add selected comandes to centralitzar
-        List<ComandaProfessor> lcp = new ArrayList<ComandaProfessor>();
-        lcp.add(comandaProfessorService.llistarComandesProfessor().get(0));
+        return "redirect:/editarComandaComandesAdministrador/" + id_comanda_centralitzada.getId_comanda_centralitzada();
+    }
+    
+    @GetMapping("/editarComandaComandesAdministrador/{id_ComandaAdministrador}")
+    public String editarComandaComandesAdministrador(ComandaAdministrador id_ComandaAdministrador, Model model) {
+        log.info("cadmin::" + id_ComandaAdministrador.toString());
+        model.addAttribute("crearComanda", new crearCentralitzada());
         
-        //Get centralitzada Id
-        Long myId = comandaAdministradorService.cercarComandaAdministrador(id_comanda_centralitzada).getId_comanda_centralitzada();
+        //Comandes ja centralitzades amb l'id_centralitzada de la comandaAdmin actual
+        var comandesProfessorCentralitzadesWithId = comandaProfessorService.llistarComandesProfessorWhereIsCentralitzada("11/12/2022");
+        model.addAttribute("comandesProfessorCentralitzades", comandesProfessorCentralitzadesWithId);
         
-        //Push the Id to all comandes involved in the operation
-        for(ComandaProfessor cp : lcp){
-            cp.setId_centralitzada(myId);
-            comandaProfessorService.crearComandaProfessor(cp);
-        }
+        //Coamndes NO CENTRALITZADES amb la data de la comanda igual que la de la centralitzada seleccionada
+        var comandesProfessorCentralitzadesWithDate = comandaProfessorService.llistarComandesProfessorWhereCentralitzada(id_ComandaAdministrador.getId_comanda_centralitzada());
+        model.addAttribute("comandesProfessorNoCentralitzades", comandesProfessorCentralitzadesWithDate);
         
-        return "redirect:/comandesAdministrador";
+        //Set Id comanda centralitzada
+        model.addAttribute("centralitzada_id", id_ComandaAdministrador);
+        
+        return "afegirComandesComandaAdministrador";
+    }
+    
+    @PostMapping("/afegirComandaComandesAdministrador") //action = guardarProveidor
+    public String afegirComandaComandesAdministrador(@Valid crearCentralitzada crearCentralitzada, Errors errors) {
+        log.info(crearCentralitzada.getCa().toString());
+        
+        //Set centralitzada's id
+        crearCentralitzada.getCp().setId_centralitzada(crearCentralitzada.getCa().getId_comanda_centralitzada());
+        comandaProfessorService.crearComandaProfessor(crearCentralitzada.getCp());
+        
+        return "redirect:/editarComandaComandesAdministrador/0";
     }
 
     @GetMapping("/eliminarComandaAdministrador/{id_ComandaAdministrador}")
