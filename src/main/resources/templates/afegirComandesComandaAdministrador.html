@@ -27,8 +27,8 @@
                     <script src="../webjars/jquery/3.6.0/jquery.min.js"></script>
                     <script src="../webjars/datatables/1.11.4/js/jquery.dataTables.min.js"></script>
                     <link href="../webjars/datatables/1.11.4/css/jquery.dataTables.min.css" rel="stylesheet"></link>
-                    <table id="table_id">
-                        <thead>
+                    <table id="table_id" class="table table-bordered text-center">
+                        <thead class="thead-green">
                             <tr>
                                 <th th:text="#{comanda.nom}"/>
                                 <th th:text="#{comanda.dataCreacio}"/>
@@ -66,14 +66,14 @@
                     <p>
                         <input type="hidden" name="ca" th:field="*{ca}"/> 
                         <label for="comandaProfessor" th:text="#{comandaProfessor.CentralitzarComanda}"/>
-                        <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} != null">
-                        <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}">
-                            <option th:each="cps : ${comandesProfessorNoCentralitzades}" th:value="${cps.id_comanda}" th:text="${cps.nom}"></option>
+                      <!--  <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} != null">-->
+                        <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}" >
+                            <option th:each="cps : ${comandesProfessorNoCentralitzades}" th:value="${cps.id_comanda}" th:text="${cps.nom}" th:if="${cps.id_comanda} != null"></option>
                         </select>
-                        </div>
-                        <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} == null">
+                      <!-- </div>-->
+                     <!--   <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} == null">
                              <label for="comandaProfessor" th:text="No hi han mes comandes"/>
-                         </div>        
+                         </div>   -->     
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Comanda"/>
                 </form>
