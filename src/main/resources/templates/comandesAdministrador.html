@@ -30,18 +30,19 @@
                         <thead class="thead-green">
                             <tr>
                                 <th th:text="#{comanda.dataArribada}"/>
-                                <th th:text="#{comanda.mesInfo}"/>
-                                <th th:text="#{comanda.duplicar}"/>
                                 <th th:text="#{editar}"/>
+                                <th th:text="#{comandes}"/>
+                                <th th:text="#{comanda.mesInfo}"/>
                                 <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="comandaAdministrador: ${comandesAdministrador}"> 
                                 <td th:text="${comandaAdministrador.data_Arribada}"></td>
-                                <td><a th:href="@{/comandesProfessorCentralitzades/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-info-circle"></i></a></td>
-                                <td><a th:href="@{/editarComandaComandesAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminarComandaAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-trash-fill"></i></a></td>
+                                <td><a th:href="@{/editarComandaAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-pencil-fill"></i></a></td>
+                                <td><a th:href="@{/editarComandaComandesAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-box"></i></a></td>
+                                <td><a th:href="@{/showProductesFromCentralitzada/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-info-circle"></i></a></td>
+                                <td><a th:href="@{/eliminarComandaComandesAdministrador/}+${comandaAdministrador.id_comanda_centralitzada}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
                         </tbody>
                     </table>

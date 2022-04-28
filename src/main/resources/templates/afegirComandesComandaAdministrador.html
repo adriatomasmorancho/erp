@@ -19,7 +19,7 @@
         <header th:replace="layout/navBar :: navBar"/>
         <div style="width: 50%; margin: 0 auto;">
             <br/>
-            <h1 align="center" th:text="${textTitol}"/>
+            <h1 align="center" th:text="${dataComanda}"/>
             <br/>
             <br/>
             <div>
@@ -61,11 +61,10 @@
             <div th:if="${comandesProfessorCentralitzades==null || comandesProfessorCentralitzades.empty}">
                 No hi ha Comandes a la llista.
             </div>
-            <form th:action="@{/afegirComandaComandesAdministrador}" method="post" id="form" th:object="${crearComanda}">
-                <div align="center">
+            <div th:if="${comandesProfessorNoCentralitzades!=null || !comandesProfessorNoCentralitzades.empty}" align="center">
+                <form th:action="@{/afegirComandaComandesAdministrador}" method="post" id="form" th:object="${crearComanda}">
                     <p>
                         <input type="hidden" name="ca" th:field="*{ca}"/> 
-
                         <label for="comandaProfessor" th:text="#{comandaProfessor.CentralitzarComanda}"/>
                         <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} != null">
                         <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}">
@@ -77,7 +76,12 @@
                          </div>        
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Comanda"/>
-                </div> 
-            </form>
+                </form>
+            </div>
+            <div th:unless="${comandesProfessorNoCentralitzades!=null || !comandesProfessorNoCentralitzades.empty}" align="center">
+                No queden comandes per centralitzar amb aquesta data.
+            </div>
+            <br/>
+            <input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" onclick="window.location.href='/comandesAdministrador'" value="Sortir"/>
     </body>
 </html>

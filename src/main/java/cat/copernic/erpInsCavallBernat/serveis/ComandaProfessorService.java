@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
+import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,6 +42,8 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     private ComandaProfessorDAO comandaProfessor;
     @Autowired
     private UsuariServiceInterface usuariService;
+    @Autowired
+    private LineaComandaService lineaService;
 
     /*LListar productes de la taula producte de la BBDD erp*/
     @Override
@@ -190,16 +194,42 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     }
 
     @Override
-    public List<ComandaProfessor> llistarComandesProfessorWhereIsCentralitzada(String date) {
-        List<ComandaProfessor> lcp = (List<ComandaProfessor>) comandaProfessor.findAll();
+    public List llistarComandesProfessorWhereIsCentralitzada(String date) {
+        var lcp = llistarComandesProfessor();
         List<ComandaProfessor> finalLcp = new ArrayList<>();
-        for(ComandaProfessor cp : lcp){
-            //TODO CHECK DATE!
-            if(cp.getId_centralitzada() == 0){
+        for(var cp : lcp){
+            if(cp.getId_centralitzada() == 0 && cp.getData_Arribada().equals(date)){
                 finalLcp.add(cp);
             }
         }
         
         return finalLcp;
+    }
+    
+    @Override
+    public List llistarComandesProductesWhereCentralitzada(long idCentralitzada) {
+        var lcp = llistarComandesProfessor();
+        List<LineaComanda> finalProductesLineaComanda = new ArrayList<>();
+        for(var cp : lcp){
+            if(cp.getId_centralitzada() == idCentralitzada){
+                var lineacomandes = lineaService.llistarLineaComandaWhereComanda(cp);
+                for(LineaComanda lcom : lineacomandes){
+                    boolean found = false;
+                    for(LineaComanda lc : finalProductesLineaComanda){
+                        if(lcom.getId_Producte() == lc.getId_Producte()){
+                            found = true;
+                            finalProductesLineaComanda.remove(lc);
+                            lc.setQuantitat(lcom.getQuantitat() + lc.getQuantitat());
+                            finalProductesLineaComanda.add(lc);
+                        }
+                    }
+                    if(!found){
+                        finalProductesLineaComanda.add(lcom);
+                    }
+                }
+            }
+        }
+        
+        return finalProductesLineaComanda;
     }
 }
