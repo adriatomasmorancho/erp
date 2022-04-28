@@ -60,6 +60,8 @@
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
                 <a th:href="@{/crearComandaProfessor}" th:text="#{comanda.crearComanda}"></a>
                 <a th:href="@{/crearComandaProfessor}"><i class="bi bi-plus-circle"></i></a>
+                <br/>
+                <input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" onclick='javascript:window.history.back()' value="Sortir"/>
             </div>
     </body>
 </html>

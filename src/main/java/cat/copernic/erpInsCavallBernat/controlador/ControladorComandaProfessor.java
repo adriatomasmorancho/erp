@@ -10,7 +10,6 @@ import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.LineaComandaServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ModulServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ProducteServiceInterface;
-import cat.copernic.erpInsCavallBernat.serveis.UnitatServiceInterface;
 import java.util.Arrays;
 import java.util.List;
 
