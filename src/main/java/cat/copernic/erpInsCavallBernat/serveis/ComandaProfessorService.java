@@ -190,12 +190,12 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     }
 
     @Override
-    public List<ComandaProfessor> llistarComandesProfessorWhereIsCentralitzada(String date) {
-        List<ComandaProfessor> lcp = (List<ComandaProfessor>) comandaProfessor.findAll();
+    public List llistarComandesProfessorWhereIsCentralitzada(String date) {
+        var lcp = llistarComandesProfessor();
         List<ComandaProfessor> finalLcp = new ArrayList<>();
-        for(ComandaProfessor cp : lcp){
+        for(var cp : lcp){
             //TODO CHECK DATE!
-            if(cp.getId_centralitzada() == 0){
+            if(cp.getId_centralitzada() == 0 && cp.getData_Arribada().equals(date)){
                 finalLcp.add(cp);
             }
         }
