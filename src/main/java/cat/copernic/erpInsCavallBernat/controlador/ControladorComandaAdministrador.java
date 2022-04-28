@@ -77,6 +77,25 @@ public class ControladorComandaAdministrador {
         
         return "crearComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
+    
+    @GetMapping("/editarComandaAdministrador/{id_comanda_centralitzada}") //URL a la pàgina amb el formulari de les dades del producte
+    public String editarComandaAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador id_comanda_centralitzada, Model model) {
+        var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
+        model.addAttribute("comandesProfessor", comandesProfessor);
+        
+        //Limitar el día actual com a mínim per a escollir en la Data Arribada
+        var today = comandaProfessorService.getActualDatePlusDays(0);
+        List<String> myList = Arrays.asList(today.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
+        return "editarComandaAdministrador"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
+    }
 
     @PostMapping("/guardarComandaAdministrador") //action = guardarProveidor
     public String guardarComandaAdministrador(@Valid ComandaAdministrador comandaAdministrador, Errors errors) {
@@ -95,6 +114,25 @@ public class ControladorComandaAdministrador {
         comandaAdministradorService.crearComandaAdministrador(comandaAdministrador);
         
         return "redirect:/editarComandaComandesAdministrador/" + comandaAdministrador.getId_comanda_centralitzada();
+    }
+    
+    @PostMapping("/guardarComandaAdministradorEditada") //action = guardarProveidor
+    public String guardarComandaAdministradorEditada(@Valid ComandaAdministrador comandaAdministrador, Errors errors) {
+        if (errors.hasErrors()) {
+            log.info("S'ha produït un error");
+            return "comandesAdministrador";
+        }
+        var dataArribada = comandaAdministrador.getData_Arribada();
+        var dia = dataArribada.substring(8, dataArribada.length());
+        var mes = dataArribada.substring(5, 7);
+        var año = dataArribada.substring(0, 4);
+        var fecha = dia + "/" + mes + "/" + año;
+        log.info("FECHA:::: " + fecha);
+        comandaAdministrador.setData_Arribada(fecha);
+        //Create comanda Centralitzada
+        comandaAdministradorService.crearComandaAdministrador(comandaAdministrador);
+        
+        return "redirect:/comandesAdministrador";
     }
     
     @GetMapping("/editarComandaComandesAdministrador/{id_comanda_centralitzada}")
@@ -169,32 +207,6 @@ public class ControladorComandaAdministrador {
     public String eliminarComandaAdministrador(ComandaAdministrador comandaAdministrador) {
         comandaAdministradorService.eliminarComandaAdministrador(comandaAdministrador);
         return "redirect:/comandesAdministrador";
-    }
-
-    @GetMapping("/editarComandaAdministrador/{id_comanda_centralitzada}")
-    public String editarComandaAdministrador(@AuthenticationPrincipal User username, ComandaAdministrador comandaAdministrador, Model model) {
-
-        log.info(String.valueOf(comandaAdministrador.getId_comanda_centralitzada()));
-        comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
-        model.addAttribute("comandaAdministrador", comandaAdministrador);
-        
-        var miRol = comandaProfessorService.rolUsername(username);
-        model.addAttribute("miRol", miRol);
-
-        return "editarComandaAdministrador";
-    }
-
-    @GetMapping("/mesInfoComandaAdministrador/{id_ComandaAdministrador}")
-    public String editar(@AuthenticationPrincipal User username, ComandaAdministrador comandaAdministrador, Model model) {
-
-        log.info(String.valueOf(comandaAdministrador.getId_comanda_centralitzada()));
-        comandaAdministrador = comandaAdministradorService.cercarComandaAdministrador(comandaAdministrador);
-        model.addAttribute("comandaAdministrador", comandaAdministrador);
-        
-        var miRol = comandaProfessorService.rolUsername(username);
-        model.addAttribute("miRol", miRol);
-
-        return "mesInfoComandaAdministrador";
     }
     
     @GetMapping("/comandesProfessorCentralitzades/{id_comanda_centralitzada}") //Pàgina productes de l'aplicació localhost:5050
