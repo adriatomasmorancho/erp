@@ -94,7 +94,7 @@ public class ControladorComandaAdministrador {
         //Create comanda Centralitzada
         comandaAdministradorService.crearComandaAdministrador(comandaAdministrador);
         
-        return "redirect:/comandesAdministrador/";
+        return "redirect:/editarComandaComandesAdministrador/" + comandaAdministrador.getId_comanda_centralitzada();
     }
     
     @GetMapping("/editarComandaComandesAdministrador/{id_comanda_centralitzada}")
@@ -136,6 +136,22 @@ public class ControladorComandaAdministrador {
         model.addAttribute("miRol", miRol);
         
         return "afegirComandesComandaAdministrador";
+    }
+    
+    @GetMapping("/eliminarComandaComandesAdministrador/{id_comanda_centralitzada}")
+    public String eliminarComandaComandesAdministrador(@AuthenticationPrincipal User username, Model model,ComandaAdministrador id_comanda_centralitzada) {
+        //remove id_centralitzada for each comandaProfessor
+        for (ComandaProfessor cp : comandaProfessorService.llistarComandesProfessor()) {
+            if (id_comanda_centralitzada.getId_comanda_centralitzada() == cp.getId_centralitzada()) {
+                cp.setId_centralitzada(0);
+                comandaProfessorService.crearComandaProfessor(cp);
+            }
+        }
+        
+        //Remove comandaAdministrador
+        comandaAdministradorService.eliminarComandaAdministrador(id_comanda_centralitzada);
+        
+        return "redirect:/comandesAdministrador";
     }
     
     @PostMapping("/afegirComandaComandesAdministrador") //action = guardarProveidor
