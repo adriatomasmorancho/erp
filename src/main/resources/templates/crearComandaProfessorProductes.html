@@ -65,17 +65,22 @@
                 No hi ha cap producte a la comanda.
             </div>
             <br/>
-            <div align="center"><!-- Posem un enllaç per a crear un usuari -->
+            <div th:if="${isCentralitzada} == 'false'" align="center"><!-- Posem un enllaç per a crear un usuari -->
                 <a th:href="@{/afegirProducteComanda/}+${id_comanda}" th:text="#{comandaProducte.afegirProducte}"></a>
                 <a th:href="@{/afegirProducteComanda/}+${id_comanda}"><i class="bi bi-plus-circle"></i></a>
-                <!--  <input class="btn btn-primary btn-lg btn-block" type="button" name="crear" onclick="window.location.href='@{/afegirProducteComanda/}+${id_comanda}'" th:value="#{comandaProducte.afegirProducte}"/>-->
+                <br/>
+                <div th:if="${miRol}==administrador" align="center">
+                    <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href = '/totesComandes'" th:value="#{confirmar}"/>
+                </div>
+                <div th:if="${miRol}==professor" align="center">
+                    <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href = '/comandesProfessor'" th:value="#{confirmar}"/>
+                </div>
             </div>
-            <br/>
-            <div th:if="${miRol}==administrador" align="center">
-            <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href='/totesComandes'" th:value="#{confirmar}"/>
+            <div th:if="${isCentralitzada} == 'true'" align="center"><!-- Posem un enllaç per a crear un usuari -->
+                <p>La comanda està centralitzada i per tant no es pot modificar</p>
+                <div align="center">
+                    <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href = '/comandesProfessor'" th:value="Sortir"/>
+                </div>
             </div>
-            <div th:if="${miRol}==professor" align="center">
-            <input class="btn btn-primary btn-lg btn-block" type="button" name="confirmar" onclick="window.location.href='/comandesProfessor'" th:value="#{confirmar}"/>
-            </div>
-           </body>
+    </body>
 </html>

@@ -134,6 +134,12 @@ public class ControladorComandaProfessor {
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
         
+        if(comandaProfessorService.cercarComandaProfessor(id_comanda).getId_centralitzada() != 0){
+            model.addAttribute("isCentralitzada", "true");
+        }else{
+            model.addAttribute("isCentralitzada", "false");
+        }
+        
         //Calulcar total
         double total = 0;
         for(LineaComanda lc : lineaComanda){
@@ -164,6 +170,10 @@ public class ControladorComandaProfessor {
 
     @GetMapping("/editarComanda/{comandaProfessor}") //URL a la pàgina amb el formulari de les dades del producte
     public String editarComandaProfessorProductes(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
+        if(comandaProfessorService.cercarComandaProfessor(comandaProfessor).getId_centralitzada() != 0){
+            return "redirect:/comandaAlreadyCentralitzada";
+        }
+        
         var data = comandaProfessorService.getCurrentDate();
         comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
         log.info("FECHA:::: " + data);
@@ -338,6 +348,11 @@ public class ControladorComandaProfessor {
         model.addAttribute("miRol", miRol);
 
         return "mesInfoComandaProfessor";
+    }
+    
+    @GetMapping("/comandaAlreadyCentralitzada")
+    public String comandaAlreadyCentralitzada() {
+        return "/comandaAlreadyCentralitzada";
     }
 
 }
