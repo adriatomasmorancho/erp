@@ -167,6 +167,13 @@ public class ControladorComandaAdministrador {
         //Set Id comanda centralitzada
         model.addAttribute("centralitzada_id", id_comanda_centralitzada);
         
+        if(comandesProfessorCentralitzadesWithDate.isEmpty()){
+            log.info("YESSSSSSSSSS");
+            model.addAttribute("comandesProfessorCentralitzadesWithDateEmpty", "true");
+        }else{
+            model.addAttribute("comandesProfessorCentralitzadesWithDateEmpty", "false");
+        }
+        
         //Create Title to show with date
         String textTitol = "Comandes Centralitzades " + id_comanda_centralitzada.getData_Arribada();
         model.addAttribute("textTitol", textTitol);
