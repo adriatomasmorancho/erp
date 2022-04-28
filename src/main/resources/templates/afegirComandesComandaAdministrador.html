@@ -36,6 +36,7 @@
                                 <th th:text="#{comanda.modul}"/>
                                 <th th:text="#{professor}"/>
                                 <th th:text="#{comanda.mesInfo}"/>
+                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,7 @@
                                 <td th:text="${comandaProfessor.modul.nom}"></td>
                                 <td th:text="${comandaProfessor.id_usuari.nom} + ' ' + ${comandaProfessor.id_usuari.cognoms}"></td>
                                 <td><a th:href="@{/mesInfoComandaProfessor/}+${comandaProfessor.id_comanda}" ><i class="bi bi-info-circle"></i></a></td>
+                                <td><a th:href="@{/removeComandaFromComandesAdministrador/}+${comandaProfessor.id_comanda}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
