@@ -68,6 +68,7 @@
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
                 <a th:href="@{/afegirProducteComanda/}+${id_comanda}" th:text="#{comandaProducte.afegirProducte}"></a>
                 <a th:href="@{/afegirProducteComanda/}+${id_comanda}"><i class="bi bi-plus-circle"></i></a>
+                <!--  <input class="btn btn-primary btn-lg btn-block" type="button" name="crear" onclick="window.location.href='@{/afegirProducteComanda/}+${id_comanda}'" th:value="#{comandaProducte.afegirProducte}"/>-->
             </div>
             <br/>
             <div th:if="${miRol}==administrador" align="center">

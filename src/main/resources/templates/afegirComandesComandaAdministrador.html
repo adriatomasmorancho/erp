@@ -66,9 +66,14 @@
                     <p>
                         <input type="hidden" name="ca" th:field="*{ca}"/> 
                         <label for="comandaProfessor" th:text="#{comandaProfessor.CentralitzarComanda}"/>
+                        <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} != null">
                         <select class="form-select" name="comandaProfessor" id="comandaProfessor" th:field="*{cp}">
                             <option th:each="cps : ${comandesProfessorNoCentralitzades}" th:value="${cps.id_comanda}" th:text="${cps.nom}"></option>
                         </select>
+                        </div>
+                        <div th:each="cps : ${comandesProfessorNoCentralitzades}" th:if="${cps.id_comanda} == null">
+                             <label for="comandaProfessor" th:text="No hi han mes comandes"/>
+                         </div>        
                     </p>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Afegir Comanda"/>
                 </form>

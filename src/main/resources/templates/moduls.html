@@ -56,8 +56,7 @@
             </div>
             <br/>
             <div align="center"><!-- Posem un enllaç per a crear un usuari -->
-                <a th:href="@{/crearModul}" th:text="#{modul.crearModul}"></a>
-                <a th:href="@{/crearModul}"><i class="bi bi-plus-circle"></i></a>
+                 <input class="btn btn-primary btn-lg btn-block" type="button" name="crear" onclick="window.location.href='/crearModul'" th:value="#{modul.crearModul}"/>
             </div>
     </body>
 </html>
