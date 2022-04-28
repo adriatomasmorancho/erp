@@ -1,6 +1,7 @@
 package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
 import cat.copernic.erpInsCavallBernat.model.Producte;
 
 import java.util.List;
@@ -19,6 +20,8 @@ public interface ComandaProfessorServiceInterface {
     public List<ComandaProfessor> llistarComandesProfessorWhereCentralitzada(long idCentralitzada);
     
     public List<ComandaProfessor> llistarComandesProfessorWhereIsCentralitzada(String date);
+    
+    public List<LineaComanda> llistarComandesProductesWhereCentralitzada(long idCentralitzada);
     
     public String getRolUserCurrent(User username);
    

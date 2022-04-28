@@ -6,6 +6,7 @@ package cat.copernic.erpInsCavallBernat.controlador;
 
 import cat.copernic.erpInsCavallBernat.model.ComandaAdministrador;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
+import cat.copernic.erpInsCavallBernat.model.LineaComanda;
 import cat.copernic.erpInsCavallBernat.model.crearCentralitzada;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaAdministradorServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.ComandaProfessorServiceInterface;
@@ -190,6 +191,26 @@ public class ControladorComandaAdministrador {
         comandaAdministradorService.eliminarComandaAdministrador(id_comanda_centralitzada);
         
         return "redirect:/comandesAdministrador";
+    }
+    
+    @GetMapping("/showProductesFromCentralitzada/{id_comanda_centralitzada}")
+    public String showProductesFromCentralitzada(@AuthenticationPrincipal User username, Model model,ComandaAdministrador id_comanda_centralitzada) {
+        
+        var lineaComanda = comandaProfessorService.llistarComandesProductesWhereCentralitzada(id_comanda_centralitzada.getId_comanda_centralitzada());
+        model.addAttribute("lineaComandes", lineaComanda);
+        
+        var miRol = comandaProfessorService.rolUsername(username);
+        model.addAttribute("miRol", miRol);
+        
+        //Calcular total
+        double total = 0;
+        for(LineaComanda lc : lineaComanda){
+            total += lc.getId_Producte().getPreu()*lc.getQuantitat();
+        }
+        String finalTotal = "Total: " + Double.toString(total) + "€";
+        model.addAttribute("total", finalTotal);
+        
+        return "showComandaAdministrador";
     }
     
     @PostMapping("/afegirComandaComandesAdministrador") //action = guardarProveidor
