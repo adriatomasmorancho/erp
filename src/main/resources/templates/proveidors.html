@@ -60,8 +60,7 @@
             </div>
             <p/>
             <div align="center">
-                <a th:href="@{/crearProveidor}"th:text="#{proveidor.crearProveidor}"></a>
-                <a th:href="@{/crearProveidor}"><i class="bi bi-plus-circle"></i></a>
+                  <input class="btn btn-primary btn-lg btn-block" type="button" name="crear" onclick="window.location.href='/crearProveidor'" th:value="#{proveidor.crearProveidor}"/>
             </div>
         </div>
     </body>
