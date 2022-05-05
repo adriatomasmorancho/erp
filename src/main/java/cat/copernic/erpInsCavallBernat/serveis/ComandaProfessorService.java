@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import cat.copernic.erpInsCavallBernat.DAO.ComandaProfessorDAO;
 import cat.copernic.erpInsCavallBernat.model.ComandaProfessor;
 import cat.copernic.erpInsCavallBernat.model.LineaComanda;
-import cat.copernic.erpInsCavallBernat.model.Producte;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -59,11 +58,6 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
          *findAll() retorna un objecte, per tant hem de fer un cast perquè l'objecte sigui un List de producte
          */
         return (List<ComandaProfessor>) comandaProfessor.findAll();
-    }
-
-    @Override
-    public String getRolUserCurrent(User username) {
-        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length() - 1);
     }
 
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
@@ -151,9 +145,9 @@ public class ComandaProfessorService implements ComandaProfessorServiceInterface
     public List getIds(User username) {
         var usuari = username.getUsername();
         var usuaris = usuariService.llistarUsuaris();
-        var rol = getRolUserCurrent(username);
+        var rol = rolUsername(username);
         List<Usuari> ids = new ArrayList<>();
-        if (rol.equals("Administrador")) {
+        if (rol.equals("administrador")) {
             for (var usuario : usuaris) {
                 ids.add(usuario);
             }

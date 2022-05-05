@@ -1,9 +1,6 @@
 package cat.copernic.erpInsCavallBernat.controlador;
 
-import cat.copernic.erpInsCavallBernat.eines.EncriptadorContrasenya;
-import cat.copernic.erpInsCavallBernat.model.Rol;
 import cat.copernic.erpInsCavallBernat.model.Usuari;
-import cat.copernic.erpInsCavallBernat.serveis.RolServiceInterface;
 import cat.copernic.erpInsCavallBernat.serveis.UsuariServiceInterface;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -15,41 +12,30 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author ivan
  */
-
 @Controller
 @Slf4j
 public class ControladorUsuari {
-    
+
     @Autowired
     private UsuariServiceInterface usuariService;
-    
+
 //    @Autowired
 //    private RolServiceInterface rolService;
-    
     @GetMapping("/usuaris") //Pàgina usuaris de l'aplicació localhost:5050
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
-        
+
         var usuaris = usuariService.llistarUsuaris();
         log.info("LISTA DE USUARIOS::: " + usuaris.toString());
-        var rol = usuariService.getRolUserCurrent(username);
-        var email = "";
-        //var cercarUsername = usuariDAO.findByUsername(email);
-
         model.addAttribute("usuaris", usuaris);
-        model.addAttribute("rol", rol);
-        
-        model.addAttribute("email", email);
-        //model.addAttribute("cercarUsername", cercarUsername);
-        
+
         var miRol = usuariService.rolUsername(username);
         model.addAttribute("miRol", miRol);
-        
+
         return "usuaris";
     }
 
@@ -59,12 +45,10 @@ public class ControladorUsuari {
      */
     @GetMapping("/crearUsuari") //URL a la pàgina amb el formulari de les dades del usuari
     public String crearUsuari(Model model, @AuthenticationPrincipal User username, Usuari usuari) {
-        var rol = usuariService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
-        
+
         var miRol = usuariService.rolUsername(username);
         model.addAttribute("miRol", miRol);
-        
+
         return "crearUsuari"; //Retorna la pàgina on es mostrarà el formulari de les dades dels usuaris
     }
 
@@ -78,30 +62,22 @@ public class ControladorUsuari {
      *crearUsuari de la classe UsuariService, per guardar el usuari en la base de dades i finalment retornar
      *a la pàgina d'inici.
      */
- /*Abans de guardar les dades del usuari, és quan comprovem si són valides o no, perquè el sistema
+    /*Abans de guardar les dades del usuari, és quan comprovem si són valides o no, perquè el sistema
      *realitzi aquesta validació, utilitzem l'anotació @Valid precedint a l'objecte al qual pertanyen
      *els valors a validar, en el nostre cas, l'objecte Usuari passat per paràmetre.
      *Per un altre costat, al mètode li passem el paràmetre error, objectede la classe Errors per saber
      *si el formulari té errors.
      */
     @PostMapping("/guardarUsuari") //action = guardarUsuari
-    public String guardarUsuari(@Valid Usuari usuari, /*@RequestParam(value = "password") String passw, /*Rol rol,*/ Errors errors) {
+    public String guardarUsuari(@Valid Usuari usuari, Errors errors) {
 
-       /* String pass = usuari.getPassword();
-        
-        if(passw == null){
-            usuari.setPassword(pass);
-        }else{
-            usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(passw));
-        }
-        */
         if (errors.hasErrors()) { //Si s'han produït errors...
             log.info("S'ha produït un error");
             return "crearUsuari"; //Mostrem la pàgina del formulari
         }
 
         usuariService.crearUsuari(usuari); //Afegim el usuari passat per paràmetre a la base de dades
-       // rolService.crearRol(rol);
+        
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }
 
@@ -123,10 +99,7 @@ public class ControladorUsuari {
         usuari = usuariService.cercarUsuari(usuari);
 
         model.addAttribute("usuari", usuari); //Enviem les dades del gos resultant de la cerca a la pàgina formulariUsuari
-        
-        var rol = usuariService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
-        
+
         var miRol = usuariService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 
@@ -146,9 +119,8 @@ public class ControladorUsuari {
         /*Eliminem el usuari passat per paràmetre amb l'id_usuari de @GetMapping mitjançant 
          *el mètode eliminarUsuari de la capa de servei.*/
         usuariService.eliminarUsuari(usuari);
-      //  rolService.eliminarRol(rol);
 
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }
-    
+
 }

@@ -53,7 +53,6 @@ public class ProducteService implements ProducteServiceInterface{
         return (List<Producte>) producte.findAll(); 
     }
     
-    
 
     /*Afegir el producte passat per paràmetre a la taula producte de la BBDD erp*/
     @Override
@@ -64,11 +63,6 @@ public class ProducteService implements ProducteServiceInterface{
          *a la taula producte de la BBDD erp.
         */
         this.producte.save(producte); 
-    }
-    
-    @Override
-    public String getRolUserCurrent(User username) {
-        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
     }
 
     /*Eliminar el producte passat per paràmetre de la taula producte de la BBDD erp*/

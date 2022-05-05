@@ -14,8 +14,6 @@ public interface ProducteServiceInterface {
     
     public List<Producte> llistarProductes(); //Mètode que implementarem per llistar productes
     
-    public String getRolUserCurrent(User username);
-    
     public void crearProducte(Producte producte); //Mètode que implementarem per afegir un gos
     
     public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un producte

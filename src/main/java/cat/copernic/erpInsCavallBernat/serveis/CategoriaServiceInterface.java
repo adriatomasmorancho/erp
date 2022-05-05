@@ -14,8 +14,6 @@ public interface CategoriaServiceInterface {
     
     public List<Categoria> llistarCategories(); //Mètode que implementarem per llistar categories
     
-    public String getRolUserCurrent(User username);
-    
     public void crearCategoria(Categoria categoria); //Mètode que implementarem per afegir una categoria
     
     public void eliminarCategoria(Categoria categoria); //Mètode que implementarem per eliminar una categoria

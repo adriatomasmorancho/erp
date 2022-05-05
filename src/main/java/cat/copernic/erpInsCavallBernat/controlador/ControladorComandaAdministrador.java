@@ -50,10 +50,6 @@ public class ControladorComandaAdministrador {
 
         model.addAttribute("comandesProfessor", comandesProfessor);
 
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-
-        model.addAttribute("rol", rol);
-
         var miRol = comandaAdministradorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 

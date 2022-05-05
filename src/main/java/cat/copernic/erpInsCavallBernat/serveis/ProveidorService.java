@@ -32,11 +32,6 @@ public class ProveidorService implements ProveidorServiceInterface {
     public List<Proveidor> llistarProveidors() {
         return (List<Proveidor>) proveidorDAO.findAll();
     }
-    
-    @Override
-    public String getRolUserCurrent(User username) {
-        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
-    }
 
     @Override
     public void crearProveidor(Proveidor proveidor) {

@@ -73,11 +73,6 @@ public class LineaComandaService implements LineaComandaServiceInterface{
         return myFinalList;
     }
     
-    
-    @Override
-    public String getRolUserCurrent(User username) {
-        return username.getAuthorities().toString().substring(1, username.getAuthorities().toString().length()-1);
-    }
 
     /*Afegir el producte passat per paràmetre a la taula linia comanda de la BBDD erp*/
     @Override

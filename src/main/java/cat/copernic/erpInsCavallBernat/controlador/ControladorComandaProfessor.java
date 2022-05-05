@@ -45,22 +45,16 @@ public class ControladorComandaProfessor {
     public String comandesProfessor(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
 
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-        log.info("USERNAME::: " + username);
         var usuari = username.getUsername();
-        log.info("USUARI::: " + usuari);
         var fecha = comandaProfessorService.getCurrentDate();
-        log.info("FECHA:::: " + fecha);
 
         model.addAttribute("comandesProfessor", comandesProfessor);
-        model.addAttribute("rol", rol);
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 
-        //model.addAttribute("myId", myId);
         var misComandas = comandaProfessorService.getMisComandes(username);
         model.addAttribute("misComandas", misComandas);
 
@@ -70,23 +64,16 @@ public class ControladorComandaProfessor {
     @GetMapping("/totesComandes") //Pàgina productes de l'aplicació localhost:5050
     public String totesComandes(Model model, ComandaProfessor id_comanda, @AuthenticationPrincipal User username) {
         var comandesProfessor = comandaProfessorService.llistarComandesProfessor();
-        var rol = comandaProfessorService.getRolUserCurrent(username);
-        log.info("USERNAME::: " + username);
         var usuari = username.getUsername();
-        log.info("USUARI::: " + usuari);
         var fecha = comandaProfessorService.getCurrentDate();
-        log.info("FECHA:::: " + fecha);
-        var ids = comandaProfessorService.getIds(username);
 
         model.addAttribute("comandesProfessor", comandesProfessor);
-        model.addAttribute("rol", rol);
         model.addAttribute("usuari", usuari);
         model.addAttribute("fecha", fecha);
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 
-        //model.addAttribute("myId", myId);
         var misComandas = comandaProfessorService.getMisComandes(username);
         model.addAttribute("misComandas", misComandas);
 
@@ -97,17 +84,16 @@ public class ControladorComandaProfessor {
     public String crearComandaProfessor(Model model, ComandaProfessor comandaProfessor, @AuthenticationPrincipal User username) {
         var data = comandaProfessorService.getCurrentDate();
         comandaProfessor.setData(data); //Posa la data actual en el camp Data Creació al crear una comanda
-        log.info("FECHA:::: " + data);
         model.addAttribute("data", data);
+        
         var productes = producteService.llistarProductes();
         var lineasComanda = lineaComandaService.llistarLineaComanda();
         var moduls = modulComandaService.llistarModuls();
-        var rol = comandaProfessorService.getRolUserCurrent(username);
         var ids = comandaProfessorService.getIds(username);
+        
         model.addAttribute("lineasComanda", lineasComanda);
         model.addAttribute("productes", productes);
         model.addAttribute("moduls", moduls);
-        model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
         
         var miRol = comandaProfessorService.rolUsername(username);
@@ -181,16 +167,23 @@ public class ControladorComandaProfessor {
         var productes = producteService.llistarProductes();
         var lineasComanda = lineaComandaService.llistarLineaComanda();
         var moduls = modulComandaService.llistarModuls();
-        var rol = comandaProfessorService.getRolUserCurrent(username);
         var ids = comandaProfessorService.getIds(username);
+        
         model.addAttribute("lineasComanda", lineasComanda);
         model.addAttribute("productes", productes);
         model.addAttribute("moduls", moduls);
-        model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
+        
+        //Calcular data+dies
+        var dataPlusTime = comandaProfessorService.getActualDatePlusDays(15);
+        List<String> myList = Arrays.asList(dataPlusTime.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
 
         return "editarComanda"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }
@@ -205,16 +198,23 @@ public class ControladorComandaProfessor {
         var productes = producteService.llistarProductes();
         var lineasComanda = lineaComandaService.llistarLineaComanda();
         var moduls = modulComandaService.llistarModuls();
-        var rol = comandaProfessorService.getRolUserCurrent(username);
         var ids = comandaProfessorService.getIds(username);
+        
         model.addAttribute("lineasComanda", lineasComanda);
         model.addAttribute("productes", productes);
         model.addAttribute("moduls", moduls);
-        model.addAttribute("rol", rol);
         model.addAttribute("ids", ids);
         
         var miRol = comandaProfessorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
+        
+        //Calcular data+dies
+        var dataPlusTime = comandaProfessorService.getActualDatePlusDays(15);
+        List<String> myList = Arrays.asList(dataPlusTime.split("/", -1));
+        if(myList.size() >= 3){
+            String finalDatePlusTime = myList.get(2) + "-" + myList.get(1) + "-" + myList.get(0);
+            model.addAttribute("data_min_input", finalDatePlusTime);
+        }
 
         return "duplicarComanda"; //Retorna la pàgina on es mostrarà el formulari de les dades dels productes
     }

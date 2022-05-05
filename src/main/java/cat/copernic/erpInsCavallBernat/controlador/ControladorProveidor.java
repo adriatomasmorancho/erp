@@ -28,10 +28,7 @@ public class ControladorProveidor {
     public String proveidors(Model model, @AuthenticationPrincipal User username, Proveidor cif) {
 
         var proveidors = proveidorService.llistarProveidors();
-        var rol = proveidorService.getRolUserCurrent(username);
-
         model.addAttribute("proveidors", proveidors);
-        model.addAttribute("rol", rol);
         
         var miRol = proveidorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
@@ -41,9 +38,6 @@ public class ControladorProveidor {
 
     @GetMapping("/crearProveidor") //URL a la pàgina amb el formulari de les dades del proveidor
     public String crearProveidor(Model model, @AuthenticationPrincipal User username, Proveidor proveidor) {
-
-        var rol = proveidorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
         
         var miRol = proveidorService.rolUsername(username);
         model.addAttribute("miRol", miRol);
@@ -73,9 +67,6 @@ public class ControladorProveidor {
         log.info(String.valueOf(proveidor.getCif()));
         proveidor = proveidorService.cercarProveidor(proveidor);
         model.addAttribute("proveidor", proveidor);
-
-        var rol = proveidorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
         
         var miRol = proveidorService.rolUsername(username);
         model.addAttribute("miRol", miRol);

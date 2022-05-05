@@ -27,7 +27,7 @@ public class Usuari implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY) //Generació autonumèrica de l'id
     private long id_usuari;
     
-    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom d'usuari
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp username d'usuari
     private String username;
     
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp contrasenya
@@ -36,13 +36,13 @@ public class Usuari implements Serializable{
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom d'usuari
     private String nom;
     
-    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom d'usuari
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp cognoms d'usuari
     private String cognoms;
     
-    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom d'usuari
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp telefon d'usuari
     private String telefon;
     
-    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp nom d'usuari
+    @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp rol d'usuari
     private String rol;
     
     /*Implementem l'atribut que relacionarà l'usuari amb el rol, tenint en compte que un 

@@ -39,10 +39,7 @@ public class ControladorProducte {
     public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
 
         var productes = producteService.llistarProductes();
-        var rol = producteService.getRolUserCurrent(username);
-
         model.addAttribute("productes", productes);
-        model.addAttribute("rol", rol);
 
         var proveidors = proveidorService.llistarProveidors();
         var categories = categoriaService.llistarCategories();
@@ -65,8 +62,6 @@ public class ControladorProducte {
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
         model.addAttribute("unitats", unitats);
-        var rol = proveidorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
         
         var miRol = producteService.rolUsername(username);
         model.addAttribute("miRol", miRol);
@@ -103,9 +98,6 @@ public class ControladorProducte {
         model.addAttribute("proveidors", proveidors);
         model.addAttribute("categories", categories);
         model.addAttribute("unitats", unitats);
-
-        var rol = proveidorService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
         
         var miRol = producteService.rolUsername(username);
         model.addAttribute("miRol", miRol);

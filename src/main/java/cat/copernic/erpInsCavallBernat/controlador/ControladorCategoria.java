@@ -32,11 +32,7 @@ public class ControladorCategoria {
     public String categories(Model model, Categoria id_Categoria, @AuthenticationPrincipal User username) {
         log.info("L'usuari autenticat és: " + username);
         var categories = categoriaService.llistarCategories();
-        var rol = categoriaService.getRolUserCurrent(username);
-        log.info("ROL és: " + rol);
-
         model.addAttribute("categories", categories);
-        model.addAttribute("rol", rol);
         
         var miRol = categoriaService.rolUsername(username);
         model.addAttribute("miRol", miRol);
@@ -46,11 +42,7 @@ public class ControladorCategoria {
     }
 
     @GetMapping("/crearCategoria") //URL a la pàgina amb el formulari de les dades del producte
-    public String crearCategoria(Model model, @AuthenticationPrincipal User username, Categoria categoria) {
-
-        var rol = categoriaService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
-        
+    public String crearCategoria(Model model, @AuthenticationPrincipal User username, Categoria categoria) {    
         var miRol = categoriaService.rolUsername(username);
         model.addAttribute("miRol", miRol);
 
@@ -79,9 +71,6 @@ public class ControladorCategoria {
         log.info(String.valueOf(categoria.getId_Categoria()));
         categoria = categoriaService.cercarCategoria(categoria);
         model.addAttribute("categoria", categoria);
-
-        var rol = categoriaService.getRolUserCurrent(username);
-        model.addAttribute("rol", rol);
         
         var miRol = categoriaService.rolUsername(username);
         model.addAttribute("miRol", miRol);

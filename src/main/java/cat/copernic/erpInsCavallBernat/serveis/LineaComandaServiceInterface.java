@@ -20,8 +20,6 @@ public interface LineaComandaServiceInterface {
     public List<LineaComanda> llistarLineaComanda(); //Mètode que implementarem per llistar les lineas comandes
     
     public List<LineaComanda> llistarLineaComandaWhereComanda(ComandaProfessor cp);
-    
-    public String getRolUserCurrent(User username);
    
     public void crearLineaComanda(LineaComanda lineaComanda); //Mètode que implementarem per afegir una linea comanda
     
@@ -31,7 +29,4 @@ public interface LineaComandaServiceInterface {
     
     public String rolUsername(User username);
     
-    
-
-  
 }
