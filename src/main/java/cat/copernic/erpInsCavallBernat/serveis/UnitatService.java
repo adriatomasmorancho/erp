@@ -64,11 +64,17 @@ public class UnitatService implements UnitatServiceInterface{
     @Override
     @Transactional
     public void crearUnitat(Unitat unitat) {
-        
-        /*Cridem al mètode save() de CrudRepository perquè afegeixi la categoria passat com a paràmetre,
-         *a la taula categoria de la BBDD erp.
-        */
-        this.unitat.save(unitat); 
+        Boolean found = false;
+        List<Unitat> myList = llistarUnitats();
+        for (Unitat c : myList) {
+            if (c.getNom().equals(unitat.getNom())) {
+                found = true;
+            }
+        }
+
+        if (!found) {
+            this.unitat.save(unitat); 
+        }
     }
 
     /*Eliminar la categoria passat per paràmetre de la taula producte de la BBDD erp*/

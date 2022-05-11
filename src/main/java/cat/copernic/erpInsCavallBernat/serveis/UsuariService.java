@@ -30,7 +30,7 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
      */
     @Autowired
     private UsuariDAO usuariDAO;
-    
+
     @Autowired
     private UsuariServiceInterface usuariService;
 
@@ -87,26 +87,36 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     public List<Usuari> llistarUsuaris() {
         List<Usuari> myList = (List<Usuari>) usuariDAO.findAll();
         List<Usuari> myNewList = new ArrayList<>();
-        
-        for(Usuari u : myList){
-            if(u.getEstat()){
+
+        for (Usuari u : myList) {
+            if (u.getEstat()) {
                 myNewList.add(u);
             }
         }
-        
+
         return myNewList;
     }
-    
+
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public List<Usuari> llistarAllUsuaris() {
-        return (List<Usuari>)usuariDAO.findAll(); 
+        return (List<Usuari>) usuariDAO.findAll();
     }
 
     @Override
     public void crearUsuari(Usuari usuari) {
-        usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(usuari.getPassword()));
-        this.usuariDAO.save(usuari);
+        Boolean found = false;
+        List<Usuari> myList = llistarAllUsuaris();
+        for (Usuari u : myList) {
+            if (u.getUsername().equals(usuari.getUsername())) {
+                found = true;
+            }
+        }
+
+        if (!found) {
+            usuari.setPassword(EncriptadorContrasenya.encriptarContrasenya(usuari.getPassword()));
+            this.usuariDAO.save(usuari);
+        }
     }
 
     @Override
@@ -118,7 +128,7 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     public Usuari cercarUsuari(Usuari usuari) {
         return this.usuariDAO.findById(usuari.getId_usuari()).orElse(null);
     }
-    
+
     @Override
     public String rolUsername(User username) {
         var usuari = username.getUsername();

@@ -63,11 +63,17 @@ public class ModulService implements ModulServiceInterface{
     @Override
     @Transactional
     public void crearModul(Modul modul) {
-        
-        /*Cridem al mètode save() de CrudRepository perquè afegeixi la categoria passat com a paràmetre,
-         *a la taula categoria de la BBDD erp.
-        */
-        this.modul.save(modul); 
+        Boolean found = false;
+        List<Modul> myList = llistarModuls();
+        for (Modul c : myList) {
+            if (c.getNom().equals(modul.getNom())) {
+                found = true;
+            }
+        }
+
+        if (!found) {
+            this.modul.save(modul);
+        }
     }
 
     /*Eliminar la categoria passat per paràmetre de la taula producte de la BBDD erp*/

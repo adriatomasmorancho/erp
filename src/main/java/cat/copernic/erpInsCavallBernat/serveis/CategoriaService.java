@@ -70,11 +70,17 @@ public class CategoriaService implements CategoriaServiceInterface{
     @Override
     @Transactional
     public void crearCategoria(Categoria categoria) {
-        
-        /*Cridem al mètode save() de CrudRepository perquè afegeixi la categoria passat com a paràmetre,
-         *a la taula categoria de la BBDD erp.
-        */
-        this.categoria.save(categoria); 
+        Boolean found = false;
+        List<Categoria> myList = llistarCategories();
+        for (Categoria c : myList) {
+            if (c.getNom().equals(categoria.getNom())) {
+                found = true;
+            }
+        }
+
+        if (!found) {
+            this.categoria.save(categoria); 
+        }
     }
 
     /*Eliminar la categoria passat per paràmetre de la taula producte de la BBDD erp*/
