@@ -99,6 +99,7 @@ public class ControladorUsuari {
         usuari = usuariService.cercarUsuari(usuari);
 
         model.addAttribute("usuari", usuari); //Enviem les dades del gos resultant de la cerca a la pàgina formulariUsuari
+        model.addAttribute("estatUsuari", usuari.getEstat());
 
         var miRol = usuariService.rolUsername(username);
         model.addAttribute("miRol", miRol);

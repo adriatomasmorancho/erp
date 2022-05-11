@@ -44,6 +44,8 @@ public class Usuari implements Serializable{
     
     @NotEmpty//Validació perquè l'usuari afegeixi contingut al camp rol d'usuari
     private String rol;
+     
+    private Boolean estat;
     
     /*Implementem l'atribut que relacionarà l'usuari amb el rol, tenint en compte que un 
      *usuari pot tenir més d'un rol, per tant serà una col.lecció de tipus list, on guardarem

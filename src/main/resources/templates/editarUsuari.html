@@ -76,6 +76,13 @@
                             <!-- Gestió errors rol-->
                             <span th:if="${#fields.hasErrors('rol')}" th:errors="*{rol}"/>
                         </p>
+                        <p>
+                            <label for="rol" th:text="Estat"/>
+                            <select class="form-select" name="estat" id="estat" th:field="*{estat}">
+                                <option value="true" th:text="Activat"/>
+                                <option value="false" th:text="Desactivat"/>
+                            </select>
+                        </p>
                     </div>
                     <!-- Botó per enviar les dades i afegir un nou usuari-->
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="actualitzar" value="Actualitzar"/>
