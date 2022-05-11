@@ -33,14 +33,12 @@
                             <tr>
                                 <th th:text="#{unitat.nom}"/>
                                 <th th:text="#{editar}"/>
-                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="unitat : ${unitats}" > 
                                 <td th:text="${unitat.nom}"></td>
                                 <td><a th:href="@{/editarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminarUnitat/}+${unitat.id_unitat}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
                         </tbody>
                     </table>

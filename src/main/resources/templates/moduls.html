@@ -33,14 +33,12 @@
                             <tr>
                                 <th th:text="#{modul.nom}"/>
                                 <th th:text="#{editar}"/>
-                                <th th:text="#{eliminar}"/>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="modul : ${moduls}"> 
                                 <td th:text="${modul.nom}"></td>
                                 <td><a th:href="@{/editarModul/}+${modul.id_modul}" ><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminarModul/}+${modul.id_modul}" ><i class="bi bi-trash-fill"></i></a></td>
                             </tr>
                         </tbody>
                     </table>
