@@ -123,5 +123,19 @@ public class ControladorUsuari {
 
         return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
     }
+    
+    @GetMapping("/activarUsuari/{id_usuari}")
+    public String activarUsuari(Usuari usuari) {
+        usuariService.activarUsuari(usuari);
+
+        return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
+    }
+    
+    @GetMapping("/desactivarUsuari/{id_usuari}")
+    public String desactivarUsuari(Usuari usuari) {
+        usuariService.desactivarUsuari(usuari);
+
+        return "redirect:/usuaris"; //Retornem a la pàgina inici mitjançant redirect
+    }
 
 }

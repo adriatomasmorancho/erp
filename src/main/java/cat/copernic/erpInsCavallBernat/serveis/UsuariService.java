@@ -117,4 +117,18 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
         return rol;
     }
 
+    @Override
+    public void activarUsuari(Usuari usuari) {
+        Usuari myUsr = cercarUsuari(usuari);
+        myUsr.setEstat(true);
+        usuariDAO.save(myUsr);
+    }
+
+    @Override
+    public void desactivarUsuari(Usuari usuari) {
+        Usuari myUsr = cercarUsuari(usuari);
+        myUsr.setEstat(false);
+        usuariDAO.save(myUsr);
+    }
+
 }

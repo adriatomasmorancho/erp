@@ -38,7 +38,7 @@
                                 <th th:text="#{usuari.telefon}"/>
                                 <th th:text="#{usuari.rol}"/>
                                 <th th:text="#{editar}"/>
-                                <th th:text="#{eliminar}"/>
+                                <th th:text="#{estat}"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,8 @@
                                 <td th:text="${usuari.telefon}"/>
                                 <td th:text="${usuari.rol}"/>
                                 <td><a th:href="@{/editar/}+${usuari.id_usuari}"><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminar/}+${usuari.id_usuari}"><i class="bi bi-trash-fill"></i></a></td>
+                                <td th:if="${usuari.estat}"><a th:href="@{/desactivarUsuari/}+${usuari.id_usuari}"><i class="bi bi-toggle-on"></td>
+                                <td th:unless="${usuari.estat}"><a th:href="@{/activarUsuari/}+${usuari.id_usuari}"><i class="bi bi-toggle-off"></td>    
                             </tr>
                         </tbody>
                     </table>

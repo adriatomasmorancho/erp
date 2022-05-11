@@ -20,6 +20,10 @@ public interface UsuariServiceInterface {
     
     public void eliminarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
     
+    public void activarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
+    
+    public void desactivarUsuari(Usuari usuari); //Mètode que implementarem per eliminar un usuari
+    
     public Usuari cercarUsuari(Usuari usuari); //Mètode que implementarem per cercar un usuari
 
 }
