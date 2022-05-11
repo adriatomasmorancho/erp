@@ -16,6 +16,10 @@ public interface ProducteServiceInterface {
     
     public void crearProducte(Producte producte); //Mètode que implementarem per afegir un gos
     
+    public void activarProducte(Producte producte);
+    
+    public void desactivarProducte(Producte producte);
+    
     public void eliminarProducte(Producte producte); //Mètode que implementarem per eliminar un producte
     
     public Producte cercarProducte(Producte producte); //Mètode que implementarem per cercar un producte

@@ -104,5 +104,19 @@ public class ControladorProducte {
 
         return "editarProducte";
     }
+    
+    @GetMapping("/activarProducte/{producte}")
+    public String activarUsuari(Producte producte) {
+        producteService.activarProducte(producte);
+
+        return "redirect:/productes"; //Retornem a la pàgina inici mitjançant redirect
+    }
+    
+    @GetMapping("/desactivarProducte/{producte}")
+    public String desactivarUsuari(Producte producte) {
+        producteService.desactivarProducte(producte);
+
+        return "redirect:/productes"; //Retornem a la pàgina inici mitjançant redirect
+    }
 
 }

@@ -106,4 +106,18 @@ public class ProducteService implements ProducteServiceInterface{
         return rol;
     }
     
+    @Override
+    public void activarProducte(Producte producte) {
+        Producte myProd = cercarProducte(producte);
+        myProd.setEstat(true);
+        this.producte.save(myProd);
+    }
+
+    @Override
+    public void desactivarProducte(Producte producte) {
+        Producte myProd = cercarProducte(producte);
+        myProd.setEstat(false);
+        this.producte.save(myProd);
+    }
+    
 }

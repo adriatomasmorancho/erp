@@ -20,42 +20,53 @@
                 <h2 class="card-title" th:text="#{producte.nouProducte}"/>
                 <p>          
                 <form th:action="@{/guardarProducte}" method="post" th:object="${producte}">
-                    <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
-                    <p>
-                        <label for="nom" th:text="#{producte.nom1}"/>
-                        <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
-                    <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
-                    </p>
-                    <p>
-                        <label for="preu" th:text="#{producte.preu1}"/>            
-                        <input class="form-control" type="number" name="preu" step="0.01" min="0" th:field="*{preu}"/> 
-                        <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
-                    </p>
-                    <p>
-                        <label for="categoria" th:text="#{producte.categoria1}"/>
-                        <select class="form-select" th:field="*{categoria}">
-                            <option th:each="categoria : ${categories}" th:value="${categoria.id_Categoria}" th:text="${categoria.nom}"></option>
-                        </select>
-                        <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
-                    </p>
-                    <p>
-                        <input type="hidden" name="stock" th:field="*{stock}"/>
-                        <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
-                    </p>
-                    <p>
-                        <label for="unitat" th:text="#{producte.unitat1}"/>
-                        <select class="form-select" th:field="*{unitat}">
-                            <option th:each="unitat : ${unitats}" th:value="${unitat.id_unitat}" th:text="${unitat.nom}"></option>
-                        </select>
-                        <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
-                    </p>
-                    <p>
-                        <label for="proveidor" th:text="#{producte.proveidor1}"/> 
-                        <select class="form-select" th:field="*{proveidor}">
-                            <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.nom}"></option>
-                        </select>
-                        <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
-                    </p>
+                    <div class="column">
+                        <input type="hidden" name="id_Producte" th:field="*{id_Producte}"/>           
+                        <p>
+                            <label for="nom" th:text="#{producte.nom1}"/>
+                            <input class="form-control" type="text" name="nom" th:field="*{nom}"/>
+                        <div th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"/>
+                        </p>
+                        <p>
+                            <label for="preu" th:text="#{producte.preu1}"/>            
+                            <input class="form-control" type="number" name="preu" step="0.01" min="0" th:field="*{preu}"/> 
+                            <span th:if="${#fields.hasErrors('preu')}" th:errors="*{preu}"/>
+                        </p>
+                        <p>
+                            <label for="categoria" th:text="#{producte.categoria1}"/>
+                            <select class="form-select" th:field="*{categoria}">
+                                <option th:each="categoria : ${categories}" th:value="${categoria.id_Categoria}" th:text="${categoria.nom}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"/>
+                        </p>
+                        <p>
+                            <input type="hidden" name="stock" th:field="*{stock}"/>
+                            <span th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"/>
+                        </p>
+                    </div>
+                    <div class="column">
+                        <p>
+                            <label for="unitat" th:text="#{producte.unitat1}"/>
+                            <select class="form-select" th:field="*{unitat}">
+                                <option th:each="unitat : ${unitats}" th:value="${unitat.id_unitat}" th:text="${unitat.nom}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('unitat')}" th:errors="*{unitat}"/>
+                        </p>
+                        <p>
+                            <label for="proveidor" th:text="#{producte.proveidor1}"/> 
+                            <select class="form-select" th:field="*{proveidor}">
+                                <option th:each="proveidor : ${proveidors}" th:value="${proveidor.cif}" th:text="${proveidor.nom}"></option>
+                            </select>
+                            <span th:if="${#fields.hasErrors('proveidor')}" th:errors="*{proveidor}"/>
+                        </p>
+                        <p>
+                            <label for="estat" th:text="Estat"/>
+                            <select class="form-select" name="estat" id="estat" th:field="*{estat}">
+                                <option value="true" th:text="Activat"/>
+                                <option value="false" th:text="Desactivat"/>
+                            </select>
+                        </p>
+                    </div>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="enviar" value="Crear"/>
                     <br/>
                     <a th:href ="@{/productes}"><input class="btn btn-primary btn-lg btn-block" type="button" name="enviar" value="Cancelar"/></a>
