@@ -85,7 +85,22 @@ public class UsuariService implements UserDetailsService, UsuariServiceInterface
     @Override
     @Transactional(readOnly = true)
     public List<Usuari> llistarUsuaris() {
-        return (List<Usuari>) usuariDAO.findAll();
+        List<Usuari> myList = (List<Usuari>) usuariDAO.findAll();
+        List<Usuari> myNewList = new ArrayList<>();
+        
+        for(Usuari u : myList){
+            if(u.getEstat()){
+                myNewList.add(u);
+            }
+        }
+        
+        return myNewList;
+    }
+    
+    @Override
+    @Transactional(readOnly=true)
+    public List<Usuari> llistarAllUsuaris() {
+        return (List<Usuari>)usuariDAO.findAll(); 
     }
 
     @Override

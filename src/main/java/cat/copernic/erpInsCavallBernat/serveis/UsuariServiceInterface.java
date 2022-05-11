@@ -14,6 +14,8 @@ public interface UsuariServiceInterface {
     
     public List<Usuari> llistarUsuaris(); //Mètode que implementarem per llistar usuaris
     
+    public List<Usuari> llistarAllUsuaris();
+    
     public String rolUsername(User username); //Mètode que implementarem per obtenir el rol del usuari actual
     
     public void crearUsuari(Usuari usuari); //Mètode que implementarem per afegir un usuari

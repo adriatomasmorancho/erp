@@ -29,7 +29,7 @@ public class ControladorUsuari {
     @GetMapping("/usuaris") //Pàgina usuaris de l'aplicació localhost:5050
     public String usuaris(Model model, @AuthenticationPrincipal User username) {
 
-        var usuaris = usuariService.llistarUsuaris();
+        var usuaris = usuariService.llistarAllUsuaris();
         log.info("LISTA DE USUARIOS::: " + usuaris.toString());
         model.addAttribute("usuaris", usuaris);
 

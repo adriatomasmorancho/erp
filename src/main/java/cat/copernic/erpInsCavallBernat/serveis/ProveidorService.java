@@ -6,6 +6,7 @@ package cat.copernic.erpInsCavallBernat.serveis;
 
 import cat.copernic.erpInsCavallBernat.DAO.ProveidorDAO;
 import cat.copernic.erpInsCavallBernat.model.Proveidor;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,23 @@ public class ProveidorService implements ProveidorServiceInterface {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Proveidor> llistarProveidors() {
-        return (List<Proveidor>) proveidorDAO.findAll();
+    public List<Proveidor> llistarProveidors() {        
+        List<Proveidor> myList = (List<Proveidor>) proveidorDAO.findAll();
+        List<Proveidor> myNewList = new ArrayList<>();
+        
+        for(Proveidor p : myList){
+            if(p.getEstat()){
+                myNewList.add(p);
+            }
+        }
+        
+        return myNewList;
+    }
+    
+    @Override
+    @Transactional(readOnly=true)
+    public List<Proveidor> llistarAllProveidors() {
+        return (List<Proveidor>) proveidorDAO.findAll(); 
     }
 
     @Override

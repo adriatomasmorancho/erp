@@ -27,7 +27,7 @@ public class ControladorProveidor {
     @GetMapping("/proveidors") //Pàgina proveidors de l'aplicació localhost:8080
     public String proveidors(Model model, @AuthenticationPrincipal User username, Proveidor cif) {
 
-        var proveidors = proveidorService.llistarProveidors();
+        var proveidors = proveidorService.llistarAllProveidors();
         model.addAttribute("proveidors", proveidors);
         
         var miRol = proveidorService.rolUsername(username);

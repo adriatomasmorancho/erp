@@ -14,6 +14,8 @@ public interface ProducteServiceInterface {
     
     public List<Producte> llistarProductes(); //Mètode que implementarem per llistar productes
     
+    public List<Producte> llistarAllProductes();
+    
     public void crearProducte(Producte producte); //Mètode que implementarem per afegir un gos
     
     public void activarProducte(Producte producte);

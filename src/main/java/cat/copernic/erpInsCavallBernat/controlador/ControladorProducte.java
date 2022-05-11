@@ -38,7 +38,7 @@ public class ControladorProducte {
     @GetMapping("/productes") //Pàgina productes de l'aplicació localhost:5050
     public String productes(Model model, @AuthenticationPrincipal Producte id_Producte, @AuthenticationPrincipal User username) {
 
-        var productes = producteService.llistarProductes();
+        var productes = producteService.llistarAllProductes();
         model.addAttribute("productes", productes);
 
         var proveidors = proveidorService.llistarProveidors();
