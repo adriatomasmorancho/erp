@@ -54,5 +54,7 @@ public class Producte implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cif_proveidor", referencedColumnName = "cif")
     private Proveidor proveidor;
+    
+    private Boolean estat;
   
 }

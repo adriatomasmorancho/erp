@@ -65,5 +65,19 @@ public class ProveidorService implements ProveidorServiceInterface {
         }
         return rol;
     }
+    
+    @Override
+    public void activarProveidor(Proveidor proveidor) {
+        Proveidor myProv = cercarProveidor(proveidor);
+        myProv.setEstat(true);
+        proveidorDAO.save(myProv);
+    }
+
+    @Override
+    public void desactivarProveidor(Proveidor proveidor) {
+        Proveidor myProv = cercarProveidor(proveidor);
+        myProv.setEstat(false);
+        proveidorDAO.save(myProv);
+    }
 
 }

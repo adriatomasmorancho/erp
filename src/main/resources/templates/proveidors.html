@@ -31,7 +31,7 @@
                                 <th th:text="#{proveidor.adreca}"/>
                                 <th th:text="#{proveidor.contacte}"/>
                                 <th th:text="#{editar}"/>
-                                <th th:text="#{eliminar}"/>
+                                <th th:text="#{estat}"/>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +43,8 @@
                                 <td th:text="${proveidor.adreca}"></td>
                                 <td th:text="${proveidor.contacte}"></td>
                                 <td><a th:href="@{/editarProveidor/}+${proveidor.cif}"><i class="bi bi-pencil-fill"></i></a></td>
-                                <td><a th:href="@{/eliminarProveidor/}+${proveidor.cif}"><i class="bi bi-trash-fill"></i></a></td>
+                                <td th:if="${proveidor.estat}"><a th:href="@{/desactivarProveidor/}+${proveidor.cif}"><i class="bi bi-toggle-on"></td>
+                                <td th:unless="${proveidor.estat}"><a th:href="@{/activarProveidor/}+${proveidor.cif}"><i class="bi bi-toggle-off"></td>
                             </tr>
                         </tbody>
                     </table>

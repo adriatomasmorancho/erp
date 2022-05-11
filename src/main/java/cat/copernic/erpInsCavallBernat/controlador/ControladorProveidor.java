@@ -73,5 +73,19 @@ public class ControladorProveidor {
 
         return "editarProveidor";
     }
+    
+    @GetMapping("/activarProveidor/{cif}")
+    public String activarUsuari(Proveidor cif) {
+        proveidorService.activarProveidor(cif);
+
+        return "redirect:/proveidors"; //Retornem a la pàgina inici mitjançant redirect
+    }
+    
+    @GetMapping("/desactivarProveidor/{cif}")
+    public String desactivarUsuari(Proveidor cif) {
+        proveidorService.desactivarProveidor(cif);
+
+        return "redirect:/proveidors"; //Retornem a la pàgina inici mitjançant redirect
+    }
 
 }

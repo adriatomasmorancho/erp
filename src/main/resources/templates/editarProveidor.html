@@ -63,6 +63,13 @@
                             <textarea class="form-control" type="text" name="observacio" th:field="*{observacio}"/>
                             <span th:if="${#fields.hasErrors('observacio')}" th:errors="*{observacio}"/>
                         </p>
+                        <p>
+                            <label for="estat" th:text="Estat"/>
+                            <select class="form-select" name="estat" id="estat" th:field="*{estat}">
+                                <option value="true" th:text="Activat"/>
+                                <option value="false" th:text="Desactivat"/>
+                            </select>
+                        </p>
                     </div>
                     <input class="btn btn-primary btn-lg btn-block" type="submit" name="actualitzar" value="Actualitzar"/>
                     <br/>
